@@ -2,7 +2,7 @@
 <html lang="hu" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Balazs Barrels Zrt. | Prémium Hordókészítés és Webshop</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -52,26 +52,27 @@
         }
     </script>
 </head>
-<body class="bg-stone-50 text-stone-900 flex flex-col min-h-screen font-sans">
+<body class="bg-stone-50 text-stone-900 flex flex-col min-h-screen font-sans antialiased">
 
     <!-- Navigáció -->
     <nav class="bg-stone-900 text-stone-100 p-4 sticky top-0 z-50 shadow-lg border-b border-stone-800">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <a href="#home" onclick="switchToView('main')" class="flex items-center gap-1.5 hover:opacity-90 transition-opacity">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="#home" onclick="switchToView('main'); closeMobileMenu();" class="flex items-center gap-1.5 hover:opacity-90 transition-opacity">
                 <div class="relative flex items-center">
                     <img src="Balázs Barrels logo vektor.png" 
                          alt="Balázs Barrels Logo" 
-                         class="h-12 w-auto object-contain brightness-0 invert" 
+                         class="h-10 sm:h-12 w-auto object-contain brightness-0 invert" 
                          onerror="handleLogoError(this, true)">
                     <span id="header-text-logo" class="hidden text-amber-500 font-serif font-bold tracking-wide text-lg">
                         Balazs <span class="text-white">Barrels</span>
                     </span>
                 </div>
-                <span class="text-xl font-serif font-bold italic tracking-wide hidden sm:inline-block">Zrt.</span>
+                <span class="text-lg sm:text-xl font-serif font-bold italic tracking-wide">Zrt.</span>
             </a>
             
-            <div class="flex flex-wrap items-center justify-center gap-6">
-                <ul class="flex flex-wrap justify-center gap-5 text-xs uppercase tracking-wider font-semibold">
+            <!-- Desktop / Tablet Menü -->
+            <div class="hidden lg:flex items-center gap-6">
+                <ul class="flex gap-5 text-xs uppercase tracking-wider font-semibold">
                     <li><a href="#home" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Kezdőlap</a></li>
                     <li><a href="#about" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Cégünkről</a></li>
                     <li><a href="#gallery" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Galéria</a></li>
@@ -83,59 +84,75 @@
                         </button>
                     </li>
                 </ul>
+            </div>
 
-                <div class="flex items-center gap-4 border-l border-stone-700 pl-4">
-                    <!-- Kosár gomb számlálóval -->
-                    <button onclick="toggleCart(true)" class="relative p-2 text-stone-300 hover:text-amber-500 transition-colors" aria-label="Kosár megnyitása">
-                        <i class="fa-solid fa-shopping-cart text-lg"></i>
-                        <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-600 text-stone-950 text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+            <!-- Jobb oldali ikonok (Kosár és Fiók) -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- Kosár gomb számlálóval -->
+                <button onclick="toggleCart(true)" class="relative p-2.5 text-stone-300 hover:text-amber-500 transition-colors rounded-full hover:bg-stone-800" aria-label="Kosár megnyitása">
+                    <i class="fa-solid fa-shopping-cart text-lg sm:text-xl"></i>
+                    <span id="cart-count" class="absolute top-0.5 right-0.5 bg-amber-600 text-stone-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                </button>
+
+                <!-- Bejelentkezés / Felhasználói Fiók menü -->
+                <div id="user-menu-container" class="relative">
+                    <div id="user-logged-in-btn" class="hidden flex items-center gap-2 cursor-pointer group p-1.5 rounded-full hover:bg-stone-800" onclick="toggleUserDropdown()">
+                        <span id="nav-user-name" class="text-xs font-bold text-stone-300 group-hover:text-amber-500 transition-colors truncate max-w-[80px] sm:max-w-[120px] hidden sm:inline">Fiókom</span>
+                        <i class="fa-solid fa-circle-user text-amber-500 text-xl sm:text-2xl"></i>
+                    </div>
+                    <button id="user-guest-btn" onclick="openAuthModal()" class="text-xs bg-amber-700 hover:bg-amber-600 text-white font-bold py-2 px-3 rounded transition-all active:scale-95 flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-sign-in-alt"></i> <span class="hidden xs:inline">Belépés</span>
                     </button>
 
-                    <!-- Bejelentkezés / Felhasználói Fiók menü -->
-                    <div id="user-menu-container" class="relative">
-                        <!-- Bejelentkezve profilnév -->
-                        <div id="user-logged-in-btn" class="hidden flex items-center gap-2 cursor-pointer group" onclick="toggleUserDropdown()">
-                            <span id="nav-user-name" class="text-xs font-bold text-stone-300 group-hover:text-amber-500 transition-colors truncate max-w-[120px]">Fiókom</span>
-                            <i class="fa-solid fa-circle-user text-amber-500 text-lg"></i>
-                        </div>
-                        <!-- Bejelentkezés gomb vendégeknek -->
-                        <button id="user-guest-btn" onclick="openAuthModal()" class="text-xs bg-amber-700 hover:bg-amber-600 text-white font-bold py-1.5 px-3 rounded transition-colors flex items-center gap-1">
-                            <i class="fa-solid fa-sign-in-alt"></i> Belépés
+                    <!-- Felhasználói Dropdown Menü -->
+                    <div id="user-dropdown" class="absolute right-0 mt-2 w-48 bg-stone-900 border border-stone-800 rounded shadow-2xl hidden py-1 z-50">
+                        <button onclick="openProfileModal(); toggleUserDropdown(false);" class="w-full text-left px-4 py-3 text-xs text-stone-300 hover:bg-stone-800 hover:text-white transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-id-card text-amber-500"></i> Saját Fiókom
                         </button>
-
-                        <!-- Felhasználói Dropdown Menü -->
-                        <div id="user-dropdown" class="absolute right-0 mt-2 w-48 bg-stone-900 border border-stone-800 rounded shadow-2xl hidden py-1 z-50">
-                            <button onclick="openProfileModal(); toggleUserDropdown(false);" class="w-full text-left px-4 py-2 text-xs text-stone-300 hover:bg-stone-800 hover:text-white transition-colors flex items-center gap-2">
-                                <i class="fa-solid fa-id-card text-amber-500"></i> Saját Fiókom
-                            </button>
-                            <button onclick="logout(); toggleUserDropdown(false);" class="w-full text-left px-4 py-2 text-xs text-red-400 hover:bg-stone-800 hover:text-red-300 transition-colors flex items-center gap-2 border-t border-stone-800">
-                                <i class="fa-solid fa-sign-out-alt"></i> Kijelentkezés
-                            </button>
-                        </div>
+                        <button onclick="logout(); toggleUserDropdown(false);" class="w-full text-left px-4 py-3 text-xs text-red-400 hover:bg-stone-800 hover:text-red-300 transition-colors flex items-center gap-2 border-t border-stone-800">
+                            <i class="fa-solid fa-sign-out-alt"></i> Kijelentkezés
+                        </button>
                     </div>
                 </div>
+
+                <!-- Mobil Hamburger Gomb -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-stone-300 hover:text-white focus:outline-none rounded-md hover:bg-stone-800" aria-label="Menü megnyitása">
+                    <i id="hamburger-icon" class="fa-solid fa-bars text-xl"></i>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobil Menü Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden mt-3 border-t border-stone-800 pt-3 space-y-2">
+            <a href="#home" onclick="switchToView('main'); toggleMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Kezdőlap</a>
+            <a href="#about" onclick="switchToView('main'); toggleMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Cégünkről</a>
+            <a href="#gallery" onclick="switchToView('main'); toggleMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Galéria</a>
+            <a href="#partners" onclick="switchToView('main'); toggleMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Partnerek</a>
+            <a href="#contact" onclick="switchToView('main'); toggleMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Kapcsolat</a>
+            <button onclick="switchToView('webshop'); toggleMobileMenu();" class="w-full text-left py-2.5 px-4 text-sm text-amber-500 hover:bg-stone-800 font-bold flex items-center gap-2 rounded transition-colors border-t border-stone-800">
+                <i class="fa-solid fa-store"></i> Webáruház
+            </button>
         </div>
     </nav>
 
     <!-- Toast értesítések helye -->
-    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4"></div>
 
     <div id="main-view-container">
         <!-- Kezdőlap (Hero) -->
-        <section id="home" class="relative py-28 px-6 bg-stone-900 text-stone-100 overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&q=80');"></div>
+        <section id="home" class="relative py-20 md:py-28 px-4 sm:px-6 bg-stone-900 text-stone-100 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="relative max-w-4xl mx-auto text-center z-10">
-                <span class="text-amber-500 uppercase tracking-widest text-sm font-bold mb-3 block">Hagyomány és Innováció 2011 óta</span>
-                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8 drop-shadow-md">A Hordókészítés Művészete</h2>
-                <p class="text-lg md:text-xl leading-relaxed text-stone-300 max-w-3xl mx-auto drop-shadow">
+                <span class="text-amber-500 uppercase tracking-widest text-xs sm:text-sm font-bold mb-3 block">Hagyomány és Innováció 2011 óta</span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6 sm:mb-8 leading-tight drop-shadow-md">A Hordókészítés Művészete</h2>
+                <p class="text-sm sm:text-base md:text-lg leading-relaxed text-stone-300 max-w-3xl mx-auto drop-shadow">
                     A Balazs Barrels Zrt.-nél a hagyományos kádármesterség alapjait ötvözzük a modern precizitással. A folyamat a gondosan válogatott tölgyfa hasításával kezdődik, melyet évekig tartó természetes szárítás követ. Ezt követi a dongák precíz megmunkálása, a tűzön való hajlítás és az égetés, amely minden hordónak megadja azt az egyedi karaktert, amitől a bor vagy pálinka tökéletessé érik.
                 </p>
-                <div class="mt-10 flex flex-wrap justify-center gap-4">
-                    <a href="#about" class="bg-amber-700 hover:bg-amber-600 text-white font-semibold px-8 py-3 rounded shadow-lg transition-all transform hover:-translate-y-0.5 inline-block">
+                <div class="mt-8 sm:mt-10 flex flex-col xs:flex-row justify-center gap-4 px-4">
+                    <a href="#about" class="w-full xs:w-auto bg-amber-700 hover:bg-amber-600 text-white font-semibold px-8 py-3.5 rounded shadow-lg transition-all active:scale-95 text-center inline-block text-sm">
                         Ismerjen meg minket
                     </a>
-                    <button onclick="switchToView('webshop')" class="bg-stone-800 hover:bg-stone-750 border border-amber-600/50 text-amber-400 font-semibold px-8 py-3 rounded shadow-lg transition-all transform hover:-translate-y-0.5 inline-block">
+                    <button onclick="switchToView('webshop')" class="w-full xs:w-auto bg-stone-800 hover:bg-stone-750 border border-amber-600/50 text-amber-400 font-semibold px-8 py-3.5 rounded shadow-lg transition-all active:scale-95 text-center inline-block text-sm">
                         Irány a Webshop
                     </button>
                 </div>
@@ -143,22 +160,22 @@
         </section>
 
         <!-- Cégünkről -->
-        <section id="about" class="py-20 bg-stone-100 px-6">
+        <section id="about" class="py-16 md:py-20 bg-stone-100 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-3xl font-serif font-bold text-center mb-12">Cégünkről & Történetünk</h2>
-                <div class="flex flex-col md:flex-row gap-10 items-center mb-16">
-                    <div class="w-full md:w-1/3 flex justify-center bg-white p-8 rounded shadow border border-stone-200">
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-center mb-10 md:mb-12">Cégünkről & Történetünk</h2>
+                <div class="flex flex-col md:flex-row gap-8 md:gap-10 items-center mb-12 md:mb-16">
+                    <div class="w-full md:w-1/3 flex justify-center bg-white p-6 sm:p-8 rounded shadow border border-stone-200">
                         <div class="relative flex justify-center items-center">
                             <img src="Balázs Barrels logo vektor.png" 
                                  alt="Balázs Barrels Zrt." 
-                                 class="max-h-40 w-auto object-contain drop-shadow" 
+                                 class="max-h-36 sm:max-h-40 w-auto object-contain drop-shadow" 
                                  onerror="handleLogoError(this, false)">
-                            <span id="about-text-logo" class="hidden text-amber-800 font-serif font-bold text-2xl text-center">
-                                Balazs Barrels <br><span class="text-stone-500 text-lg">Zrt.</span>
+                            <span id="about-text-logo" class="hidden text-amber-800 font-serif font-bold text-xl sm:text-2xl text-center">
+                                Balazs Barrels <br><span class="text-stone-500 text-base sm:text-lg">Zrt.</span>
                             </span>
                         </div>
                     </div>
-                    <div class="w-full md:w-2/3 leading-relaxed text-stone-700 text-lg">
+                    <div class="w-full md:w-2/3 leading-relaxed text-stone-700 text-sm sm:text-base">
                         <p class="mb-4">
                             A <strong>Balazs Barrels Zrt.</strong>-t 2011 decemberében alapította <strong>Nagy Balázs</strong> vezérigazgató, aki a nemzetközi borvilágban már korábban is nevet szerzett magának az elismert Trust hordógyártó vállalat alapítójaként és vezetőjeként. 
                         </p>
@@ -169,10 +186,10 @@
                 </div>
 
                 <!-- Mérföldkövek és Portfólió rács -->
-                <div class="grid md:grid-cols-2 gap-8 my-8">
-                    <div class="bg-white p-8 rounded shadow border-l-4 border-amber-700">
-                        <h3 class="font-serif font-bold text-xl mb-4 text-stone-900 border-b pb-2">Mérföldkövek</h3>
-                        <ul class="space-y-3 text-stone-700 text-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 my-8">
+                    <div class="bg-white p-6 sm:p-8 rounded shadow border-l-4 border-amber-700">
+                        <h3 class="font-serif font-bold text-lg sm:text-xl mb-4 text-stone-900 border-b pb-2">Mérföldkövek</h3>
+                        <ul class="space-y-3.5 text-stone-700 text-xs sm:text-sm">
                             <li class="flex gap-2">
                                 <strong class="text-amber-800 shrink-0">2011:</strong> 
                                 <span>A cég megalapítása és a saját, modern botykapeterdi gyártóüzem elindítása.</span>
@@ -196,9 +213,9 @@
                         </ul>
                     </div>
 
-                    <div class="bg-white p-8 rounded shadow border-l-4 border-amber-700">
-                        <h3 class="font-serif font-bold text-xl mb-4 text-stone-900 border-b pb-2">Termékpalettánk</h3>
-                        <ul class="space-y-3 text-stone-700 text-sm">
+                    <div class="bg-white p-6 sm:p-8 rounded shadow border-l-4 border-amber-700">
+                        <h3 class="font-serif font-bold text-lg sm:text-xl mb-4 text-stone-900 border-b pb-2">Termékpalettánk</h3>
+                        <ul class="space-y-3.5 text-stone-700 text-xs sm:text-sm">
                             <li class="flex items-start gap-2">
                                 <span class="text-amber-700 font-bold">1.</span>
                                 <div><strong>Kishordók:</strong> Kézműves hordók széles választékban, tölgy, akác, cseresznye, eper és kőrisfából is.</div>
@@ -223,46 +240,46 @@
                     </div>
                 </div>
                 
-                <p class="text-stone-600 leading-relaxed text-center italic mt-8 max-w-3xl mx-auto">
+                <p class="text-stone-650 leading-relaxed text-center italic mt-8 max-w-3xl mx-auto text-sm sm:text-base">
                     "Gyártástechnológiánk alapja a szigorú minőségellenőrzés és a válogatott alapanyagok használata. Célunk, hogy olyan kivételes hordókat alkossunk, amelyekben a legkiválóbb borok és párlatok érlelődhetnek tökéletessé."
                 </p>
             </div>
         </section>
 
         <!-- Galéria -->
-        <section id="gallery" class="py-20 bg-stone-50 px-6">
+        <section id="gallery" class="py-16 md:py-20 bg-stone-50 px-4 sm:px-6">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-serif text-center mb-4">Galéria</h2>
-                <p class="text-center text-stone-600 mb-12 max-w-lg mx-auto">Tekintse meg a kádármesterség legszebb pillanatait és a gyártási folyamat lépéseit.</p>
+                <h2 class="text-2xl sm:text-3xl font-serif text-center mb-4 font-bold">Galéria</h2>
+                <p class="text-center text-stone-600 mb-10 md:mb-12 max-w-lg mx-auto text-xs sm:text-sm">Tekintse meg a kádármesterség legszebb pillanatait és a gyártási folyamat lépéseit.</p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <div class="group relative overflow-hidden rounded shadow aspect-[4/3] bg-stone-200">
                         <img src="https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=800&q=80" 
                              alt="Kézi égetés és hajlítás" 
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <span class="text-white font-serif font-semibold text-lg">Kézi égetés és hajlítás</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                            <span class="text-white font-serif font-semibold text-base">Kézi égetés és hajlítás</span>
                         </div>
                     </div>
 
                     <div class="group relative overflow-hidden rounded shadow aspect-[4/3] bg-stone-200">
                         <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=800&q=80" 
                              alt="Prémium érlelés pincében" 
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <span class="text-white font-serif font-semibold text-lg">Prémium érlelés pincében</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                            <span class="text-white font-serif font-semibold text-base">Prémium érlelés pincében</span>
                         </div>
                     </div>
 
                     <div class="group relative overflow-hidden rounded shadow aspect-[4/3] bg-stone-200">
                         <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=80" 
                              alt="Válogatott magyar tölgyfa" 
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <span class="text-white font-serif font-semibold text-lg">Válogatott magyar tölgyfa</span>
+                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                            <span class="text-white font-serif font-semibold text-base">Válogatott magyar tölgyfa</span>
                         </div>
                     </div>
                 </div>
@@ -270,21 +287,21 @@
         </section>
 
         <!-- Partnerek -->
-        <section id="partners" class="py-20 bg-stone-100 px-6">
+        <section id="partners" class="py-16 md:py-20 bg-stone-100 px-4 sm:px-6">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-serif text-center mb-4">Partnereink</h2>
-                <p class="text-center text-stone-600 mb-10 max-w-lg mx-auto">Akik már bizalmat szavaztak prémium minőségű botykapeterdi hordóinknak.</p>
+                <h2 class="text-2xl sm:text-3xl font-serif text-center mb-4 font-bold">Partnereink</h2>
+                <p class="text-center text-stone-600 mb-10 max-w-lg mx-auto text-xs sm:text-sm">Akik már bizalmat szavaztak prémium minőségű botykapeterdi hordóinknak.</p>
                 
-                <div class="bg-white p-8 rounded shadow border-l-8 border-amber-800 text-center">
-                    <p class="text-stone-600 italic mb-6">
+                <div class="bg-white p-6 sm:p-8 rounded shadow border-l-8 border-amber-800 text-center">
+                    <p class="text-stone-600 italic mb-6 text-sm sm:text-base">
                         "Itt fog szerepelni az Ön által küldött hivatalos partnerlista. Igény esetén logókkal, leírásokkal kiegészítve."
                     </p>
-                    <div class="flex flex-wrap justify-center gap-8 opacity-60">
-                        <span class="text-stone-500 font-serif font-bold text-lg">Díjnyertes Borászatok</span>
-                        <span class="text-stone-500 font-serif font-bold text-lg">•</span>
-                        <span class="text-stone-500 font-serif font-bold text-lg">Kézműves Pálinkafőzdék</span>
-                        <span class="text-stone-500 font-serif font-bold text-lg">•</span>
-                        <span class="text-stone-500 font-serif font-bold text-lg">Nemzetközi Forgalmazók</span>
+                    <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 opacity-60 text-xs sm:text-sm">
+                        <span class="text-stone-500 font-serif font-bold">Díjnyertes Borászatok</span>
+                        <span class="text-stone-500 font-serif font-bold hidden sm:inline">•</span>
+                        <span class="text-stone-500 font-serif font-bold">Kézműves Pálinkafőzdék</span>
+                        <span class="text-stone-500 font-serif font-bold hidden sm:inline">•</span>
+                        <span class="text-stone-500 font-serif font-bold">Nemzetközi Forgalmazók</span>
                     </div>
                 </div>
             </div>
@@ -292,77 +309,77 @@
     </div>
 
     <!-- Webshop Nézet -->
-    <section id="webshop-view" class="py-12 bg-stone-50 px-6 hidden flex-grow">
+    <section id="webshop-view" class="py-8 sm:py-12 bg-stone-50 px-4 sm:px-6 hidden flex-grow">
         <div class="max-w-6xl mx-auto">
             <!-- Webshop Fejléc & Kereső (Képes háttérrel) -->
-            <div class="relative rounded-lg overflow-hidden mb-8 p-8 md:p-12 text-white shadow-lg border border-stone-800">
+            <div class="relative rounded-lg overflow-hidden mb-8 p-6 sm:p-10 md:p-12 text-white shadow-lg border border-stone-800">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1920&q=80');"></div>
                 <div class="absolute inset-0 bg-stone-950/75"></div>
                 <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div>
-                        <h2 class="text-3xl font-serif font-bold flex items-center gap-2 text-white drop-shadow-md">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-2xl sm:text-3xl font-serif font-bold flex items-center justify-center md:justify-start gap-2.5 text-white drop-shadow-md">
                             <i class="fa-solid fa-store text-amber-500"></i> Balázs Barrels Webáruház
                         </h2>
-                        <p class="text-sm text-stone-300 mt-2 drop-shadow">Válassza ki a kádármesterünk által kézzel készített prémium hordóit.</p>
+                        <p class="text-xs sm:text-sm text-stone-300 mt-2 drop-shadow">Válassza ki a kádármesterünk által kézzel készített prémium hordóit.</p>
                     </div>
                     
                     <!-- Keresősáv -->
                     <div class="w-full md:w-80 relative" id="shop-search-container">
-                        <input type="text" id="shop-search" oninput="handleSearch(this.value)" placeholder="Keresés a termékek között..." class="w-full bg-stone-900/90 text-white pl-10 pr-4 py-2.5 rounded border border-stone-700 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all text-sm !text-white">
-                        <i class="fa-solid fa-magnifying-glass text-stone-400 absolute left-3.5 top-3.5 text-sm"></i>
+                        <input type="text" id="shop-search" oninput="handleSearch(this.value)" placeholder="Keresés a termékek között..." class="w-full bg-stone-900/90 text-white pl-10 pr-4 py-3 rounded border border-stone-700 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all text-sm !text-white">
+                        <i class="fa-solid fa-magnifying-glass text-stone-400 absolute left-3.5 top-4 text-sm"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Bejelentkezés-védelmi felhívás (Ha nincs belépve) -->
-            <div id="prices-hidden-banner" class="mb-10 bg-amber-50 border border-amber-200 text-stone-800 p-6 rounded-lg shadow-sm flex flex-col sm:flex-row items-center gap-4">
+            <div id="prices-hidden-banner" class="mb-10 bg-amber-50 border border-amber-200 text-stone-800 p-5 sm:p-6 rounded-lg shadow-sm flex flex-col md:flex-row items-center gap-4">
                 <div class="bg-amber-600 text-white rounded-full p-4 shrink-0 flex items-center justify-center w-12 h-12 shadow">
                     <i class="fa-solid fa-lock text-lg"></i>
                 </div>
-                <div class="text-center sm:text-left flex-grow">
-                    <h3 class="font-bold text-lg text-stone-900">Az árak és a konfigurációs opciók rejtettek</h3>
-                    <p class="text-sm text-stone-600">Prémium hordóink árainak megtekintéséhez, a fafajták és pörkölési szintek testreszabásához, valamint a megrendelés leadásához kérjük, jelentkezzen be vagy regisztráljon.</p>
+                <div class="text-center md:text-left flex-grow">
+                    <h3 class="font-bold text-base sm:text-lg text-stone-900">Az árak és a konfigurációs opciók rejtettek</h3>
+                    <p class="text-xs sm:text-sm text-stone-600">Prémium hordóink árainak megtekintéséhez, a fafajták és pörkölési szintek testreszabásához, valamint a megrendelés leadásához kérjük, jelentkezzen be vagy regisztráljon.</p>
                 </div>
-                <button onclick="openAuthModal()" class="bg-amber-700 hover:bg-amber-600 text-white font-bold px-5 py-2.5 rounded transition-all shadow shrink-0 text-sm">
+                <button onclick="openAuthModal()" class="w-full md:w-auto bg-amber-700 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded transition-all shadow active:scale-95 text-xs sm:text-sm text-center">
                     Bejelentkezés / Regisztráció
                 </button>
             </div>
 
             <!-- 1. Kategória: Kishordók -->
             <div class="mb-14">
-                <div class="border-b border-stone-200 pb-2 mb-6">
-                    <h3 class="text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
+                <div class="border-b border-stone-200 pb-2.5 mb-6">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
                         <span class="w-2.5 h-6 bg-amber-600 rounded-sm"></span> Kishordók (1L - 112L)
                     </h3>
-                    <p class="text-xs text-stone-500 mt-1">Kézműves hordók pálinka és bor érleléséhez, tölgyfa, akácfa, cseresznyefa, eperfa vagy kőrisfából.</p>
+                    <p class="text-[11px] sm:text-xs text-stone-500 mt-1">Kézműves hordók pálinka és bor érleléséhez, tölgyfa, akácfa, cseresznyefa, eperfa vagy kőrisfából.</p>
                 </div>
-                <div id="kishordo-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div id="kishordo-grid" class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Javascript populates -->
                 </div>
             </div>
 
             <!-- 2. Kategória: Barrique Hordók -->
             <div class="mb-14">
-                <div class="border-b border-stone-200 pb-2 mb-6">
-                    <h3 class="text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
+                <div class="border-b border-stone-200 pb-2.5 mb-6">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
                         <span class="w-2.5 h-6 bg-amber-600 rounded-sm"></span> Barrique Hordók
                     </h3>
-                    <p class="text-xs text-stone-500 mt-1">225L, 228L, 300L és 500L méretű professzionális tölgyfahordók minőségi borkészítéshez és párlatokhoz.</p>
+                    <p class="text-[11px] sm:text-xs text-stone-500 mt-1">225L, 228L, 300L és 500L méretű professzionális tölgyfahordók minőségi borkészítéshez és párlatokhoz.</p>
                 </div>
-                <div id="barrique-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div id="barrique-grid" class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Javascript populates -->
                 </div>
             </div>
 
             <!-- 3. Kategória: Kiegészítők és Edények -->
             <div class="mb-10">
-                <div class="border-b border-stone-200 pb-2 mb-6">
-                    <h3 class="text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
+                <div class="border-b border-stone-200 pb-2.5 mb-6">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
                         <span class="w-2.5 h-6 bg-amber-600 rounded-sm"></span> Kiegészítők &amp; Egyedi Kádártermékek
                     </h3>
-                    <p class="text-xs text-stone-500 mt-1">Kerti virágedények, díszkádak és ecetes hordók a háztartások és kertek díszítésére.</p>
+                    <p class="text-[11px] sm:text-xs text-stone-500 mt-1">Kerti virágedények, díszkádak és ecetes hordók a háztartások és kertek díszítésére.</p>
                 </div>
-                <div id="kiegeszito-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div id="kiegeszito-grid" class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Javascript populates -->
                 </div>
             </div>
@@ -371,24 +388,24 @@
     </section>
 
     <!-- Kapcsolat -->
-    <section id="contact" class="py-20 bg-stone-900 text-stone-100 px-6">
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <section id="contact" class="py-16 md:py-20 bg-stone-900 text-stone-100 px-4 sm:px-6">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center">
             <div>
-                <h2 class="text-3xl font-serif mb-6 text-amber-500 font-bold">Kapcsolat</h2>
+                <h2 class="text-2xl sm:text-3xl font-serif mb-6 text-amber-500 font-bold">Kapcsolat</h2>
                 
-                <div class="space-y-4 text-stone-300 text-lg">
+                <div class="space-y-4 text-stone-300 text-sm sm:text-base">
                     <div class="border-b border-stone-800 pb-3">
-                        <p class="text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Cégnév</p>
-                        <p class="text-xl font-bold text-white">Balazs Barrels Zrt.</p>
+                        <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Cégnév</p>
+                        <p class="text-lg sm:text-xl font-bold text-white">Balazs Barrels Zrt.</p>
                     </div>
                     
                     <div class="border-b border-stone-800 pb-3">
-                        <p class="text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Gyártás Helye</p>
+                        <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Gyártás Helye</p>
                         <p class="text-white font-medium">7900 Botykapeterd, hrsz: 017/22</p>
                     </div>
                     
                     <div class="border-b border-stone-800 pb-3">
-                        <p class="text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Telefonszám</p>
+                        <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Telefonszám</p>
                         <p>
                             <a href="tel:+36705628453" class="font-bold text-amber-500 hover:text-amber-400 transition-colors">
                                 +36 70 562 8453
@@ -397,9 +414,9 @@
                     </div>
                     
                     <div class="pb-3">
-                        <p class="text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">E-mail cím</p>
+                        <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">E-mail cím</p>
                         <p>
-                            <a href="mailto:info@balazsbarrels.com" class="font-bold text-amber-500 hover:text-amber-400 transition-colors font-mono">
+                            <a href="mailto:info@balazsbarrels.com" class="font-bold text-amber-500 hover:text-amber-400 transition-colors font-mono text-sm sm:text-base">
                                 info@balazsbarrels.com
                             </a>
                         </p>
@@ -408,7 +425,7 @@
             </div>
             
             <!-- Google Maps Beágyazás -->
-            <div class="w-full h-80 bg-stone-800 rounded-lg overflow-hidden border border-stone-700 shadow-2xl relative">
+            <div class="w-full h-64 sm:h-80 bg-stone-800 rounded-lg overflow-hidden border border-stone-700 shadow-2xl relative">
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2729.8!2d17.8!3d46.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4769c9b4e9f7832f%3A0x6b610c3f5d5b7a0!2sBotykapeterd%2C%20017%2F22%2C%207900!5e0!3m2!1shu!2shu!4v1600000000000!5m2!1shu!2shu" 
                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
@@ -418,7 +435,7 @@
     </section>
 
     <!-- Lábléc -->
-    <footer class="py-6 text-center text-stone-500 bg-stone-950 text-sm mt-auto border-t border-stone-900">
+    <footer class="py-6 text-center text-stone-500 bg-stone-950 text-xs sm:text-sm mt-auto border-t border-stone-900 px-4">
         <p>&copy; 2026 Balazs Barrels Zrt. Minden jog fenntartva.</p>
     </footer>
 
@@ -439,7 +456,7 @@
                 <h3 class="font-serif font-bold text-lg text-white flex items-center gap-2">
                     <i class="fa-solid fa-basket-shopping text-amber-500"></i> Az Ön Kosara
                 </h3>
-                <button onclick="toggleCart(false)" class="text-stone-400 hover:text-white transition-colors" aria-label="Kosár bezárása">
+                <button onclick="toggleCart(false)" class="p-2 text-stone-400 hover:text-white transition-colors" aria-label="Kosár bezárása">
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
@@ -450,21 +467,21 @@
             </div>
 
             <!-- Kosár Összesítő és Checkout gomb -->
-            <div class="p-4 border-t border-stone-850 bg-stone-900 space-y-3">
-                <div class="flex justify-between text-xs text-stone-400">
+            <div class="p-4 border-t border-stone-850 bg-stone-900 space-y-3 pb-8 md:pb-4">
+                <div class="flex justify-between text-[11px] sm:text-xs text-stone-400">
                     <span>Nettó részösszeg (27% ÁFA nélkül):</span>
                     <span id="cart-subtotal">0 Ft</span>
                 </div>
-                <div class="flex justify-between text-xs text-stone-400">
+                <div class="flex justify-between text-[11px] sm:text-xs text-stone-400">
                     <span>ÁFA tartalom (27%):</span>
                     <span id="cart-tax">0 Ft</span>
                 </div>
-                <div class="flex justify-between font-bold text-sm border-t border-stone-800 pt-2 text-white">
+                <div class="flex justify-between font-bold text-xs sm:text-sm border-t border-stone-800 pt-2 text-white">
                     <span>Várható bruttó fizetendő:</span>
                     <span id="cart-total" class="text-amber-500 font-mono text-base">0 Ft</span>
                 </div>
 
-                <button id="checkout-btn" onclick="openCheckout()" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3 rounded flex items-center justify-center gap-2 transition-all shadow-lg">
+                <button id="checkout-btn" onclick="openCheckout()" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg text-sm">
                     Tovább a Pénztárhoz <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -472,42 +489,42 @@
     </div>
 
     <!-- Termék konfigurátor Modal -->
-    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProductModal()"></div>
-        <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative z-10 flex flex-col md:flex-row">
+        <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative z-10 flex flex-col md:flex-row">
             
-            <!-- Left Side: Interactive Multi-Image Gallery -->
-            <div class="w-full md:w-1/2 p-6 flex flex-col gap-4 bg-stone-950">
+            <!-- Bal oldal: Interaktív multi-képgaléria -->
+            <div class="w-full md:w-1/2 p-4 sm:p-6 flex flex-col gap-4 bg-stone-950 justify-center">
                 <div class="relative overflow-hidden aspect-[4/3] rounded-lg border border-stone-800 shadow-inner">
                     <img id="modal-product-img" src="" alt="Termék" class="w-full h-full object-cover">
                 </div>
                 <!-- Thumbnail Indicators -->
-                <div id="modal-thumbnails-container" class="flex gap-2 overflow-x-auto py-2 justify-center scrollbar-none">
-                    <!-- Javascript populates small clickable preview frames here -->
+                <div id="modal-thumbnails-container" class="flex gap-2 overflow-x-auto py-1 justify-center scrollbar-none">
+                    <!-- Javascript populates -->
                 </div>
-                <button onclick="closeProductModal()" class="md:hidden absolute top-4 right-4 bg-black bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition-all z-20">
+                <button onclick="closeProductModal()" class="md:hidden absolute top-4 right-4 bg-black bg-opacity-70 text-white p-2.5 rounded-full hover:bg-opacity-90 transition-all z-20 w-10 h-10 flex items-center justify-center">
                     <i class="fa-solid fa-times"></i>
                 </button>
             </div>
 
-            <!-- Right Side: Details, Config and Complete Description -->
-            <div class="w-full md:w-1/2 p-6 flex flex-col justify-between">
+            <!-- Jobb oldal: Részletek, opciók és gombok -->
+            <div class="w-full md:w-1/2 p-4 sm:p-6 flex flex-col justify-between">
                 <div>
                     <div class="hidden md:flex justify-end mb-2">
-                        <button onclick="closeProductModal()" class="text-stone-400 hover:text-white transition-colors text-xl">
+                        <button onclick="closeProductModal()" class="text-stone-400 hover:text-white transition-colors text-xl p-1">
                             <i class="fa-solid fa-times"></i>
                         </button>
                     </div>
-                    <span id="modal-product-category" class="text-amber-500 text-xs font-bold uppercase tracking-wider block mb-1">Kategória</span>
-                    <h3 id="modal-product-name" class="text-xl font-serif font-bold text-white mb-3">Termék neve</h3>
+                    <span id="modal-product-category" class="text-amber-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider block mb-1">Kategória</span>
+                    <h3 id="modal-product-name" class="text-lg sm:text-xl font-serif font-bold text-white mb-2 sm:mb-3">Termék neve</h3>
                     
-                    <!-- Full visible product description -->
+                    <!-- Termékleírás -->
                     <div class="mb-4">
-                        <p id="modal-product-desc" class="text-stone-300 text-sm leading-relaxed max-h-[160px] overflow-y-auto pr-1">Leírás helye.</p>
+                        <p id="modal-product-desc" class="text-stone-300 text-xs sm:text-sm leading-relaxed max-h-[120px] md:max-h-[160px] overflow-y-auto pr-1">Leírás.</p>
                     </div>
 
                     <!-- EGYEDI GRAVÍROZÁS EXTRA ÉRTESÍTŐ PANEL -->
-                    <div id="modal-custom-laser-notice" class="hidden mb-4 p-3 bg-stone-950/65 border border-amber-600/30 rounded-lg text-xs text-stone-300 flex items-start gap-2.5">
+                    <div id="modal-custom-laser-notice" class="hidden mb-4 p-3 bg-stone-950/65 border border-amber-600/30 rounded-lg text-[11px] sm:text-xs text-stone-300 flex items-start gap-2.5">
                         <i class="fa-solid fa-wand-magic-sparkles text-amber-500 mt-0.5 shrink-0"></i>
                         <div>
                             <strong class="text-amber-400 block mb-0.5">Egyedi feliratozás és logózás!</strong>
@@ -515,27 +532,27 @@
                         </div>
                     </div>
 
-                    <!-- FA TÍPUS VÁLASZTÁS KISHORDÓKHOZ -->
-                    <div id="modal-wood-section" class="mb-6 hidden">
-                        <label class="block text-xs uppercase text-stone-400 font-bold mb-1.5">Fa típusa</label>
-                        <div id="modal-wood-container" class="grid grid-cols-2 gap-2 text-xs">
+                    <!-- FA TÍPUS VÁLASZTÁS KISHORDÓKHOZ ÉS BARRIQUE-HOZ -->
+                    <div id="modal-wood-section" class="mb-5 hidden">
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1.5">Fa típusa</label>
+                        <div id="modal-wood-container" class="grid grid-cols-2 xs:grid-cols-3 gap-2 text-[11px] sm:text-xs">
                         </div>
                     </div>
 
                     <!-- PÖRKÖLÉSI SZINT -->
-                    <div class="mb-6">
-                        <label id="modal-toast-label" class="block text-xs uppercase text-stone-400 font-bold mb-1.5">Égetési / pörkölési szint</label>
-                        <div id="modal-toast-container" class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="mb-5">
+                        <label id="modal-toast-label" class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1.5">Égetési / pörkölési szint</label>
+                        <div id="modal-toast-container" class="grid grid-cols-2 xs:grid-cols-3 gap-2 text-[11px] sm:text-xs">
                         </div>
                     </div>
                 </div>
 
-                <div class="border-t border-stone-800 pt-4 mt-4">
+                <div class="border-t border-stone-800 pt-4 mt-2">
                     <div class="flex justify-between items-center mb-4">
                         <span class="text-stone-400 text-xs">Várható bruttó ár:</span>
-                        <span id="modal-product-price" class="text-2xl font-black text-amber-500">0 Ft</span>
+                        <span id="modal-product-price" class="text-xl sm:text-2xl font-black text-amber-500">0 Ft</span>
                     </div>
-                    <button onclick="addProductToCart()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3 rounded flex items-center justify-center gap-2 transition-all">
+                    <button onclick="addProductToCart()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-95 text-xs sm:text-sm">
                         Hozzáadás a Kosárhoz <i class="fa-solid fa-shopping-basket"></i>
                     </button>
                 </div>
@@ -545,74 +562,70 @@
     </div>
 
     <!-- Belépés és Regisztráció Modal -->
-    <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-85" onclick="closeAuthModal()"></div>
-        <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-lg w-full p-6 shadow-2xl relative z-10 max-h-[90vh] overflow-y-auto">
+        <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-lg w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
             
-            <!-- Bezár gomb -->
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors" aria-label="Bezárás">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors p-1" aria-label="Bezárás">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
 
-            <!-- Fülek a Bejelentkezés és Regisztráció választásához -->
-            <div class="flex border-b border-stone-800 mb-6">
+            <!-- Fülek -->
+            <div class="flex border-b border-stone-800 mb-6 text-sm sm:text-base">
                 <button onclick="toggleAuthTab('login')" id="tab-login" class="flex-1 py-2 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500">Bejelentkezés</button>
                 <button onclick="toggleAuthTab('register')" id="tab-register" class="flex-1 py-2 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white">Regisztráció</button>
             </div>
 
             <!-- BEJELENTKEZÉS FORM -->
-            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4 text-xs sm:text-sm">
                 <div>
-                    <label class="block text-xs uppercase text-stone-400 font-bold mb-1">E-mail cím</label>
-                    <input type="email" id="login-email" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                    <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">E-mail cím</label>
+                    <input type="email" id="login-email" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 text-xs sm:text-sm">
                 </div>
                 <div>
-                    <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Jelszó</label>
-                    <input type="password" id="login-password" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                    <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Jelszó</label>
+                    <input type="password" id="login-password" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 text-xs sm:text-sm">
                 </div>
-                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-2.5 rounded transition-all text-sm mt-4">
+                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded transition-all active:scale-95 text-xs sm:text-sm mt-4">
                     Belépés a Fiókba
                 </button>
                 
-                <!-- Gyors teszt fiók belépés -->
                 <div class="border-t border-stone-800 pt-4 mt-2">
-                    <button type="button" onclick="loadDemoAccount()" class="w-full bg-stone-850 hover:bg-stone-800 text-amber-400 font-bold py-2 rounded text-xs border border-amber-500/25 transition-all flex items-center justify-center gap-1.5">
+                    <button type="button" onclick="loadDemoAccount()" class="w-full bg-stone-850 hover:bg-stone-800 text-amber-400 font-bold py-2.5 rounded text-xs border border-amber-500/25 transition-all active:scale-95 flex items-center justify-center gap-1.5">
                         <i class="fa-solid fa-wand-magic-sparkles"></i> Gyors teszt fiók betöltése (1 kattintás)
                     </button>
                 </div>
             </form>
 
             <!-- REGISZTRÁCIÓS FORM -->
-            <form id="register-form" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden">
-                <!-- Ügyfél típus választó -->
+            <form id="register-form" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden text-xs sm:text-sm">
                 <div>
-                    <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Ügyféltípus</label>
+                    <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Ügyféltípus</label>
                     <div class="grid grid-cols-2 gap-2">
-                        <button type="button" id="reg-type-magan" onclick="selectRegType('maganszemely')" class="py-2 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all">Magánszemély</button>
-                        <button type="button" id="reg-type-ceg" onclick="selectRegType('ceg')" class="py-2 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all">Cég</button>
-                    </div>
-                </div>
-
-                <!-- Alap mezők -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Teljes Név / Kapcsolattartó</label>
-                        <input type="text" id="reg-name" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Telefonszám</label>
-                        <input type="tel" id="reg-phone" placeholder="+36 30 123 4567" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                        <button type="button" id="reg-type-magan" onclick="selectRegType('maganszemely')" class="py-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all">Magánszemély</button>
+                        <button type="button" id="reg-type-ceg" onclick="selectRegType('ceg')" class="py-2.5 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all">Cég</button>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs uppercase text-stone-400 font-bold mb-1">E-mail cím</label>
-                        <input type="email" id="reg-email" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Név / Kapcsolattartó</label>
+                        <input type="text" id="reg-name" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Jelszó (min. 4 karakter)</label>
-                        <input type="password" id="reg-password" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Telefonszám</label>
+                        <input type="tel" id="reg-phone" placeholder="+36 30 123 4567" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">E-mail cím</label>
+                        <input type="email" id="reg-email" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Jelszó (min. 4 karakter)</label>
+                        <input type="password" id="reg-password" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
                     </div>
                 </div>
 
@@ -620,64 +633,39 @@
                 <div id="reg-ceg-section" class="hidden space-y-4 border-t border-stone-800 pt-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Cégnév (Hivatalos)</label>
-                            <input type="text" id="reg-company-name" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                            <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Cégnév (Hivatalos)</label>
+                            <input type="text" id="reg-company-name" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
                         </div>
                         <div>
-                            <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Belföldi Adószám</label>
-                            <input type="text" id="reg-vat-number" placeholder="12345678-1-12" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                            <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Belföldi Adószám</label>
+                            <input type="text" id="reg-vat-number" placeholder="12345678-1-12" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
                         </div>
                     </div>
 
-                    <!-- Kiterjesztett Országválasztás és EU adószám kezelése -->
+                    <!-- Kiterjesztett Országválasztás -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Ország (Székhely)</label>
-                            <select id="reg-country" onchange="handleRegCountryChange(this.value)" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                            <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Ország (Székhely)</label>
+                            <select id="reg-country" onchange="handleRegCountryChange(this.value)" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
                                 <option value="HU" data-eu="false">Magyarország</option>
                                 <option value="AT" data-eu="true">Ausztria (EU)</option>
                                 <option value="BE" data-eu="true">Belgium (EU)</option>
-                                <option value="BG" data-eu="true">Bulgária (EU)</option>
-                                <option value="CY" data-eu="true">Ciprus (EU)</option>
-                                <option value="CZ" data-eu="true">Csehország (EU)</option>
                                 <option value="DE" data-eu="true">Németország (EU)</option>
-                                <option value="DK" data-eu="true">Dánia (EU)</option>
-                                <option value="EE" data-eu="true">Észtország (EU)</option>
                                 <option value="ES" data-eu="true">Spanyolország (EU)</option>
-                                <option value="FI" data-eu="true">Finnország (EU)</option>
                                 <option value="FR" data-eu="true">Franciaország (EU)</option>
-                                <option value="GR" data-eu="true">Görögország (EU)</option>
-                                <option value="HR" data-eu="true">Horvátország (EU)</option>
-                                <option value="IE" data-eu="true">Írország (EU)</option>
                                 <option value="IT" data-eu="true">Olaszország (EU)</option>
-                                <option value="LT" data-eu="true">Litvánia (EU)</option>
-                                <option value="LU" data-eu="true">Luxemburg (EU)</option>
-                                <option value="LV" data-eu="true">Lettország (EU)</option>
-                                <option value="MT" data-eu="true">Málta (EU)</option>
-                                <option value="NL" data-eu="true">Hollandia (EU)</option>
                                 <option value="PL" data-eu="true">Lengyelország (EU)</option>
-                                <option value="PT" data-eu="true">Portugália (EU)</option>
                                 <option value="RO" data-eu="true">Románia (EU)</option>
-                                <option value="SE" data-eu="true">Svédország (EU)</option>
-                                <option value="SI" data-eu="true">Szlovénia (EU)</option>
                                 <option value="SK" data-eu="true">Szlovákia (EU)</option>
-                                <option value="USA" data-eu="false">Egyesült Államok</option>
-                                <option value="GB" data-eu="false">Egyesült Királyság</option>
-                                <option value="CH" data-eu="false">Svájc</option>
-                                <option value="CA" data-eu="false">Kanada</option>
-                                <option value="AU" data-eu="false">Ausztrália</option>
-                                <option value="NZ" data-eu="false">Új-Zéland</option>
-                                <option value="JP" data-eu="false">Japán</option>
-                                <option value="NO" data-eu="false">Norvégia</option>
                             </select>
                         </div>
                         <div id="reg-eu-vat-container" class="hidden">
-                            <label class="block text-xs uppercase text-stone-400 font-bold mb-1">Közösségi (EU) Adószám</label>
-                            <input type="text" id="reg-eu-vat" placeholder="ATU12345678" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-sm">
+                            <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Közösségi (EU) Adószám</label>
+                            <input type="text" id="reg-eu-vat" placeholder="ATU12345678" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
                         </div>
                     </div>
 
-                    <!-- LEBONTOTT SZÁMLÁZÁSI CÍM (SZÉKHELY) -->
+                    <!-- LEBONTOTT SZÁMLÁZÁSI CÍM -->
                     <div class="border-t border-stone-800 pt-3">
                         <span class="block text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">Céges Székhely (Számlázási cím)</span>
                         <div class="grid grid-cols-3 gap-2 mb-2">
@@ -709,8 +697,8 @@
 
                 <!-- MEGEGYEZIK JELÖLŐ -->
                 <div class="pt-3 border-t border-stone-800">
-                    <label class="flex items-center gap-2 text-xs text-stone-300 cursor-pointer">
-                        <input type="checkbox" id="reg-same-addr" onchange="toggleRegShippingSection()" class="rounded border-stone-700 text-amber-500 bg-stone-800 focus:ring-0">
+                    <label class="flex items-center gap-2 text-xs text-stone-300 cursor-pointer p-1">
+                        <input type="checkbox" id="reg-same-addr" onchange="toggleRegShippingSection()" class="rounded border-stone-700 text-amber-500 bg-stone-800 focus:ring-0 w-4 h-4">
                         A szállítási cím megegyezik a székhellyel / számlázási címmel
                     </label>
                 </div>
@@ -744,7 +732,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-2.5 rounded transition-all text-sm mt-4">
+                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded transition-all active:scale-95 text-xs sm:text-sm mt-4">
                     Sikeres Regisztráció
                 </button>
             </form>
@@ -752,31 +740,31 @@
     </div>
 
     <!-- Saját Fiók / Rendelési előzmények Modal -->
-    <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProfileModal()"></div>
-        <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-4xl w-full p-6 shadow-2xl relative z-10 max-h-[90vh] overflow-y-auto">
+        <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-4xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
             
-            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors p-1">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
 
-            <h3 class="font-serif font-bold text-2xl text-white mb-6 border-b border-stone-800 pb-3 flex items-center gap-2">
+            <h3 class="font-serif font-bold text-xl sm:text-2xl text-white mb-6 border-b border-stone-800 pb-3 flex items-center gap-2">
                 <i class="fa-solid fa-circle-user text-amber-500"></i> Az Ön Felhasználói Fiókja
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Személyes / Céges Adatok Módosítása -->
+                <!-- Személyes / Céges Adatok -->
                 <div class="space-y-4">
-                    <h4 class="text-sm uppercase text-amber-500 font-bold tracking-wider">Profil Adatok Frissítése</h4>
-                    <form id="profile-form" onsubmit="handleProfileUpdate(event)" class="space-y-3 text-xs">
+                    <h4 class="text-xs sm:text-sm uppercase text-amber-500 font-bold tracking-wider border-b border-stone-800 pb-1">Profil Adatok Frissítése</h4>
+                    <form id="profile-form" onsubmit="handleProfileUpdate(event)" class="space-y-3.5 text-xs">
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <label class="block text-stone-400 font-bold mb-0.5">Név</label>
-                                <input type="text" id="prof-name" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <input type="text" id="prof-name" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs sm:text-sm">
                             </div>
                             <div>
                                 <label class="block text-stone-400 font-bold mb-0.5">Telefonszám</label>
-                                <input type="text" id="prof-phone" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <input type="text" id="prof-phone" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs sm:text-sm">
                             </div>
                         </div>
 
@@ -799,7 +787,6 @@
                                         <option value="HU">Magyarország</option>
                                         <option value="AT">Ausztria</option>
                                         <option value="DE">Németország</option>
-                                        <!-- Javascript can populate more or keep simple -->
                                     </select>
                                 </div>
                                 <div id="prof-eu-vat-container" class="hidden">
@@ -829,7 +816,7 @@
                                         <input type="text" id="prof-bill-house" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
                                     </div>
                                     <div class="col-span-4">
-                                        <label class="block text-[10px] text-stone-400 mb-0.5">Egyéb (ajtó, megjegyzés)</label>
+                                        <label class="block text-[10px] text-stone-400 mb-0.5">Egyéb</label>
                                         <input type="text" id="prof-bill-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
                                     </div>
                                 </div>
@@ -857,13 +844,13 @@
                                     <input type="text" id="prof-ship-house" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
                                 </div>
                                 <div class="col-span-4">
-                                    <label class="block text-[10px] text-stone-400 mb-0.5">Egyéb (ajtó, megjegyzés)</label>
+                                    <label class="block text-[10px] text-stone-400 mb-0.5">Egyéb</label>
                                     <input type="text" id="prof-ship-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-2 rounded mt-2 transition-all">
+                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded mt-2 transition-all active:scale-95 text-xs">
                             Adatok mentése
                         </button>
                     </form>
@@ -871,9 +858,9 @@
 
                 <!-- Rendelési előzmények -->
                 <div>
-                    <h4 class="text-sm uppercase text-amber-500 font-bold tracking-wider mb-4">Rendelési Előzmények</h4>
-                    <div id="profile-orders" class="space-y-4 max-h-[380px] overflow-y-auto pr-1">
-                        <!-- Javascript listázza a rendeléseket -->
+                    <h4 class="text-xs sm:text-sm uppercase text-amber-500 font-bold tracking-wider mb-4 border-b border-stone-800 pb-1">Rendelési Előzmények</h4>
+                    <div id="profile-orders" class="space-y-4 max-h-[340px] md:max-h-[380px] overflow-y-auto pr-1">
+                        <!-- Javascript listázza -->
                     </div>
                 </div>
             </div>
@@ -881,86 +868,86 @@
         </div>
     </div>
 
-    <!-- Pénztár Nézet (Fizetés elrendezés) -->
-    <section id="checkout-view" class="py-12 bg-stone-100 px-6 hidden flex-grow">
-        <div class="max-w-4xl mx-auto bg-stone-900 text-white p-8 rounded-lg shadow-2xl border border-stone-800">
-            <h2 class="text-2xl font-serif font-bold text-amber-500 mb-6 border-b border-stone-800 pb-3 flex items-center gap-2">
+    <!-- Pénztár Nézet -->
+    <section id="checkout-view" class="py-8 sm:py-12 bg-stone-100 px-4 sm:px-6 hidden flex-grow">
+        <div class="max-w-4xl mx-auto bg-stone-900 text-white p-5 sm:p-8 rounded-lg shadow-2xl border border-stone-800">
+            <h2 class="text-xl sm:text-2xl font-serif font-bold text-amber-500 mb-6 border-b border-stone-800 pb-3 flex items-center gap-2">
                 <i class="fa-solid fa-receipt"></i> Megrendelés Véglegesítése
             </h2>
 
-            <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
+            <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm">
                 <!-- Bal oldal: Adatok ellenőrzése -->
                 <div class="space-y-4">
-                    <h3 class="text-sm uppercase text-stone-400 font-bold tracking-widest border-b border-stone-800 pb-1">Vevő és Számlázási Adatok</h3>
+                    <h3 class="text-xs sm:text-sm uppercase text-stone-400 font-bold tracking-widest border-b border-stone-800 pb-1">Vevő és Számlázási Adatok</h3>
                     <div>
                         <label class="block text-stone-400 mb-0.5">Név / Cégnév</label>
-                        <input type="text" id="co-name" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                        <input type="text" id="co-name" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
                             <label class="block text-stone-400 mb-0.5">Telefonszám</label>
-                            <input type="tel" id="co-phone" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                            <input type="tel" id="co-phone" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
                         </div>
                         <div>
                             <label class="block text-stone-400 mb-0.5">E-mail cím</label>
-                            <input type="email" id="co-email" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                            <input type="email" id="co-email" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
                         </div>
                     </div>
 
                     <!-- LEBONTOTT SZÁMLÁZÁSI CÍM -->
-                    <div class="bg-stone-950 p-3 rounded border border-stone-800 space-y-2">
+                    <div class="bg-stone-950 p-3 sm:p-4 rounded border border-stone-800 space-y-2">
                         <span class="block text-amber-500 font-bold">Számlázási cím</span>
                         <div class="grid grid-cols-3 gap-2">
                             <div class="col-span-1">
                                 <label class="block text-stone-400 mb-0.5">Irányítószám</label>
-                                <input type="text" id="co-bill-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <input type="text" id="co-bill-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                             </div>
                             <div class="col-span-2">
                                 <label class="block text-stone-400 mb-0.5">Település</label>
-                                <input type="text" id="co-bill-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <input type="text" id="co-bill-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                             </div>
                         </div>
                         <div>
                             <label class="block text-stone-400 mb-0.5">Közterület neve és jellege</label>
-                            <input type="text" id="co-bill-street" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                            <input type="text" id="co-bill-street" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                         </div>
                         <div class="grid grid-cols-3 gap-2">
                             <div class="col-span-1">
                                 <label class="block text-stone-400 mb-0.5">Házszám</label>
-                                <input type="text" id="co-bill-house" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <input type="text" id="co-bill-house" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                             </div>
                             <div class="col-span-2">
-                                <label class="block text-stone-400 mb-0.5">Egyéb (ajtó, megjegyzés)</label>
-                                <input type="text" id="co-bill-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <label class="block text-stone-400 mb-0.5">Egyéb</label>
+                                <input type="text" id="co-bill-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                             </div>
                         </div>
                     </div>
 
                     <!-- LEBONTOTT SZÁLLÍTÁSI CÍM -->
-                    <div class="bg-stone-950 p-3 rounded border border-stone-800 space-y-2">
+                    <div class="bg-stone-950 p-3 sm:p-4 rounded border border-stone-800 space-y-2">
                         <span class="block text-amber-500 font-bold">Szállítási cím</span>
                         <div class="grid grid-cols-3 gap-2">
                             <div class="col-span-1">
                                 <label class="block text-stone-400 mb-0.5">Irányítószám</label>
-                                <input type="text" id="co-ship-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <input type="text" id="co-ship-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                             </div>
                             <div class="col-span-2">
                                 <label class="block text-stone-400 mb-0.5">Település</label>
-                                <input type="text" id="co-ship-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <input type="text" id="co-ship-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                             </div>
                         </div>
                         <div>
                             <label class="block text-stone-400 mb-0.5">Közterület neve és jellege</label>
-                            <input type="text" id="co-ship-street" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                            <input type="text" id="co-ship-street" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                         </div>
                         <div class="grid grid-cols-3 gap-2">
                             <div class="col-span-1">
                                 <label class="block text-stone-400 mb-0.5">Házszám</label>
-                                <input type="text" id="co-ship-house" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <input type="text" id="co-ship-house" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                             </div>
                             <div class="col-span-2">
-                                <label class="block text-stone-400 mb-0.5">Egyéb (ajtó, megjegyzés)</label>
-                                <input type="text" id="co-ship-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                                <label class="block text-stone-400 mb-0.5">Egyéb</label>
+                                <input type="text" id="co-ship-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
                             </div>
                         </div>
                     </div>
@@ -969,11 +956,11 @@
                 <!-- Jobb oldal: Szállítás, fizetés, végösszeg -->
                 <div class="space-y-6 flex flex-col justify-between">
                     <div>
-                        <h3 class="text-sm uppercase text-stone-400 font-bold tracking-widest border-b border-stone-800 pb-1 mb-3">Szállítási és Fizetési Opciók</h3>
+                        <h3 class="text-xs sm:text-sm uppercase text-stone-400 font-bold tracking-widest border-b border-stone-800 pb-1 mb-3">Szállítási és Fizetési Opciók</h3>
                         
                         <div class="space-y-2 mb-4">
                             <label class="block text-stone-400 mb-1">Átvétel módja</label>
-                            <select id="co-delivery" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                            <select id="co-delivery" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
                                 <option value="delivery">Házhozszállítás futárszolgálattal (+0 Ft)</option>
                                 <option value="pickup">Személyes átvétel Botykapeterden</option>
                             </select>
@@ -981,25 +968,25 @@
 
                         <div class="space-y-2">
                             <label class="block text-stone-400 mb-1">Fizetési mód</label>
-                            <select id="co-payment" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700">
+                            <select id="co-payment" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
                                 <option value="cod">Utánvétel a futárnál készpénzzel vagy kártyával</option>
                                 <option value="transfer">Banki előreutalás (díjbekérő alapján)</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="border-t border-stone-800 pt-4 bg-stone-950 p-4 rounded border border-stone-800">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-stone-400">Végső bruttó fizetendő összeg:</span>
-                            <span id="co-final-total" class="text-2xl font-black text-amber-500">0 Ft</span>
+                    <div class="border-t border-stone-800 pt-4 bg-stone-950 p-4 sm:p-5 rounded border border-stone-800">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+                            <span class="text-stone-400 text-xs">Végső bruttó fizetendő összeg:</span>
+                            <span id="co-final-total" class="text-xl sm:text-2xl font-black text-amber-500 font-mono">0 Ft</span>
                         </div>
                         <p class="text-[10px] text-stone-400 mb-4 leading-relaxed">Megrendelésével Ön kijelenti, hogy elfogadta a Balazs Barrels Zrt. Általános Szerződési Feltételeit és Adatkezelési tájékoztatóját.</p>
                         
-                        <div class="flex gap-2">
-                            <button type="button" onclick="switchToView('webshop')" class="w-1/2 bg-stone-800 hover:bg-stone-700 text-stone-300 font-bold py-3 rounded text-center transition-all">
+                        <div class="flex flex-col xs:flex-row gap-2">
+                            <button type="button" onclick="switchToView('webshop')" class="w-full xs:w-1/2 bg-stone-800 hover:bg-stone-700 text-stone-300 font-bold py-3.5 rounded text-center transition-all active:scale-95 text-xs sm:text-sm">
                                 Vissza a Webshopba
                             </button>
-                            <button type="submit" class="w-1/2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3 rounded transition-all shadow-lg text-center">
+                            <button type="submit" class="w-full xs:w-1/2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded transition-all shadow-lg active:scale-95 text-center text-xs sm:text-sm">
                                 Rendelés Leadása
                             </button>
                         </div>
@@ -1012,12 +999,12 @@
     <!-- Siker ablak -->
     <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-90"></div>
-        <div class="bg-stone-900 border border-amber-600/30 text-white rounded-lg p-8 max-w-md w-full text-center relative z-10 shadow-2xl">
-            <div class="w-20 h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-amber-500/30">
-                <i class="fa-solid fa-circle-check text-4xl"></i>
+        <div class="bg-stone-900 border border-amber-600/30 text-white rounded-lg p-6 sm:p-8 max-w-md w-full text-center relative z-10 shadow-2xl">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-amber-500/30">
+                <i class="fa-solid fa-circle-check text-3xl sm:text-4xl"></i>
             </div>
-            <h3 class="font-serif font-bold text-2xl text-white mb-2">Köszönjük Megrendelését!</h3>
-            <p class="text-sm text-stone-400 mb-6">A megrendelését sikeresen rögzítettük a rendszerünkben. Kádármestereink hamarosan megkezdik a termékek összeállítását.</p>
+            <h3 class="font-serif font-bold text-xl sm:text-2xl text-white mb-2">Köszönjük Megrendelését!</h3>
+            <p class="text-xs sm:text-sm text-stone-400 mb-6">A megrendelését sikeresen rögzítettük a rendszerünkben. Kádármestereink hamarosan megkezdik a termékek összeállítását.</p>
             
             <div class="bg-stone-950 p-4 rounded-lg border border-stone-800 mb-6 text-xs text-left font-mono space-y-1.5">
                 <div class="flex justify-between"><span class="text-stone-500">Rendelési azonosító:</span> <span id="success-order-id" class="text-amber-500 font-bold">BB-12345</span></div>
@@ -1025,12 +1012,11 @@
                 <div class="flex justify-between"><span class="text-stone-500">Fizetés módja:</span> <span id="success-order-payment" class="text-white">Utánvét</span></div>
             </div>
 
-            <button onclick="closeSuccessModal()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded-md transition-all">
+            <button onclick="closeSuccessModal()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3.5 rounded-md transition-all active:scale-95 text-xs sm:text-sm">
                 Vissza a Webáruházba
             </button>
         </div>
     </div>
-
 
     <script>
         // Termékek listája - 10 db kishordó, 4 db barrique hordó, 3 db kiegészítő
@@ -1309,7 +1295,7 @@
             },
             saveUser: function(userObj) {
                 let users = this.getUsers();
-                // Meglévő felhasználó frissítése vagy új hozzáadása
+                // Meglévő frissítése vagy új hozzáadása
                 const idx = users.findIndex(u => u.email.toLowerCase() === userObj.email.toLowerCase());
                 if (idx > -1) {
                     users[idx] = userObj;
@@ -1371,6 +1357,27 @@
             }, 3000);
         }
 
+        // Mobil Hamburger Menü kezelés
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('hamburger-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = "fa-solid fa-bars text-xl";
+            } else {
+                icon.className = "fa-solid fa-xmark text-xl";
+            }
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('hamburger-icon');
+            if (menu && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars text-xl";
+            }
+        }
+
         function switchToView(view) {
             currentView = view;
             const mainContainer = document.getElementById('main-view-container');
@@ -1385,7 +1392,7 @@
                 mainContainer.classList.add('hidden');
                 shopContainer.classList.remove('hidden');
                 checkoutContainer.classList.add('hidden');
-                renderProducts(); // Újragenerálás kereső szűréssel együtt
+                renderProducts(); // Újragenerálás
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (view === 'checkout') {
                 mainContainer.classList.add('hidden');
@@ -1395,13 +1402,12 @@
             }
         }
 
-        // FEJLÉC FELHASZNÁLÓI DROPDOWN
         function toggleUserDropdown() {
             const dd = document.getElementById('user-dropdown');
             dd.classList.toggle('hidden');
         }
 
-        // KÜLSŐ KATTINTÁS VÉDELMEK (Dropdown bezárása ha mellé kattintanak)
+        // KÜLSŐ KATTINTÁS VÉDELMEK (Dropdown bezárása)
         window.addEventListener('click', function(e) {
             const menuContainer = document.getElementById('user-menu-container');
             const dd = document.getElementById('user-dropdown');
@@ -1427,7 +1433,7 @@
             barriqueGrid.innerHTML = '';
             kiegeszitoGrid.innerHTML = '';
 
-            // Árak bannereinek elrejtése vagy mutatása
+            // Árak elrejtése banner vezérlés
             const banner = document.getElementById('prices-hidden-banner');
             if (currentUser) {
                 if (banner) banner.classList.add('hidden');
@@ -1435,7 +1441,6 @@
                 if (banner) banner.classList.remove('hidden');
             }
 
-            // Szűrt termékek összegyűjtése
             const filtered = products.filter(p => {
                 if (!searchQuery) return true;
                 return p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
@@ -1443,39 +1448,37 @@
 
             filtered.forEach(p => {
                 const card = document.createElement('div');
-                card.className = "bg-white border border-stone-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between";
+                card.className = "bg-white border border-stone-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between";
 
-                // Bejelentkezett állapot szerinti ár kijelzés
                 let priceHtml = '';
                 let actionBtn = '';
 
                 if (currentUser) {
-                    priceHtml = `<span class="text-xl font-bold text-amber-600 font-mono">${new Intl.NumberFormat('hu-HU').format(p.price)} Ft</span>`;
+                    priceHtml = `<span class="text-lg sm:text-xl font-bold text-amber-600 font-mono">${new Intl.NumberFormat('hu-HU').format(p.price)} Ft</span>`;
                     actionBtn = `
-                        <button onclick="openProductModal('${p.id}')" class="w-full bg-stone-900 hover:bg-amber-600 hover:text-stone-950 text-white font-bold py-2.5 rounded text-xs transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5">
+                        <button onclick="openProductModal('${p.id}')" class="w-full bg-stone-900 hover:bg-amber-600 hover:text-stone-950 text-white font-bold py-3 rounded text-xs transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-[0.98]">
                             Megtekintés és konfigurálás <i class="fa-solid fa-sliders text-[10px]"></i>
                         </button>
                     `;
                 } else {
                     priceHtml = `
-                        <div class="flex items-center gap-1.5 text-xs text-stone-400 italic">
+                        <div class="flex items-center gap-1.5 text-xs text-stone-400 italic font-medium">
                             <i class="fa-solid fa-lock text-[10px]"></i> Árakhoz lépjen be!
                         </div>
                     `;
                     actionBtn = `
-                        <button onclick="openAuthModal()" class="w-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2.5 rounded text-xs transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5">
+                        <button onclick="openAuthModal()" class="w-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-3 rounded text-xs transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-[0.98]">
                             Belépés a vásárláshoz <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     `;
                 }
 
-                // Első kép vagy fallback betöltése
                 const coverImg = p.images && p.images.length > 0 ? p.images[0] : 'https://placehold.co/400x300/e7e5e4/44403c?text=Hordo';
 
                 card.innerHTML = `
                     <div class="relative aspect-[4/3] bg-stone-100 overflow-hidden cursor-pointer" onclick="${currentUser ? `openProductModal('${p.id}')` : 'openAuthModal()'}">
                         <img src="${coverImg}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/e7e5e4/44403c?text=Hordo'">
-                        <span class="absolute top-2 left-2 bg-stone-900/80 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">${p.volume}</span>
+                        <span class="absolute top-2.5 left-2.5 bg-stone-900/80 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">${p.volume}</span>
                     </div>
                     <div class="p-4 flex-grow flex flex-col justify-between gap-3">
                         <div>
@@ -1492,7 +1495,6 @@
                     </div>
                 `;
 
-                // Csoportosítás kategóriák szerint
                 if (p.category === 'kishordo') {
                     kishordoGrid.appendChild(card);
                 } else if (p.category === 'barrique') {
@@ -1502,7 +1504,6 @@
                 }
             });
 
-            // Üres állapotok kezelése
             if (kishordoGrid.children.length === 0) kishordoGrid.innerHTML = `<p class="col-span-full text-center text-xs text-stone-400 py-6">Nincs a keresésnek megfelelő kishordó.</p>`;
             if (barriqueGrid.children.length === 0) barriqueGrid.innerHTML = `<p class="col-span-full text-center text-xs text-stone-400 py-6">Nincs a keresésnek megfelelő barrique hordó.</p>`;
             if (kiegeszitoGrid.children.length === 0) kiegeszitoGrid.innerHTML = `<p class="col-span-full text-center text-xs text-stone-400 py-6">Nincs a keresésnek megfelelő kiegészítő.</p>`;
@@ -1512,24 +1513,21 @@
             selectedProduct = products.find(p => p.id === productId);
             if (!selectedProduct) return;
 
-            // Alapértelmezett választások rögzítése
             selectedConfig.toast = selectedProduct.toastLevels[0];
 
-            // Főkép alapértelmezett betöltése
             const mainImg = document.getElementById('modal-product-img');
             mainImg.src = selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[0] : 'https://placehold.co/600x450/e7e5e4/44403c?text=Hordo';
             mainImg.onerror = function() {
                 this.src = 'https://placehold.co/600x450/e7e5e4/44403c?text=' + encodeURIComponent(selectedProduct.name);
             };
 
-            // Galéria thumbnail panelek legenerálása
             const thumbContainer = document.getElementById('modal-thumbnails-container');
             thumbContainer.innerHTML = '';
             
             if (selectedProduct.images && selectedProduct.images.length > 0) {
                 selectedProduct.images.forEach((imgUrl, idx) => {
                     const thumb = document.createElement('div');
-                    thumb.className = `w-14 h-14 md:w-16 md:h-16 rounded overflow-hidden cursor-pointer border-2 transition-all shrink-0 ${
+                    thumb.className = `w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded overflow-hidden cursor-pointer border-2 transition-all shrink-0 ${
                         idx === 0 ? 'border-amber-500 scale-105 shadow' : 'border-stone-800 hover:border-stone-500'
                     }`;
                     
@@ -1551,12 +1549,10 @@
                 });
             }
 
-            // Statikus adatok beillesztése
             document.getElementById('modal-product-name').textContent = selectedProduct.name;
             document.getElementById('modal-product-category').textContent = selectedProduct.category === 'kishordo' ? 'Kishordó' : selectedProduct.category === 'barrique' ? 'Barrique hordó' : 'Kiegészítő';
             document.getElementById('modal-product-desc').textContent = selectedProduct.desc;
 
-            // Logózási panel láthatósága (Csak hordóknál jelenik meg, virágedénynél nem!)
             const laserNotice = document.getElementById('modal-custom-laser-notice');
             if (selectedProduct.category === 'kishordo' || selectedProduct.category === 'barrique') {
                 laserNotice.classList.remove('hidden');
@@ -1567,7 +1563,6 @@
             const woodSection = document.getElementById('modal-wood-section');
             let woodTypes = null;
             
-            // Szabályozás: kishordók és 225L/228L barrique hordóknál minden opció, 300L/500L barrique hordóknál csak tölgy és akác
             if (selectedProduct.category === 'kishordo' || selectedProduct.id === 'barrique-225l' || selectedProduct.id === 'barrique-228l') {
                 woodTypes = ['Tölgyfa', 'Akácfa', 'Cseresznyefa', 'Eperfa', 'Kőrisfa'];
             } else if (selectedProduct.id === 'barrique-300l' || selectedProduct.id === 'barrique-500l') {
@@ -1584,8 +1579,8 @@
                     const btn = document.createElement('button');
                     btn.type = "button";
                     btn.className = w === selectedConfig.wood 
-                        ? "p-2 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all" 
-                        : "p-2 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all";
+                        ? "p-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all active:scale-95" 
+                        : "p-2.5 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all active:scale-95";
                     btn.textContent = w;
                     btn.onclick = () => selectWoodType(w);
                     woodContainer.appendChild(btn);
@@ -1595,7 +1590,6 @@
                 selectedConfig.wood = null;
             }
 
-            // Címke módosítása kiegészítőknél vs hordóknál
             const toastLabel = document.getElementById('modal-toast-label');
             if (selectedProduct.category === 'kiegeszito') {
                 toastLabel.textContent = 'Felületkezelés';
@@ -1603,7 +1597,6 @@
                 toastLabel.textContent = 'Égetési / pörkölési szint';
             }
 
-            // Pörkölési / égetési szintek gombjainak generálása
             const toastContainer = document.getElementById('modal-toast-container');
             toastContainer.innerHTML = '';
             selectedProduct.toastLevels.forEach(lvl => {
@@ -1611,14 +1604,13 @@
                 btn.type = "button";
                 btn.id = `toast-${encodeURIComponent(lvl)}`;
                 btn.className = lvl === selectedConfig.toast 
-                    ? "p-2 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all" 
-                    : "p-2 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all";
+                    ? "p-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all active:scale-95" 
+                    : "p-2.5 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all active:scale-95";
                 btn.textContent = lvl;
                 btn.onclick = () => selectToastLevel(lvl);
                 toastContainer.appendChild(btn);
             });
 
-            // Kosár ár számítása
             calculateModalPrice();
             document.getElementById('product-modal').classList.remove('hidden');
         }
@@ -1634,25 +1626,24 @@
                 Array.from(woodContainer.children).forEach(btn => {
                     const btnWood = btn.textContent;
                     if (btnWood === wood) {
-                        btn.className = "p-2 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all";
+                        btn.className = "p-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all active:scale-95";
                     } else {
-                        btn.className = "p-2 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all";
+                        btn.className = "p-2.5 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all active:scale-95";
                     }
                 });
             }
             calculateModalPrice();
         }
 
-        // PÖRKÖLÉSI SZINT KIVÁLASZTÁSA
         function selectToastLevel(level) {
             selectedConfig.toast = level;
             selectedProduct.toastLevels.forEach(lvl => {
                 const btn = document.getElementById(`toast-${encodeURIComponent(lvl)}`);
                 if (btn) {
                     if (lvl === level) {
-                        btn.className = "p-2 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all";
+                        btn.className = "p-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all active:scale-95";
                     } else {
-                        btn.className = "p-2 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all";
+                        btn.className = "p-2.5 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all active:scale-95";
                     }
                 }
             });
@@ -1663,7 +1654,6 @@
             if (!selectedProduct) return;
             let finalPrice = selectedProduct.price;
 
-            // Különleges fafajta felárak az összes konfigurálható hordó esetén
             if (selectedConfig.wood) {
                 if (selectedConfig.wood === 'Cseresznyefa') finalPrice += 3000;
                 else if (selectedConfig.wood === 'Eperfa') finalPrice += 4000;
@@ -1674,7 +1664,6 @@
             document.getElementById('modal-product-price').textContent = `${new Intl.NumberFormat('hu-HU').format(finalPrice)} Ft`;
         }
 
-        // ESCAPE GOMB bezárja a modális ablakokat (Kivéve a kosarat, mert azt a kérés szerint letiltottuk)
         window.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeProductModal();
@@ -1686,7 +1675,6 @@
         function addProductToCart() {
             if (!selectedProduct) return;
             
-            // Végső ár újraszámítása a kosár tételhez
             let price = selectedProduct.price;
             if (selectedConfig.wood) {
                 if (selectedConfig.wood === 'Cseresznyefa') price += 3000;
@@ -1695,7 +1683,6 @@
                 else if (selectedConfig.wood === 'Akácfa') price += 1500;
             }
 
-            // Egyedi azonosító rögzítése opciók alapján
             const woodPart = selectedConfig.wood ? `-${encodeURIComponent(selectedConfig.wood)}` : '';
             const itemId = `${selectedProduct.id}-${encodeURIComponent(selectedConfig.toast)}${woodPart}`;
             
@@ -1718,7 +1705,7 @@
 
             updateCart();
             closeProductModal();
-            toggleCart(true); // Kosár panel felugratása
+            toggleCart(true); // Kosár panel nyitása
             showNotification("Termék sikeresen hozzáadva a kosárhoz!");
         }
 
@@ -1762,14 +1749,12 @@
                 document.getElementById('checkout-btn').disabled = true;
                 document.getElementById('checkout-btn').classList.add('opacity-50', 'cursor-not-allowed');
                 
-                // Mobil lebegő eltüntetése
                 floatingBtn.classList.remove('scale-100');
                 floatingBtn.classList.add('scale-0');
             } else {
                 document.getElementById('checkout-btn').disabled = false;
                 document.getElementById('checkout-btn').classList.remove('opacity-50', 'cursor-not-allowed');
                 
-                // Mobil lebegő gomb megjelenítése
                 floatingBtn.classList.remove('scale-0');
                 floatingBtn.classList.add('scale-100');
 
@@ -1786,17 +1771,17 @@
                         </div>
                         <div class="flex-grow min-w-0">
                             <h4 class="font-bold text-sm text-white truncate">${item.name}</h4>
-                            <p class="text-xs text-stone-400 font-mono mt-0.5">${item.volume} | Pörkölés: ${item.toast}${woodText}</p>
-                            <p class="text-sm font-bold text-amber-500 mt-1">${new Intl.NumberFormat('hu-HU').format(item.price)} Ft</p>
+                            <p class="text-[10px] text-stone-400 font-mono mt-0.5">${item.volume} | Pörkölés: ${item.toast}${woodText}</p>
+                            <p class="text-xs sm:text-sm font-bold text-amber-500 mt-1">${new Intl.NumberFormat('hu-HU').format(item.price)} Ft</p>
                         </div>
                         <div class="flex flex-col items-end gap-2 shrink-0">
-                            <button onclick="removeFromCart('${item.id}')" class="text-stone-500 hover:text-red-500 transition-colors text-sm" aria-label="Törlés">
+                            <button onclick="removeFromCart('${item.id}')" class="text-stone-550 hover:text-red-500 p-1 transition-colors text-sm" aria-label="Törlés">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                             <div class="flex items-center bg-stone-800 rounded border border-stone-700 text-xs overflow-hidden">
-                                <button onclick="updateQuantity('${item.id}', -1)" class="px-2 py-1 hover:bg-stone-700 text-white font-bold">-</button>
+                                <button onclick="updateQuantity('${item.id}', -1)" class="px-2.5 py-1 hover:bg-stone-700 text-white font-bold">-</button>
                                 <span class="px-2 font-bold text-white min-w-[20px] text-center">${item.quantity}</span>
-                                <button onclick="updateQuantity('${item.id}', 1)" class="px-2 py-1 hover:bg-stone-700 text-white font-bold">+</button>
+                                <button onclick="updateQuantity('${item.id}', 1)" class="px-2.5 py-1 hover:bg-stone-700 text-white font-bold">+</button>
                             </div>
                         </div>
                     `;
@@ -1804,7 +1789,6 @@
                 });
             }
 
-            // Számlálók frissítése
             if (totalItemsCount > 0) {
                 countBadge.textContent = totalItemsCount;
                 countBadge.classList.remove('hidden');
@@ -1813,7 +1797,6 @@
                 countBadge.classList.add('hidden');
             }
 
-            // ÁFA VISSZAOSZTÁSOS SZÁMÍTÁS (Nettó = Bruttó / 1.27)
             const total = subtotal;
             const nettSubtotal = Math.round(total / 1.27);
             const tax = total - nettSubtotal;
@@ -1823,11 +1806,9 @@
             document.getElementById('cart-total').textContent = `${new Intl.NumberFormat('hu-HU').format(total)} Ft`;
             document.getElementById('co-final-total').textContent = `${new Intl.NumberFormat('hu-HU').format(total)} Ft`;
 
-            // Kosár mentése localstorage-ba
             localStorage.setItem('local_cart', JSON.stringify(cart));
         }
 
-        // KOSÁR KI/BE CSÚSZTATÁSA
         function toggleCart(show) {
             const drawer = document.getElementById('cart-drawer-container');
             if (show) {
@@ -1842,24 +1823,22 @@
             toggleCart(false);
 
             if (!currentUser) {
-                showNotification("A vásárlás folytatásához jelentkezzen be!", "error");
+                showNotification("A megrendeléshez kérjük jelentkezzen be!", "error");
                 openAuthModal();
                 return;
             }
 
-            // Pénztár űrlap pre-fill a bejelentkezett profil adatai alapján
+            // Fill
             document.getElementById('co-name').value = currentUser.name || '';
             document.getElementById('co-phone').value = currentUser.phone || '';
             document.getElementById('co-email').value = currentUser.email || '';
 
-            // Lebontott számlázási adatok kitöltése (ha van, egyébként a szállítási)
             document.getElementById('co-bill-zip').value = currentUser.bill_zip || currentUser.ship_zip || '';
             document.getElementById('co-bill-city').value = currentUser.bill_city || currentUser.ship_city || '';
             document.getElementById('co-bill-street').value = currentUser.bill_street || currentUser.ship_street || '';
             document.getElementById('co-bill-house').value = currentUser.bill_house || currentUser.ship_house || '';
             document.getElementById('co-bill-other').value = currentUser.bill_other || currentUser.ship_other || '';
 
-            // Lebontott szállítási adatok kitöltése
             document.getElementById('co-ship-zip').value = currentUser.ship_zip || '';
             document.getElementById('co-ship-city').value = currentUser.ship_city || '';
             document.getElementById('co-ship-street').value = currentUser.ship_street || '';
@@ -1872,7 +1851,6 @@
         function handleCheckoutSubmit(e) {
             e.preventDefault();
 
-            // Siker ablak adatainak beállítása
             const orderId = 'BB-' + Math.floor(10000 + Math.random() * 90000);
             const totalText = document.getElementById('co-final-total').textContent;
             const payMethod = document.getElementById('co-payment');
@@ -1882,7 +1860,6 @@
             document.getElementById('success-order-total').textContent = totalText;
             document.getElementById('success-order-payment').textContent = payText;
 
-            // Rendelés elmentése a rendelési előzmények közé
             let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
             const newOrder = {
                 orderId: orderId,
@@ -1895,11 +1872,9 @@
             orders.push(newOrder);
             localStorage.setItem('local_orders', JSON.stringify(orders));
 
-            // Kosár ürítése sikeres vásárlás után
             cart = [];
             updateCart();
 
-            // Siker ablak felugratása
             document.getElementById('success-modal').classList.remove('hidden');
         }
 
@@ -1926,13 +1901,13 @@
             if (tab === 'login') {
                 loginForm.classList.remove('hidden');
                 registerForm.classList.add('hidden');
-                tabLogin.className = "flex-1 py-2 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500";
-                tabRegister.className = "flex-1 py-2 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white";
+                tabLogin.className = "flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500";
+                tabRegister.className = "flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white";
             } else {
                 loginForm.classList.add('hidden');
                 registerForm.classList.remove('hidden');
-                tabLogin.className = "flex-1 py-2 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white";
-                tabRegister.className = "flex-1 py-2 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500";
+                tabLogin.className = "flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white";
+                tabRegister.className = "flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500";
             }
         }
 
@@ -1945,24 +1920,22 @@
             const cegSection = document.getElementById('reg-ceg-section');
 
             if (type === 'maganszemely') {
-                btnMagan.className = "py-2 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all";
-                btnCeg.className = "py-2 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all";
+                btnMagan.className = "py-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all active:scale-95";
+                btnCeg.className = "py-2.5 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all active:scale-95";
                 cegSection.classList.add('hidden');
             } else {
-                btnMagan.className = "py-2 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all";
-                btnCeg.className = "py-2 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all";
+                btnMagan.className = "py-2.5 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all active:scale-95";
+                btnCeg.className = "py-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all active:scale-95";
                 cegSection.classList.remove('hidden');
             }
         }
 
-        // EU Adószám mező elrejtése vagy mutatása az országválasztás alapján
         function handleRegCountryChange(countryVal) {
             const selectEl = document.getElementById('reg-country');
             const activeOpt = selectEl.options[selectEl.selectedIndex];
             const isEu = activeOpt.getAttribute('data-eu') === 'true';
             const euVatContainer = document.getElementById('reg-eu-vat-container');
 
-            // Magyarországnál ('HU') SOHA ne jelenjen meg az EU adószám mező
             if (isEu && countryVal !== 'HU') {
                 euVatContainer.classList.remove('hidden');
             } else {
@@ -1970,7 +1943,6 @@
             }
         }
 
-        // Ha a "Megegyezik a székhellyel" be van jelölve, elrejtjük a szállítási cím kitöltőit
         function toggleRegShippingSection() {
             const isChecked = document.getElementById('reg-same-addr').checked;
             const shipSection = document.getElementById('reg-shipping-section');
@@ -1987,7 +1959,7 @@
             }
         }
 
-        // BEJELENTKEZÉS VÉGREHAJTÁSA
+        // BEJELENTKEZÉS
         function handleLoginSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value.trim().toLowerCase();
@@ -2001,13 +1973,14 @@
                 localStorage.setItem('active_session', JSON.stringify(currentUser));
                 updateNavbarUser();
                 closeAuthModal();
-                renderProducts(); // Újratölti az árakat a shopban
+                renderProducts();
                 showNotification(`Üdvözöljük újra, ${currentUser.name}!`);
             } else {
                 showNotification("Hibás e-mail cím vagy jelszó!", "error");
             }
         }
 
+        // REGISZTRÁCIÓ
         function handleRegisterSubmit(e) {
             e.preventDefault();
 
@@ -2016,7 +1989,6 @@
             const phone = document.getElementById('reg-phone').value.trim();
             const password = document.getElementById('reg-password').value;
 
-            // Formátum ellenőrzések
             if (password.length < 4) {
                 showNotification("A jelszónak legalább 4 karakternek kell lennie!", "error");
                 return;
@@ -2028,7 +2000,6 @@
                 return;
             }
 
-            // Alap objektum rögzítése
             let newUser = {
                 email: email,
                 name: name,
@@ -2045,7 +2016,6 @@
                 newUser.country = document.getElementById('reg-country').value;
                 newUser.eu_vat = document.getElementById('reg-eu-vat').value.trim();
 
-                // Lebontott számlázási (székhely) cím adatai
                 newUser.bill_zip = document.getElementById('reg-bill-zip').value.trim();
                 newUser.bill_city = document.getElementById('reg-bill-city').value.trim();
                 newUser.bill_street = document.getElementById('reg-bill-street').value.trim();
@@ -2068,7 +2038,6 @@
                 newUser.ship_house = document.getElementById('reg-ship-house').value.trim();
                 newUser.ship_other = document.getElementById('reg-ship-other').value.trim();
                 
-                // Magánszemélynél ha nincs számlázás, megegyezik a szállítással
                 if (selectedRegTypeState === 'maganszemely') {
                     newUser.bill_zip = newUser.ship_zip;
                     newUser.bill_city = newUser.ship_city;
@@ -2078,7 +2047,6 @@
                 }
             }
 
-            // Mentés adatbázisba és automatikus beléptetés
             DB.saveUser(newUser);
             currentUser = newUser;
             localStorage.setItem('active_session', JSON.stringify(currentUser));
@@ -2089,14 +2057,12 @@
             showNotification("Sikeres regisztráció és belépés!");
         }
 
-        // TESZT FIÓK BETÖLTÉSE
         function loadDemoAccount() {
             document.getElementById('login-email').value = 'teszt@barrels.hu';
             document.getElementById('login-password').value = '123';
             showNotification("Minta adatok beillesztve, kattintson a Belépés gombra.");
         }
 
-        // KIJELENTKEZÉS
         function logout() {
             currentUser = null;
             localStorage.removeItem('active_session');
@@ -2106,7 +2072,6 @@
             showNotification("Sikeresen kijelentkezett a fiókjából.");
         }
 
-        // FEJLÉC PROFIL FRISSÍTÉSE
         function updateNavbarUser() {
             const loggedInBtn = document.getElementById('user-logged-in-btn');
             const guestBtn = document.getElementById('user-guest-btn');
@@ -2125,7 +2090,6 @@
         function openProfileModal() {
             if (!currentUser) return;
 
-            // Alapadatok beillesztése
             document.getElementById('prof-name').value = currentUser.name || '';
             document.getElementById('prof-phone').value = currentUser.phone || '';
 
@@ -2136,11 +2100,9 @@
                 document.getElementById('prof-vat').value = currentUser.vat_number || '';
                 document.getElementById('prof-country').value = currentUser.country || 'HU';
                 
-                // EU Adószám ellenőrzése megnyitáskor
                 handleProfCountryChange(currentUser.country || 'HU');
                 document.getElementById('prof-eu-vat').value = currentUser.eu_vat || '';
 
-                // Lebontott céges székhely adatok profilban
                 document.getElementById('prof-bill-zip').value = currentUser.bill_zip || '';
                 document.getElementById('prof-bill-city').value = currentUser.bill_city || '';
                 document.getElementById('prof-bill-street').value = currentUser.bill_street || '';
@@ -2150,16 +2112,13 @@
                 cegBlock.classList.add('hidden');
             }
 
-            // Lebontott szállítási cím adatok profilban
             document.getElementById('prof-ship-zip').value = currentUser.ship_zip || '';
             document.getElementById('prof-ship-city').value = currentUser.ship_city || '';
             document.getElementById('prof-ship-street').value = currentUser.ship_street || '';
             document.getElementById('prof-ship-house').value = currentUser.ship_house || '';
             document.getElementById('prof-ship-other').value = currentUser.ship_other || '';
 
-            // Rendelések betöltése
             renderProfileOrders();
-
             document.getElementById('profile-modal').classList.remove('hidden');
         }
 
@@ -2167,14 +2126,12 @@
             document.getElementById('profile-modal').classList.add('hidden');
         }
 
-        // Országválasztás szerinti EU Adószám profil módosítóban
         function handleProfCountryChange(countryVal) {
             const selectEl = document.getElementById('prof-country');
             const activeOpt = selectEl.options[selectEl.selectedIndex];
             const isEu = activeOpt ? activeOpt.text.includes('(EU)') || countryVal === 'AT' || countryVal === 'DE' : false; 
             const euVatContainer = document.getElementById('prof-eu-vat-container');
 
-            // Magyarországnál nem mutatjuk
             if (countryVal !== 'HU') {
                 euVatContainer.classList.remove('hidden');
             } else {
@@ -2182,7 +2139,6 @@
             }
         }
 
-        // PROFIL ADATOK SIKERES FRISSÍTÉSE
         function handleProfileUpdate(e) {
             e.preventDefault();
 
@@ -2195,7 +2151,6 @@
                 currentUser.country = document.getElementById('prof-country').value;
                 currentUser.eu_vat = document.getElementById('prof-eu-vat').value.trim();
 
-                // Lebontott székhely adatok mentése
                 currentUser.bill_zip = document.getElementById('prof-bill-zip').value.trim();
                 currentUser.bill_city = document.getElementById('prof-bill-city').value.trim();
                 currentUser.bill_street = document.getElementById('prof-bill-street').value.trim();
@@ -2203,14 +2158,12 @@
                 currentUser.bill_other = document.getElementById('prof-bill-other').value.trim();
             }
 
-            // Lebontott szállítási cím mentése
             currentUser.ship_zip = document.getElementById('prof-ship-zip').value.trim();
             currentUser.ship_city = document.getElementById('prof-ship-city').value.trim();
             currentUser.ship_street = document.getElementById('prof-ship-street').value.trim();
             currentUser.ship_house = document.getElementById('prof-ship-house').value.trim();
             currentUser.ship_other = document.getElementById('prof-ship-other').value.trim();
 
-            // Adatbázis mentés
             DB.saveUser(currentUser);
             localStorage.setItem('active_session', JSON.stringify(currentUser));
             
@@ -2219,7 +2172,6 @@
             showNotification("Profil adatai sikeresen módosítva!");
         }
 
-        // RENDELÉSI ELŐZMÉNYEK RENDERELÉSE A SAJÁT FIÓK LAPON
         function renderProfileOrders() {
             const container = document.getElementById('profile-orders');
             container.innerHTML = '';
@@ -2229,7 +2181,7 @@
 
             if (userOrders.length === 0) {
                 container.innerHTML = `
-                    <div class="p-6 text-center text-stone-500 text-xs">
+                    <div class="p-6 text-center text-stone-505 text-xs">
                         Önnek még nincs leadott rendelése.
                     </div>
                 `;
@@ -2243,7 +2195,7 @@
                 let itemsListHtml = '';
                 o.items.forEach(it => {
                     const woodText = it.wood ? `, Fa: ${it.wood}` : '';
-                    itemsListHtml += `<div>• ${it.name} (${it.volume}, ${it.toast}${woodText}) - ${it.quantity} db</div>`;
+                    itemsListHtml += `<div class="text-[11px] sm:text-xs text-stone-300">• ${it.name} (${it.volume}, ${it.toast}${woodText}) - ${it.quantity} db</div>`;
                 });
 
                 block.innerHTML = `
@@ -2251,7 +2203,7 @@
                         <span class="font-mono text-amber-500 font-bold">${o.orderId}</span>
                         <span class="text-stone-400 font-mono">${o.date}</span>
                     </div>
-                    <div class="text-xs text-stone-300 space-y-1">
+                    <div class="space-y-1">
                         ${itemsListHtml}
                     </div>
                     <div class="flex justify-between items-center text-xs pt-1 border-t border-stone-900 mt-2 font-bold">
@@ -2266,6 +2218,7 @@
             });
         }
 
+        // Görgetési beállítások
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
