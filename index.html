@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Balazs Barrels Zrt. | Prémium Hordókészítés és Webshop</title>
     
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS Client library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
         section {
@@ -524,7 +528,7 @@
                                         <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalma:
                                     </h4>
                                     <p>
-                                        Jelen projektben 10 fő munkavállaló felvételét valósítjuk meg (5 fő asztalos szakember és 5 fő faipari kisegítő alkalmazása), akik közvetlenül a termelési folyamatban kapnak helyet, használva azt az infrastruktúrát, melyeket a beruházás keretében valósítunk meg, építünk meg saját forrásból. A 10 fő felvételre kerülő munkavállaló a megnövekedett kapacitás okozta munkatöbblet ellátásához szükséges, valamint az új termékkör gyártásához kapcsolódó gépek kezelése is a feladatuk lesz. A vállalkozásunk székhelye 1191 Budapest, Hamvas utca 7-9., a gyártási tevékenységünk azonban 7900 Botykapeterd, 017/022 hrsz. telephelyünkön történik, a foglalkoztatottak számának növekedését indukáló beruházás is itt valósul meg, a munkavállalók is ebbe a szabad vállalkozási zónában található telephelyre kerülnek állományba. A pályázatban bemutatott 10 fő munkavállaló felvétele így olyan területén valósul meg, ahol munkaerőpiaci túlkínálat jellemző, így közvetlen környezetünkben leszünk képesek megélhetést és munkát biztosítani az érintetteknek.
+                                        Jelen projektben 10 fő munkavállaló felvételét valósítjuk meg (5 fő asztalos szakember és 5 fő faipari kisegítő alkalmazása), akik közvetlenül a termelési folyamatban kapnak helyet, használva azt az infrastruktúrát, melyeket a beruházás keretében valósítunk meg, építünk meg saját forrásból.
                                     </p>
                                 </div>
                             </div>
@@ -583,29 +587,6 @@
                                         <span class="text-stone-500 font-medium">Megvalósítás helyszíne:</span>
                                         <strong class="text-stone-900 text-right">7900 Botykapeterd, hrsz. 017/22.</strong>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="border-t border-stone-200 pt-4 space-y-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
-                                <div>
-                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-file-lines text-xs"></i> Projekt leírása:
-                                    </h4>
-                                    <p class="mb-2">
-                                        Cégünk 19.645.409 Ft. vissza nem térítendő támogatást nyert el a KKV START INNOVÁCIÓ (2020-1.1.1-KKV START) kódszámú pályázati kiíráson.
-                                    </p>
-                                    <p>
-                                        A Balázs Barrels Zrt. 2011. december 21-én került bejegyzésre és kifejezetten azzal a céllal jött létre, hogy fahordókat értékesítsen világszerte. Kezdetben csak kereskedelmi tevékenységet végeztünk, majd ez 2017-től kiegészült a gyártási tevékenységünkkel is. Innentől kezdve az értékesítés helyett a gyártás lett a vállalkozásunk főtevékenysége, mely gyártási tevékenységet a botykapeterdi telephelyünkön végezzük. Jelenlegi termékpalettánk nagy vonalakban: Barrique fahordók - 225 L, 228 L, illetve 500 L-es kivitelekben, Ászokhordók – nagy űrtartalmú, Fahordók – kicsi űrtartalmúak – 1L-től 100 L-ig.
-                                    </p>
-                                </div>
-
-                                <div class="pt-2 border-t border-stone-100">
-                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalma:
-                                    </h4>
-                                    <p>
-                                        A fejlesztéssel az évszázados hordógyártási technológiában olyan változást eszközlünk, ami termékeinket egyedivé teszi, így a birtokunkba kerül egy olyan gyártástechnológia, melyet alkalmazva saját üzemünkben, jelentős előnyre tehetünk szert más gyártókkal szemben. A fejlesztés következményeképpen egy egyedi termékkör jön létre, mely hosszútávon is használható, jó minőségű termék, aminek gyártása költséghatékonyabbá, gyorsabbá válik és melyek együttesen mind nagyobb potenciált biztosítanak számunkra.
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -669,23 +650,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="border-t border-stone-200 pt-4 space-y-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
-                                <div>
-                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-file-lines text-xs"></i> A projekt részletes bemutatása:
-                                    </h4>
-                                    <p class="mb-2">
-                                        A Balázs Barrels Zrt. 67.216.119 Ft összegű uniós támogatást nyert a „GINOP_PLUSZ-1.2.1-21 - A mikro-, kis- és középvállalkozások modern üzleti és termelési kihívásokhoz való alkalmazkodását segítő fejlesztések támogatása” című pályázati kiíráson a Széchényi PLUSZ program keretében. A 96.023.027 Ft összköltségű beruházás révén a vállalkozás infrastrukturális fejlesztést, megújuló energiaforrás hasznosítását, valamint gyártó eszközök beszerzését valósítja meg.
-                                    </p>
-                                    <p>
-                                        A vállalkozás főtevékenysége a TEÁOR 1624 Tároló fatermékek gyártása, mely tevékenységhez elengedhetetlenül szükséges a technológiailag fejlett géppark, a folyamatos innováció és fejlesztés, valamint az ennek helyet adó gyártó- és raktárkapacitás bővítése. Ezt szem előtt tartva került megtervezésre a beruházás jelen tartalom mellett, melyet a releváns üzleti igények indukáltak. A beruházással a folyamatosan növekvő rendelésállományt teljesíteni tudja cég, teljes biztonsággal meg tudja tartani a munkavállalói létszámát, a beruházás révén a vállalkozás kitettsége csökken, magasabb minőségben, gyorsabban, rugalmasabban és költséghatékonyabban tud majd gyártani.
-                                    </p>
-                                    <p class="mt-2">
-                                        A beruházással egyrészről a gyártási folyamatot tudja a vállalkozás automatizálni, gyorsítani és hatékonyabbá tenni, másrészről jelentős gyártó- és raktárkapacitást is jelent számukra az infrastrukturális beruházás. A fűtési rendszer környezethatékony működéséhez szükséges a faelgázosító kazánrendszer kiépítése, mely szintén a projekt része, biztosítva ezzel a környezethatékony működést, az ökológiai lábnyomuk csökkentését.
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -734,15 +698,6 @@
                                         <strong class="text-stone-900 font-mono text-right">2021.02.15.</strong>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="border-t border-stone-200 pt-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
-                                <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalmának rövid bemutatása:
-                                </h4>
-                                <p>
-                                    Beruházás műszaki gépekre, amelyek segítik a hordógyártás során keletkezett forgács és por eltávolítását a légtérből.
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -793,15 +748,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="border-t border-stone-200 pt-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
-                                <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalmának rövid bemutatása:
-                                </h4>
-                                <p>
-                                    Fahordógyártáshoz szükséges alapanyag, dongafa beszerzése.
-                                </p>
-                            </div>
                         </div>
                     </div>
 
@@ -851,15 +797,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="border-t border-stone-200 pt-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
-                                <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalmának rövid bemutatása:
-                                </h4>
-                                <p>
-                                    Forgóeszköz finanszírozás a vállalkozás folyamatos és hatékony működésének biztosítására.
-                                </p>
-                            </div>
                         </div>
                     </div>
 
@@ -877,9 +814,14 @@
                             <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Cégnév</p>
                             <p class="text-lg sm:text-xl font-bold text-white">Balazs Barrels Zrt.</p>
                         </div>
+
+                        <div class="border-b border-stone-800 pb-3">
+                            <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Székhely</p>
+                            <p class="text-white font-medium">1191 Budapest, Hamvas utca 7-9.</p>
+                        </div>
                         
                         <div class="border-b border-stone-800 pb-3">
-                            <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Gyártás Helye</p>
+                            <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Gyártás Helye & Telephely</p>
                             <p class="text-white font-medium">7900 Botykapeterd, hrsz: 017/22</p>
                         </div>
                         
@@ -1009,6 +951,38 @@
                     </div>
 
                     <div class="bg-stone-950 p-3 sm:p-4 rounded border border-stone-800 space-y-2">
+                        <span class="block text-amber-500 font-bold">Szállítási cím</span>
+                        <div>
+                            <label class="block text-stone-400 mb-0.5">Ország</label>
+                            <input type="text" id="co-ship-country" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label class="block text-stone-400 mb-0.5">Irányítószám</label>
+                                <input type="text" id="co-ship-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-stone-400 mb-0.5">Település</label>
+                                <input type="text" id="co-ship-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-stone-400 mb-0.5">Közterület neve és jellege</label>
+                            <input type="text" id="co-ship-street" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label class="block text-stone-400 mb-0.5">Házszám</label>
+                                <input type="text" id="co-ship-house" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-stone-400 mb-0.5">Egyéb (Emelet, ajtó stb.)</label>
+                                <input type="text" id="co-ship-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-950 p-3 sm:p-4 rounded border border-stone-800 space-y-2">
                         <span class="block text-amber-500 font-bold">Számlázási cím</span>
                         <div class="grid grid-cols-3 gap-2">
                             <div class="col-span-1">
@@ -1035,34 +1009,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="bg-stone-950 p-3 sm:p-4 rounded border border-stone-800 space-y-2">
-                        <span class="block text-amber-500 font-bold">Szállítási cím</span>
-                        <div class="grid grid-cols-3 gap-2">
-                            <div class="col-span-1">
-                                <label class="block text-stone-400 mb-0.5">Irányítószám</label>
-                                <input type="text" id="co-ship-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
-                            </div>
-                            <div class="col-span-2">
-                                <label class="block text-stone-400 mb-0.5">Település</label>
-                                <input type="text" id="co-ship-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-stone-400 mb-0.5">Közterület neve és jellege</label>
-                            <input type="text" id="co-ship-street" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
-                        </div>
-                        <div class="grid grid-cols-3 gap-2">
-                            <div class="col-span-1">
-                                <label class="block text-stone-400 mb-0.5">Házszám</label>
-                                <input type="text" id="co-ship-house" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
-                            </div>
-                            <div class="col-span-2">
-                                <label class="block text-stone-400 mb-0.5">Egyéb</label>
-                                <input type="text" id="co-ship-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="space-y-6 flex flex-col justify-between">
@@ -1086,19 +1032,33 @@
                         </div>
                     </div>
 
-                    <div class="border-t border-stone-800 pt-4 bg-stone-950 p-4 sm:p-5 rounded border border-stone-800">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+                    <div class="border-t border-stone-800 pt-4 bg-stone-950 p-4 sm:p-5 rounded border border-stone-800 space-y-3">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                             <span class="text-stone-400 text-xs">Végső bruttó fizetendő összeg:</span>
                             <span id="co-final-total" class="text-xl sm:text-2xl font-black text-amber-500 font-mono">0 Ft</span>
                         </div>
-                        <p class="text-[10px] text-stone-400 mb-4 leading-relaxed">Megrendelésével Ön kijelenti, hogy elfogadta a Balazs Barrels Zrt. Általános Szerződési Feltételeit és Adatkezelési tájékoztatóját.</p>
+
+                        <!-- Jogi elfogadás kötelező kocka -->
+                        <div class="border-t border-stone-800 pt-3">
+                            <label class="flex items-start gap-2.5 cursor-pointer text-xs text-stone-300 select-none">
+                                <input type="checkbox" id="co-terms-check" required class="accent-amber-600 w-4 h-4 rounded mt-0.5 shrink-0">
+                                <span class="leading-relaxed text-[11px] sm:text-xs">
+                                    Elfogadom a Balazs Barrels Zrt. <button type="button" onclick="openLegalModal('aszf')" class="text-amber-500 underline font-bold hover:text-amber-400">Általános Szerződési Feltételeit (ÁSZF)</button> és az <button type="button" onclick="openLegalModal('gdpr')" class="text-amber-500 underline font-bold hover:text-amber-400">Adatkezelési Tájékoztatót</button>. Tudomásul veszem, hogy a megrendelés fizetési kötelezettséggel jár.
+                                </span>
+                            </label>
+                        </div>
+
+                        <!-- Egyedi gravírozási kivétel figyelmeztetés -->
+                        <p class="text-[10px] text-amber-400/90 bg-amber-950/40 p-2.5 rounded border border-amber-600/30 leading-relaxed">
+                            <i class="fa-solid fa-triangle-exclamation mr-1"></i> <strong>Fontos tájékoztatás:</strong> Egyedi lézergravírozással/felirattal kért hordók esetén a 45/2014. (II.26.) Korm. rendelet 29. § (1) c) pontja értelmében a vásárlót <strong>nem illeti meg a 14 napos indokolás nélküli elállási jog</strong>.
+                        </p>
                         
-                        <div class="flex flex-col xs:flex-row gap-2">
+                        <div class="flex flex-col xs:flex-row gap-2 pt-1">
                             <button type="button" onclick="switchToView('webshop')" class="w-full xs:w-1/2 bg-stone-800 hover:bg-stone-700 text-stone-300 font-bold py-3.5 rounded text-center transition-all active:scale-95 text-xs sm:text-sm">
                                 Vissza a Webshopba
                             </button>
                             <button type="submit" class="w-full xs:w-1/2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded transition-all shadow-lg active:scale-95 text-center text-xs sm:text-sm">
-                                Rendelés Leadása
+                                Megrendelés Elküldése
                             </button>
                         </div>
                     </div>
@@ -1107,9 +1067,37 @@
         </div>
     </section>
 
-    <footer class="py-6 text-center text-stone-500 bg-stone-950 text-xs sm:text-sm mt-auto border-t border-stone-900 px-4">
-        <p>&copy; 2026 Balazs Barrels Zrt. Minden jog fenntartva.</p>
+    <footer class="py-8 text-stone-400 bg-stone-950 text-xs border-t border-stone-900 px-4 mt-auto">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <div>
+                <p class="font-bold text-stone-300">&copy; 2026 Balazs Barrels Zrt. Minden jog fenntartva.</p>
+                <p class="text-[11px] text-stone-500 mt-1">1191 Budapest, Hamvas utca 7-9. | Botykapeterd Gyártási Üzem</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 text-[11px] font-semibold text-amber-500">
+                <button onclick="openLegalModal('aszf')" class="hover:underline hover:text-amber-400 transition-colors">Általános Szerződési Feltételek (ÁSZF)</button>
+                <span class="text-stone-700">•</span>
+                <button onclick="openLegalModal('gdpr')" class="hover:underline hover:text-amber-400 transition-colors">Adatkezelési Tájékoztató (GDPR)</button>
+                <span class="text-stone-700">•</span>
+                <button onclick="openLegalModal('impresszum')" class="hover:underline hover:text-amber-400 transition-colors">Impresszum &amp; ÉÉÁ Nyilatkozat</button>
+            </div>
+        </div>
     </footer>
+
+    <div id="cookie-banner" class="fixed bottom-0 inset-x-0 z-50 bg-stone-900/95 border-t border-amber-600/40 p-4 sm:p-5 text-stone-200 shadow-2xl backdrop-blur-md hidden">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+            <div class="flex items-center gap-3 text-stone-300">
+                <i class="fa-solid fa-cookie-bite text-amber-500 text-2xl shrink-0"></i>
+                <p class="leading-relaxed">
+                    A weboldal sütiket (cookie-kat) használ a biztonságos működéshez, a felhasználói élmény javításához és a megrendelések lebonyolításához. A böngészés folytatásával elfogadja a sütik használatát az <button onclick="openLegalModal('gdpr')" class="text-amber-500 underline font-bold">Adatkezelési Tájékoztatóban</button> foglaltak szerint.
+                </p>
+            </div>
+            <div class="flex gap-2 shrink-0 w-full md:w-auto">
+                <button onclick="acceptCookies()" class="w-full md:w-auto bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold px-6 py-2.5 rounded transition-all text-xs active:scale-95 shadow">
+                    Sütik Elfogadása
+                </button>
+            </div>
+        </div>
+    </div>
 
     <button id="floating-cart-btn" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-amber-600 text-stone-950 p-4 rounded-full shadow-2xl scale-0 hover:scale-105 active:scale-95 transition-all duration-300 md:hidden flex items-center justify-center">
         <i class="fa-solid fa-shopping-basket text-xl"></i>
@@ -1152,6 +1140,7 @@
         </div>
     </div>
 
+    <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProductModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative z-10 flex flex-col md:flex-row">
@@ -1214,9 +1203,10 @@
         </div>
     </div>
 
+    <!-- Auth Modal -->
     <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-85" onclick="closeAuthModal()"></div>
-        <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-lg w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
+        <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
             <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors p-1" aria-label="Bezárás">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
@@ -1277,7 +1267,52 @@
                     </div>
                 </div>
 
-                <div id="reg-ceg-section" class="hidden space-y-4 border-t border-stone-800 pt-4">
+                <!-- Céges Mezők -->
+                <div id="reg-ceg-section" class="hidden space-y-3 border-t border-stone-800 pt-3">
+                    <h4 class="text-xs uppercase text-amber-500 font-bold tracking-wider">Cégadatok</h4>
+                    <div>
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Ország</label>
+                        <select id="reg-country" onchange="handleCountryChange()" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                            <option value="Magyarország" selected>Magyarország</option>
+                            <optgroup label="Európai Unió">
+                                <option value="Ausztria">Ausztria</option>
+                                <option value="Belgium">Belgium</option>
+                                <option value="Bulgária">Bulgária</option>
+                                <option value="Ciprus">Ciprus</option>
+                                <option value="Csehország">Csehország</option>
+                                <option value="Dánia">Dánia</option>
+                                <option value="Észtország">Észtország</option>
+                                <option value="Finnország">Finnország</option>
+                                <option value="Franciaország">Franciaország</option>
+                                <option value="Görögország">Görögország</option>
+                                <option value="Hollandia">Hollandia</option>
+                                <option value="Horvátország">Horvátország</option>
+                                <option value="Írország">Írország</option>
+                                <option value="Lengyelország">Lengyelország</option>
+                                <option value="Lettország">Lettország</option>
+                                <option value="Litvánia">Litvánia</option>
+                                <option value="Luxemburg">Luxemburg</option>
+                                <option value="Málta">Málta</option>
+                                <option value="Németország">Németország</option>
+                                <option value="Olaszország">Olaszország</option>
+                                <option value="Portugália">Portugália</option>
+                                <option value="Románia">Románia</option>
+                                <option value="Spanyolország">Spanyolország</option>
+                                <option value="Svédország">Svédország</option>
+                                <option value="Szlovákia">Szlovákia</option>
+                                <option value="Szlovénia">Szlovénia</option>
+                            </optgroup>
+                            <optgroup label="Egyéb nagy országok">
+                                <option value="Amerikai Egyesült Államok">Amerikai Egyesült Államok</option>
+                                <option value="Ausztrália">Ausztrália</option>
+                                <option value="Egyesült Királyság">Egyesült Királyság</option>
+                                <option value="Japán">Japán</option>
+                                <option value="Kanada">Kanada</option>
+                                <option value="Kína">Kína</option>
+                                <option value="Svájc">Svájc</option>
+                            </optgroup>
+                        </select>
+                    </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Cégnév</label>
@@ -1288,6 +1323,85 @@
                             <input type="text" id="reg-vat-number" placeholder="12345678-1-12" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
                         </div>
                     </div>
+                    <div id="reg-eu-vat-container" class="hidden">
+                        <label class="block text-[10px] sm:text-xs uppercase text-amber-400 font-bold mb-1">EU Adószám</label>
+                        <input type="text" id="reg-eu-vat-number" placeholder="pl. DE123456789" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                    </div>
+                </div>
+
+                <!-- Szállítási Cím Megadása -->
+                <div class="border-t border-stone-800 pt-3 space-y-3">
+                    <h4 class="text-xs uppercase text-amber-500 font-bold tracking-wider">Szállítási Cím</h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-1">
+                            <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Irányítószám</label>
+                            <input type="text" id="reg-ship-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Település</label>
+                            <input type="text" id="reg-ship-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Közterület neve és jellege</label>
+                        <input type="text" id="reg-ship-street" required placeholder="Fő utca" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-1">
+                            <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Házszám</label>
+                            <input type="text" id="reg-ship-house" required placeholder="12." class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Egyéb (pl. emelet, ajtó)</label>
+                            <input type="text" id="reg-ship-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Számlázási Cím Opció -->
+                <div class="border-t border-stone-800 pt-3 space-y-3">
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-stone-300 font-semibold select-none">
+                        <input type="checkbox" id="reg-bill-same" checked onchange="toggleSameBillingReg()" class="accent-amber-600 w-4 h-4 rounded">
+                        <span>A számlázási cím megegyezik a szállítási címmel</span>
+                    </label>
+
+                    <div id="reg-billing-container" class="hidden space-y-3 pt-2">
+                        <h4 class="text-xs uppercase text-amber-500 font-bold tracking-wider">Számlázási Cím</h4>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Irányítószám</label>
+                                <input type="text" id="reg-bill-zip" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Település</label>
+                                <input type="text" id="reg-bill-city" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Közterület neve és jellege</label>
+                            <input type="text" id="reg-bill-street" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Házszám</label>
+                                <input type="text" id="reg-bill-house" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-[10px] text-stone-400 font-bold mb-0.5">Egyéb</label>
+                                <input type="text" id="reg-bill-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kötelező GDPR Regisztrációs Nyilatkozat -->
+                <div class="border-t border-stone-800 pt-3">
+                    <label class="flex items-start gap-2 cursor-pointer text-xs text-stone-300 select-none">
+                        <input type="checkbox" id="reg-gdpr-check" required class="accent-amber-600 w-4 h-4 rounded mt-0.5 shrink-0">
+                        <span class="text-[11px] leading-tight">
+                            Elfogadom az <button type="button" onclick="openLegalModal('gdpr')" class="text-amber-500 underline font-bold">Adatkezelési Tájékoztatót</button> a regisztrációhoz és fiókkezeléshez.
+                        </span>
+                    </label>
                 </div>
 
                 <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded transition-all active:scale-95 text-xs sm:text-sm mt-4">
@@ -1297,6 +1411,7 @@
         </div>
     </div>
 
+    <!-- Profile Modal -->
     <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProfileModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-4xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1310,7 +1425,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-4">
-                    <h4 class="text-xs sm:text-sm uppercase text-amber-500 font-bold tracking-wider border-b border-stone-800 pb-1">Profil Adatok Frissítése</h4>
+                    <h4 class="text-xs sm:text-sm uppercase text-amber-500 font-bold tracking-wider border-b border-stone-800 pb-1">Elmentett Profil és Címadatok</h4>
                     <form id="profile-form" onsubmit="handleProfileUpdate(event)" class="space-y-3.5 text-xs">
                         <div class="grid grid-cols-2 gap-2">
                             <div>
@@ -1323,8 +1438,36 @@
                             </div>
                         </div>
 
+                        <div class="border-t border-stone-800 pt-3 space-y-2">
+                            <span class="block text-amber-500 font-bold text-xs">Szállítási cím</span>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                    <label class="block text-stone-400 text-[10px]">Irsz.</label>
+                                    <input type="text" id="prof-ship-zip" class="w-full bg-stone-800 text-white p-1.5 rounded border border-stone-700 text-xs">
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-stone-400 text-[10px]">Település</label>
+                                    <input type="text" id="prof-ship-city" class="w-full bg-stone-800 text-white p-1.5 rounded border border-stone-700 text-xs">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-stone-400 text-[10px]">Utca / Közterület</label>
+                                <input type="text" id="prof-ship-street" class="w-full bg-stone-800 text-white p-1.5 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                    <label class="block text-stone-400 text-[10px]">Házszám</label>
+                                    <input type="text" id="prof-ship-house" class="w-full bg-stone-800 text-white p-1.5 rounded border border-stone-700 text-xs">
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-stone-400 text-[10px]">Egyéb</label>
+                                    <input type="text" id="prof-ship-other" class="w-full bg-stone-800 text-white p-1.5 rounded border border-stone-700 text-xs">
+                                </div>
+                            </div>
+                        </div>
+
                         <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded mt-2 transition-all active:scale-95 text-xs">
-                            Adatok mentése
+                            Adatok és Címek Mentése
                         </button>
                     </form>
                 </div>
@@ -1338,6 +1481,7 @@
         </div>
     </div>
 
+    <!-- Success Modal -->
     <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-90"></div>
         <div class="bg-stone-900 border border-amber-600/30 text-white rounded-lg p-6 sm:p-8 max-w-md w-full text-center relative z-10 shadow-2xl">
@@ -1359,7 +1503,125 @@
         </div>
     </div>
 
+    <!-- Legal Documents Modal (ÁSZF, GDPR, Impresszum, ÉÉÁ) -->
+    <div id="legal-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-85" onclick="closeLegalModal()"></div>
+        <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-4xl w-full p-5 sm:p-8 shadow-2xl relative z-10 max-h-[92vh] flex flex-col">
+            <button onclick="closeLegalModal()" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors p-1" aria-label="Bezárás">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Modal Header Tabs -->
+            <div class="flex border-b border-stone-800 pb-3 gap-2 overflow-x-auto shrink-0 mb-4 text-xs sm:text-sm">
+                <button onclick="showLegalTab('aszf')" id="legal-tab-aszf" class="py-2 px-3 font-bold rounded bg-amber-600 text-stone-950 transition-colors shrink-0">ÁSZF</button>
+                <button onclick="showLegalTab('gdpr')" id="legal-tab-gdpr" class="py-2 px-3 font-bold rounded bg-stone-800 text-stone-300 hover:text-white transition-colors shrink-0">Adatkezelés (GDPR)</button>
+                <button onclick="showLegalTab('impresszum')" id="legal-tab-impresszum" class="py-2 px-3 font-bold rounded bg-stone-800 text-stone-300 hover:text-white transition-colors shrink-0">Impresszum &amp; ÉÉÁ</button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="overflow-y-auto pr-2 space-y-6 text-xs sm:text-sm leading-relaxed text-stone-300">
+                <!-- ÁSZF TAB -->
+                <div id="legal-content-aszf" class="space-y-4">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-amber-500 border-b border-stone-800 pb-2">BALAZS BARRELS ZRT. - ÁLTALÁNOS SZERZŐDÉSI FELTÉTELEK (ÁSZF)</h3>
+                    <p class="text-[11px] text-stone-400 font-mono">Hatálybalépés dátuma: 2026. július 22.</p>
+                    
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white text-sm">1. Impresszum és a Szolgáltató adatai</h4>
+                        <p>Cégnév: <strong>Balazs Barrels Zrt.</strong> | Székhely: <strong>1191 Budapest, Hamvas utca 7-9.</strong> | Gyártási telephely: <strong>7900 Botykapeterd, hrsz. 017/22</strong> | Vezérigazgató: Nagy Balázs | E-mail: info@balazsbarrels.com | Tel: +36 70 562 8453 | TEÁOR: 1624 Tároló fatermékek gyártása, 4791 Csomagküldő internetes kiskereskedelem.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white text-sm">2. Általános rendelkezések és megrendelés</h4>
+                        <p>A Vevő a webáruházban történő regisztrációt követően böngészhet a kishordók, barrique hordók és egyéb kádár termékek között. A kívánt termék(ek) paramétereinek (fafajta, pörkölési égetési szint, méret) kiválasztása után a termék a kosárba kerül. A megrendelés véglegesítése a Megrendelés fizetési kötelezettséggel gombra kattintva valósul meg.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white text-sm">3. Árak, fizetési és szállítási feltételek</h4>
+                        <p>A feltüntetett árak magyar forintban (HUF) értendők és tartalmazzák a 27%-os ÁFA-t. Fizetési módok: Utánvétel a futárnál készpénzzel vagy kártyával, vagy banki előreutalás. Szállítás futárszolgálattal vagy díjmentes személyes átvétel a botykapeterdi gyártó üzemben (7900 Botykapeterd, hrsz. 017/22).</p>
+                    </div>
+
+                    <div class="space-y-3 bg-stone-950 p-4 rounded border border-amber-600/30">
+                        <h4 class="font-bold text-amber-400 text-sm">4. Elállási jog (Fogyasztók esetén) és egyedi gravírozási kivétel</h4>
+                        <p>A fogyasztónak minősülő vásárló a 45/2014. (II. 26.) Korm. rendelet alapján 14 napon belül indokolás nélkül elállhat a szerződéstől. A termék visszaküldésének közvetlen költsége a fogyasztót terheli.</p>
+                        <p class="font-bold text-amber-300 mt-2">KIVÉTEL AZ ELÁLLÁSI JOG ALÓL:</p>
+                        <p>A Vevő egyedi utasítása alapján vagy kifejezett kérésére előállított, személyre szabott termékek (pl. <strong>egyedi lézergravírozott, egyedi logóval vagy felirattal ellátott hordók</strong>) esetén a Vevőt <strong>nem illeti meg a 14 napos indokolás nélküli elállási jog</strong>.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white text-sm">5. Szavatosság és Reklamációkezelés</h4>
+                        <p>Reklamációját a Vevő írásban az info@balazsbarrels.com e-mail címen teheti meg. Fogyasztói jogvita esetén a Vevő a lakóhelye szerint illetékes Békéltető Testülethez fordulhat.</p>
+                    </div>
+                </div>
+
+                <!-- GDPR TAB -->
+                <div id="legal-content-gdpr" class="space-y-4 hidden">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-amber-500 border-b border-stone-800 pb-2">BALAZS BARRELS ZRT. - ADATKEZELÉSI TÁJÉKOZTATÓ (GDPR)</h3>
+                    <p class="text-[11px] text-stone-400 font-mono">Hatálybalépés dátuma: 2026. július 22.</p>
+
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-white text-sm">1. Az Adatkezelő adatai</h4>
+                        <p>Balazs Barrels Zrt., Székhely: 1191 Budapest, Hamvas utca 7-9., Telephely: 7900 Botykapeterd, hrsz. 017/22. Adatkezelésért felelős: Nagy Balázs vezérigazgató (info@balazsbarrels.com, +36 70 562 8453).</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-white text-sm">2. Kezelt adatok, cél és jogalap</h4>
+                        <p>• <strong>Webshop regisztráció:</strong> Név, e-mail, tel, jelszó, cégadatok. Jogalap: GDPR 6. cikk (1) a) pont - önkéntes hozzájárulás.<br>
+                        • <strong>Megrendelések teljesítése:</strong> Szállítási/számlázási cím, tel, e-mail. Jogalap: GDPR 6. cikk (1) b) pont - szerződés teljesítése &amp; c) pont - számviteli kötelezettség.<br>
+                        • <strong>Ügyfélszolgálat:</strong> Üzenet tartalma, szaktanácsadás. Jogalap: jogos érdek.</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-white text-sm">3. Adatok tárolásának időtartama</h4>
+                        <p>• Regisztrációs adatok: A fiók törléséig.<br>
+                        • Számviteli és számlázási adatok: A Számviteli törvény (2000. évi C. törvény 169. §) alapján 8 évig.<br>
+                        • Szerződéses adatok: A polgári jogi elévülési idő (5 év) végéig.</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-white text-sm">4. Adatfeldolgozók &amp; Jogorvoslat</h4>
+                        <p>Adatfeldolgozók: Futárszolgálat (kiszállítás), Online Számlázó rendszer (NAV megfelelőség), IT Tárhelyszolgáltató (Supabase). Jogorvoslatért a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH - 1055 Budapest, Falk Miksa utca 9-11., www.naih.hu) lehet fordulni.</p>
+                    </div>
+                </div>
+
+                <!-- IMPRESSZUM & ÉÉÁ TAB -->
+                <div id="legal-content-impresszum" class="space-y-4 hidden">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-amber-500 border-b border-stone-800 pb-2">IMPRESSZUM &amp; ÉLELMISZERREL ÉRINTKEZŐ ANYAGOK (ÉÉÁ) NYILATKOZAT</h3>
+                    
+                    <div class="bg-stone-950 p-4 rounded border border-stone-800 space-y-2 text-xs">
+                        <div class="grid grid-cols-3 border-b border-stone-800 pb-1"><span class="text-stone-400">Cégnév:</span> <span class="col-span-2 text-white font-bold">Balazs Barrels Zrt.</span></div>
+                        <div class="grid grid-cols-3 border-b border-stone-800 pb-1"><span class="text-stone-400">Székhely:</span> <span class="col-span-2 text-white">1191 Budapest, Hamvas utca 7-9.</span></div>
+                        <div class="grid grid-cols-3 border-b border-stone-800 pb-1"><span class="text-stone-400">Gyártási telephely:</span> <span class="col-span-2 text-white">7900 Botykapeterd, hrsz. 017/22</span></div>
+                        <div class="grid grid-cols-3 border-b border-stone-800 pb-1"><span class="text-stone-400">Vezérigazgató:</span> <span class="col-span-2 text-white">Nagy Balázs</span></div>
+                        <div class="grid grid-cols-3 border-b border-stone-800 pb-1"><span class="text-stone-400">E-mail / Tel:</span> <span class="col-span-2 text-white">info@balazsbarrels.com | +36 70 562 8453</span></div>
+                        <div class="grid grid-cols-3 border-b border-stone-800 pb-1"><span class="text-stone-400">Főtevékenység:</span> <span class="col-span-2 text-white">TEÁOR 1624 Tároló fatermékek gyártása, 4791 Csomagküldő internetes kiskereskedelem</span></div>
+                        <div class="grid grid-cols-3"><span class="text-stone-400">Illetékes Kamara:</span> <span class="col-span-2 text-white">Területi Kereskedelmi és Iparkamara</span></div>
+                    </div>
+
+                    <div class="space-y-3 pt-2">
+                        <h4 class="font-bold text-amber-400 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-certificate"></i> Élelmiszerrel Érintkező Anyagok (ÉÉÁ) Megfelelőségi Nyilatkozat
+                        </h4>
+                        <p class="leading-relaxed">
+                            A Balazs Barrels Zrt. kijelenti, hogy az általa gyártott és forgalmazott fahordók és kádár termékek megfelelnek az <strong>1935/2004/EK európai uniós rendeletnek</strong>, valamint a kapcsolódó hazai élelmiszer-biztonsági előírásoknak (<strong>NÉBIH</strong>).
+                        </p>
+                        <p class="leading-relaxed text-stone-300">
+                            A felhasznált faanyagok (tölgy, akác, cseresznye, eper, kőris), a pörkölési technológiák és az acél abroncsok élelmiszerekkel (bor, pálinka, ecet, párlatok) való közvetlen érintkezésre alkalmasak, higiénikusak és teljesen biztonságosak.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        const SUPABASE_URL = 'https://altzcabgntmmwmuhapao.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsdHpjYWdibnRtbXdtdWhhapaoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ3MzQ4MDEsImV4cCI6MjEwMDMxMDgwMX0.cZZNxCYjSR-XHowfWbw2c1U3zNk_b8DJml2OECYHhaY';
+
+        let supabaseClient = null;
+        if (window.supabase && typeof window.supabase.createClient === 'function') {
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
         function toggleProjectDetails(id) {
             const body = document.getElementById('project-body-' + id);
             const icon = document.getElementById('project-icon-' + id);
@@ -1371,6 +1633,44 @@
                 body.classList.add('hidden');
                 if (icon) icon.className = "fa-solid fa-chevron-down text-sm";
             }
+        }
+
+        // Cookie Banner
+        function checkCookieConsent() {
+            if (!localStorage.getItem('cookie_consent_accepted')) {
+                document.getElementById('cookie-banner').classList.remove('hidden');
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookie_consent_accepted', 'true');
+            document.getElementById('cookie-banner').classList.add('hidden');
+            showNotification("Sütik beállításai elmentve.");
+        }
+
+        // Legal Modal Logic
+        function openLegalModal(tab = 'aszf') {
+            document.getElementById('legal-modal').classList.remove('hidden');
+            showLegalTab(tab);
+        }
+
+        function closeLegalModal() {
+            document.getElementById('legal-modal').classList.add('hidden');
+        }
+
+        function showLegalTab(tab) {
+            const tabs = ['aszf', 'gdpr', 'impresszum'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`legal-tab-${t}`);
+                const content = document.getElementById(`legal-content-${t}`);
+                if (t === tab) {
+                    btn.className = "py-2 px-3 font-bold rounded bg-amber-600 text-stone-950 transition-colors shrink-0";
+                    content.classList.remove('hidden');
+                } else {
+                    btn.className = "py-2 px-3 font-bold rounded bg-stone-800 text-stone-300 hover:text-white transition-colors shrink-0";
+                    content.classList.add('hidden');
+                }
+            });
         }
 
         const products = [
@@ -1676,11 +1976,18 @@
                         name: 'Minta János',
                         phone: '+36 30 987 6543',
                         type: 'maganszemely',
+                        ship_country: 'Magyarország',
                         ship_zip: '7900',
                         ship_city: 'Botykapeterd',
                         ship_street: 'Fő út',
                         ship_house: '14.',
-                        ship_other: 'Barna kapu'
+                        ship_other: 'Barna kapu',
+                        bill_same: true,
+                        bill_zip: '7900',
+                        bill_city: 'Botykapeterd',
+                        bill_street: 'Fő út',
+                        bill_house: '14.',
+                        bill_other: ''
                     }];
                     localStorage.setItem('local_users', JSON.stringify(defaultUsers));
                     return defaultUsers;
@@ -1714,6 +2021,7 @@
             renderProducts();
             renderGallery();
             updateCart();
+            checkCookieConsent();
             switchToView('main');
         };
 
@@ -2046,25 +2354,6 @@
             document.getElementById('modal-product-price').textContent = `${new Intl.NumberFormat('hu-HU').format(finalPrice)} Ft`;
         }
 
-        window.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeProductModal();
-                closeAuthModal();
-                closeProfileModal();
-                closeGalleryLightbox();
-            } else if (e.key === 'ArrowLeft') {
-                const lightbox = document.getElementById('gallery-lightbox');
-                if (lightbox && !lightbox.classList.contains('hidden')) {
-                    navigateGallery(-1);
-                }
-            } else if (e.key === 'ArrowRight') {
-                const lightbox = document.getElementById('gallery-lightbox');
-                if (lightbox && !lightbox.classList.contains('hidden')) {
-                    navigateGallery(1);
-                }
-            }
-        });
-
         function addProductToCart() {
             if (!selectedProduct) return;
             
@@ -2221,27 +2510,35 @@
                 return;
             }
 
-            document.getElementById('co-name').value = currentUser.name || '';
+            document.getElementById('co-name').value = currentUser.company_name || currentUser.name || '';
             document.getElementById('co-phone').value = currentUser.phone || '';
             document.getElementById('co-email').value = currentUser.email || '';
 
-            document.getElementById('co-bill-zip').value = currentUser.bill_zip || currentUser.ship_zip || '';
-            document.getElementById('co-bill-city').value = currentUser.bill_city || currentUser.ship_city || '';
-            document.getElementById('co-bill-street').value = currentUser.bill_street || currentUser.ship_street || '';
-            document.getElementById('co-bill-house').value = currentUser.bill_house || currentUser.ship_house || '';
-            document.getElementById('co-bill-other').value = currentUser.bill_other || currentUser.ship_other || '';
-
+            document.getElementById('co-ship-country').value = currentUser.ship_country || 'Magyarország';
             document.getElementById('co-ship-zip').value = currentUser.ship_zip || '';
             document.getElementById('co-ship-city').value = currentUser.ship_city || '';
             document.getElementById('co-ship-street').value = currentUser.ship_street || '';
             document.getElementById('co-ship-house').value = currentUser.ship_house || '';
             document.getElementById('co-ship-other').value = currentUser.ship_other || '';
 
+            const isSame = currentUser.bill_same !== false;
+            document.getElementById('co-bill-zip').value = isSame ? (currentUser.ship_zip || '') : (currentUser.bill_zip || '');
+            document.getElementById('co-bill-city').value = isSame ? (currentUser.ship_city || '') : (currentUser.bill_city || '');
+            document.getElementById('co-bill-street').value = isSame ? (currentUser.ship_street || '') : (currentUser.bill_street || '');
+            document.getElementById('co-bill-house').value = isSame ? (currentUser.ship_house || '') : (currentUser.bill_house || '');
+            document.getElementById('co-bill-other').value = isSame ? (currentUser.ship_other || '') : (currentUser.bill_other || '');
+
             switchToView('checkout');
         }
 
-        function handleCheckoutSubmit(e) {
+        async function handleCheckoutSubmit(e) {
             e.preventDefault();
+
+            const termsCheck = document.getElementById('co-terms-check');
+            if (!termsCheck.checked) {
+                showNotification("A megrendeléshez el kell fogadnia az ÁSZF-et!", "error");
+                return;
+            }
 
             const orderId = 'BB-' + Math.floor(10000 + Math.random() * 90000);
             const totalText = document.getElementById('co-final-total').textContent;
@@ -2252,7 +2549,6 @@
             document.getElementById('success-order-total').textContent = totalText;
             document.getElementById('success-order-payment').textContent = payText;
 
-            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
             const newOrder = {
                 orderId: orderId,
                 customerEmail: currentUser.email,
@@ -2261,6 +2557,23 @@
                 date: new Date().toLocaleDateString('hu-HU'),
                 status: 'Feldolgozás alatt'
             };
+
+            if (supabaseClient) {
+                try {
+                    const { error } = await supabaseClient.from('orders').insert([{
+                        order_id: orderId,
+                        customer_email: currentUser.email,
+                        total: newOrder.total,
+                        items: newOrder.items,
+                        status: newOrder.status
+                    }]);
+                    if (error) console.warn("Supabase orders insert notice:", error.message);
+                } catch (err) {
+                    console.warn("Supabase call failed:", err);
+                }
+            }
+
+            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
             orders.push(newOrder);
             localStorage.setItem('local_orders', JSON.stringify(orders));
 
@@ -2322,10 +2635,70 @@
             }
         }
 
-        function handleLoginSubmit(e) {
+        function handleCountryChange() {
+            const countryVal = document.getElementById('reg-country').value;
+            const euVatContainer = document.getElementById('reg-eu-vat-container');
+            if (countryVal !== 'Magyarország') {
+                euVatContainer.classList.remove('hidden');
+            } else {
+                euVatContainer.classList.add('hidden');
+                document.getElementById('reg-eu-vat-number').value = '';
+            }
+        }
+
+        function toggleSameBillingReg() {
+            const checked = document.getElementById('reg-bill-same').checked;
+            const billContainer = document.getElementById('reg-billing-container');
+            if (checked) {
+                billContainer.classList.add('hidden');
+            } else {
+                billContainer.classList.remove('hidden');
+            }
+        }
+
+        async function handleLoginSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value.trim().toLowerCase();
             const pass = document.getElementById('login-password').value;
+
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({
+                        email: email,
+                        password: pass
+                    });
+                    if (!error && data.user) {
+                        currentUser = {
+                            email: data.user.email,
+                            name: data.user.user_metadata?.name || 'Felhasználó',
+                            phone: data.user.user_metadata?.phone || '',
+                            ship_country: data.user.user_metadata?.ship_country || 'Magyarország',
+                            ship_zip: data.user.user_metadata?.ship_zip || '',
+                            ship_city: data.user.user_metadata?.ship_city || '',
+                            ship_street: data.user.user_metadata?.ship_street || '',
+                            ship_house: data.user.user_metadata?.ship_house || '',
+                            ship_other: data.user.user_metadata?.ship_other || '',
+                            bill_same: data.user.user_metadata?.bill_same !== false,
+                            bill_zip: data.user.user_metadata?.bill_zip || '',
+                            bill_city: data.user.user_metadata?.bill_city || '',
+                            bill_street: data.user.user_metadata?.bill_street || '',
+                            bill_house: data.user.user_metadata?.bill_house || '',
+                            bill_other: data.user.user_metadata?.bill_other || '',
+                            company_name: data.user.user_metadata?.company_name || '',
+                            vat_number: data.user.user_metadata?.vat_number || '',
+                            eu_vat_number: data.user.user_metadata?.eu_vat_number || ''
+                        };
+                        localStorage.setItem('active_session', JSON.stringify(currentUser));
+                        updateNavbarUser();
+                        closeAuthModal();
+                        renderProducts();
+                        showNotification(`Üdvözöljük újra, ${currentUser.name}!`);
+                        return;
+                    }
+                } catch (err) {
+                    console.warn("Supabase Auth signin attempt failed:", err);
+                }
+            }
 
             const users = DB.getUsers();
             const found = users.find(u => u.email.toLowerCase() === email && u.password === pass);
@@ -2342,13 +2715,79 @@
             }
         }
 
-        function handleRegisterSubmit(e) {
+        async function handleRegisterSubmit(e) {
             e.preventDefault();
+
+            const gdprCheck = document.getElementById('reg-gdpr-check');
+            if (!gdprCheck.checked) {
+                showNotification("A regisztrációhoz el kell fogadnia az Adatkezelési Tájékoztatót!", "error");
+                return;
+            }
 
             const email = document.getElementById('reg-email').value.trim().toLowerCase();
             const name = document.getElementById('reg-name').value.trim();
             const phone = document.getElementById('reg-phone').value.trim();
             const password = document.getElementById('reg-password').value;
+
+            const ship_zip = document.getElementById('reg-ship-zip').value.trim();
+            const ship_city = document.getElementById('reg-ship-city').value.trim();
+            const ship_street = document.getElementById('reg-ship-street').value.trim();
+            const ship_house = document.getElementById('reg-ship-house').value.trim();
+            const ship_other = document.getElementById('reg-ship-other').value.trim();
+
+            const bill_same = document.getElementById('reg-bill-same').checked;
+            const bill_zip = bill_same ? ship_zip : document.getElementById('reg-bill-zip').value.trim();
+            const bill_city = bill_same ? ship_city : document.getElementById('reg-bill-city').value.trim();
+            const bill_street = bill_same ? ship_street : document.getElementById('reg-bill-street').value.trim();
+            const bill_house = bill_same ? ship_house : document.getElementById('reg-bill-house').value.trim();
+            const bill_other = bill_same ? ship_other : document.getElementById('reg-bill-other').value.trim();
+
+            const country = document.getElementById('reg-country').value;
+            const company_name = selectedRegTypeState === 'ceg' ? document.getElementById('reg-company-name').value.trim() : '';
+            const vat_number = selectedRegTypeState === 'ceg' ? document.getElementById('reg-vat-number').value.trim() : '';
+            const eu_vat_number = (selectedRegTypeState === 'ceg' && country !== 'Magyarország') ? document.getElementById('reg-eu-vat-number').value.trim() : '';
+
+            const userMeta = {
+                name,
+                phone,
+                type: selectedRegTypeState,
+                ship_country: country,
+                ship_zip,
+                ship_city,
+                ship_street,
+                ship_house,
+                ship_other,
+                bill_same,
+                bill_zip,
+                bill_city,
+                bill_street,
+                bill_house,
+                bill_other,
+                company_name,
+                vat_number,
+                eu_vat_number
+            };
+
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: { data: userMeta }
+                    });
+                    if (!error && data.user) {
+                        currentUser = { email, ...userMeta };
+                        localStorage.setItem('active_session', JSON.stringify(currentUser));
+                        updateNavbarUser();
+                        closeAuthModal();
+                        renderProducts();
+                        showNotification("Sikeres regisztráció és belépés!");
+                        return;
+                    }
+                } catch (err) {
+                    console.warn("Supabase register error:", err);
+                }
+            }
 
             const users = DB.getUsers();
             if (users.find(u => u.email.toLowerCase() === email)) {
@@ -2357,11 +2796,9 @@
             }
 
             let newUser = {
-                email: email,
-                name: name,
-                phone: phone,
-                password: password,
-                type: selectedRegTypeState
+                email,
+                password,
+                ...userMeta
             };
 
             DB.saveUser(newUser);
@@ -2381,6 +2818,9 @@
         }
 
         function logout() {
+            if (supabaseClient) {
+                supabaseClient.auth.signOut().catch(() => {});
+            }
             currentUser = null;
             localStorage.removeItem('active_session');
             updateNavbarUser();
@@ -2397,7 +2837,7 @@
             if (currentUser) {
                 loggedInBtn.classList.remove('hidden');
                 guestBtn.classList.add('hidden');
-                navName.textContent = currentUser.name;
+                navName.textContent = currentUser.company_name || currentUser.name;
             } else {
                 loggedInBtn.classList.add('hidden');
                 guestBtn.classList.remove('hidden');
@@ -2409,6 +2849,12 @@
 
             document.getElementById('prof-name').value = currentUser.name || '';
             document.getElementById('prof-phone').value = currentUser.phone || '';
+
+            document.getElementById('prof-ship-zip').value = currentUser.ship_zip || '';
+            document.getElementById('prof-ship-city').value = currentUser.ship_city || '';
+            document.getElementById('prof-ship-street').value = currentUser.ship_street || '';
+            document.getElementById('prof-ship-house').value = currentUser.ship_house || '';
+            document.getElementById('prof-ship-other').value = currentUser.ship_other || '';
 
             renderProfileOrders();
             document.getElementById('profile-modal').classList.remove('hidden');
@@ -2424,20 +2870,51 @@
             currentUser.name = document.getElementById('prof-name').value.trim();
             currentUser.phone = document.getElementById('prof-phone').value.trim();
 
+            currentUser.ship_zip = document.getElementById('prof-ship-zip').value.trim();
+            currentUser.ship_city = document.getElementById('prof-ship-city').value.trim();
+            currentUser.ship_street = document.getElementById('prof-ship-street').value.trim();
+            currentUser.ship_house = document.getElementById('prof-ship-house').value.trim();
+            currentUser.ship_other = document.getElementById('prof-ship-other').value.trim();
+
             DB.saveUser(currentUser);
             localStorage.setItem('active_session', JSON.stringify(currentUser));
             
             updateNavbarUser();
             closeProfileModal();
-            showNotification("Profil adatai sikeresen módosítva!");
+            showNotification("Profil és címadatok sikeresen elmentve!");
         }
 
-        function renderProfileOrders() {
+        async function renderProfileOrders() {
             const container = document.getElementById('profile-orders');
             container.innerHTML = '';
 
-            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
-            const userOrders = orders.filter(o => o.customerEmail.toLowerCase() === currentUser.email.toLowerCase());
+            let userOrders = [];
+
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('orders')
+                        .select('*')
+                        .eq('customer_email', currentUser.email);
+                    if (!error && data && data.length > 0) {
+                        userOrders = data.map(d => ({
+                            orderId: d.order_id,
+                            customerEmail: d.customer_email,
+                            total: d.total,
+                            items: d.items,
+                            date: new Date(d.created_at).toLocaleDateString('hu-HU'),
+                            status: d.status || 'Feldolgozás alatt'
+                        }));
+                    }
+                } catch (err) {
+                    console.warn("Could not fetch orders from Supabase:", err);
+                }
+            }
+
+            if (userOrders.length === 0) {
+                let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
+                userOrders = orders.filter(o => o.customerEmail.toLowerCase() === currentUser.email.toLowerCase());
+            }
 
             if (userOrders.length === 0) {
                 container.innerHTML = `
@@ -2453,10 +2930,12 @@
                 block.className = "bg-stone-950 p-4 rounded border border-stone-800 space-y-2";
                 
                 let itemsListHtml = '';
-                o.items.forEach(it => {
-                    const woodText = it.wood ? `, Fa: ${it.wood}` : '';
-                    itemsListHtml += `<div class="text-[11px] sm:text-xs text-stone-300">• ${it.name} (${it.volume}, ${it.toast}${woodText}) - ${it.quantity} db</div>`;
-                });
+                if (Array.isArray(o.items)) {
+                    o.items.forEach(it => {
+                        const woodText = it.wood ? `, Fa: ${it.wood}` : '';
+                        itemsListHtml += `<div class="text-[11px] sm:text-xs text-stone-300">• ${it.name} (${it.volume}, ${it.toast}${woodText}) - ${it.quantity} db</div>`;
+                    });
+                }
 
                 block.innerHTML = `
                     <div class="flex justify-between items-center text-xs border-b border-stone-900 pb-1.5 mb-1.5">
@@ -2477,6 +2956,26 @@
                 container.appendChild(block);
             });
         }
+
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProductModal();
+                closeAuthModal();
+                closeProfileModal();
+                closeGalleryLightbox();
+                closeLegalModal();
+            } else if (e.key === 'ArrowLeft') {
+                const lightbox = document.getElementById('gallery-lightbox');
+                if (lightbox && !lightbox.classList.contains('hidden')) {
+                    navigateGallery(-1);
+                }
+            } else if (e.key === 'ArrowRight') {
+                const lightbox = document.getElementById('gallery-lightbox');
+                if (lightbox && !lightbox.classList.contains('hidden')) {
+                    navigateGallery(1);
+                }
+            }
+        });
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
