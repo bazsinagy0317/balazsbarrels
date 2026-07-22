@@ -1620,6 +1620,9 @@
         let supabaseClient = null;
         if (window.supabase && typeof window.supabase.createClient === 'function') {
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            // Globális hivatkozások beállítása a konzolos teszteléshez és a JS függvényekhez
+            window.supabaseClient = supabaseClient;
+            window.supabase = supabaseClient;
         }
 
         function toggleProjectDetails(id) {
@@ -2544,14 +2547,35 @@
             const totalText = document.getElementById('co-final-total').textContent;
             const payMethod = document.getElementById('co-payment');
             const payText = payMethod.options[payMethod.selectedIndex].text;
+            const delMethod = document.getElementById('co-delivery');
+            const delText = delMethod.options[delMethod.selectedIndex].text;
 
             document.getElementById('success-order-id').textContent = orderId;
             document.getElementById('success-order-total').textContent = totalText;
             document.getElementById('success-order-payment').textContent = payText;
 
+            const shipAddr = {
+                country: document.getElementById('co-ship-country').value,
+                zip: document.getElementById('co-ship-zip').value,
+                city: document.getElementById('co-ship-city').value,
+                street: document.getElementById('co-ship-street').value,
+                house: document.getElementById('co-ship-house').value,
+                other: document.getElementById('co-ship-other').value
+            };
+
+            const billAddr = {
+                zip: document.getElementById('co-bill-zip').value,
+                city: document.getElementById('co-bill-city').value,
+                street: document.getElementById('co-bill-street').value,
+                house: document.getElementById('co-bill-house').value,
+                other: document.getElementById('co-bill-other').value
+            };
+
             const newOrder = {
                 orderId: orderId,
                 customerEmail: currentUser.email,
+                customerName: document.getElementById('co-name').value,
+                customerPhone: document.getElementById('co-phone').value,
                 total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
                 items: JSON.parse(JSON.stringify(cart)),
                 date: new Date().toLocaleDateString('hu-HU'),
@@ -2563,13 +2587,20 @@
                     const { error } = await supabaseClient.from('orders').insert([{
                         order_id: orderId,
                         customer_email: currentUser.email,
+                        customer_name: newOrder.customerName,
+                        customer_phone: newOrder.customerPhone,
                         total: newOrder.total,
                         items: newOrder.items,
+                        delivery_method: delText,
+                        payment_method: payText,
+                        shipping_address: shipAddr,
+                        billing_address: billAddr,
                         status: newOrder.status
                     }]);
-                    if (error) console.warn("Supabase orders insert notice:", error.message);
+                    if (error) console.error("Supabase rendelés mentési hiba:", error.message);
+                    else console.log("✅ Rendelés sikeresen elmentve a Supabase-be!");
                 } catch (err) {
-                    console.warn("Supabase call failed:", err);
+                    console.warn("Supabase hívási hiba:", err);
                 }
             }
 
@@ -2668,25 +2699,32 @@
                         password: pass
                     });
                     if (!error && data.user) {
+                        let profileData = {};
+                        const { data: prof, error: pErr } = await supabaseClient.from('profiles').select('*').eq('id', data.user.id).maybeSingle();
+                        if (prof && !pErr) {
+                            profileData = prof;
+                        }
+
                         currentUser = {
+                            id: data.user.id,
                             email: data.user.email,
-                            name: data.user.user_metadata?.name || 'Felhasználó',
-                            phone: data.user.user_metadata?.phone || '',
-                            ship_country: data.user.user_metadata?.ship_country || 'Magyarország',
-                            ship_zip: data.user.user_metadata?.ship_zip || '',
-                            ship_city: data.user.user_metadata?.ship_city || '',
-                            ship_street: data.user.user_metadata?.ship_street || '',
-                            ship_house: data.user.user_metadata?.ship_house || '',
-                            ship_other: data.user.user_metadata?.ship_other || '',
-                            bill_same: data.user.user_metadata?.bill_same !== false,
-                            bill_zip: data.user.user_metadata?.bill_zip || '',
-                            bill_city: data.user.user_metadata?.bill_city || '',
-                            bill_street: data.user.user_metadata?.bill_street || '',
-                            bill_house: data.user.user_metadata?.bill_house || '',
-                            bill_other: data.user.user_metadata?.bill_other || '',
-                            company_name: data.user.user_metadata?.company_name || '',
-                            vat_number: data.user.user_metadata?.vat_number || '',
-                            eu_vat_number: data.user.user_metadata?.eu_vat_number || ''
+                            name: profileData.name || data.user.user_metadata?.name || 'Felhasználó',
+                            phone: profileData.phone || data.user.user_metadata?.phone || '',
+                            ship_country: profileData.country || data.user.user_metadata?.ship_country || 'Magyarország',
+                            ship_zip: profileData.ship_zip || data.user.user_metadata?.ship_zip || '',
+                            ship_city: profileData.ship_city || data.user.user_metadata?.ship_city || '',
+                            ship_street: profileData.ship_street || data.user.user_metadata?.ship_street || '',
+                            ship_house: profileData.ship_house || data.user.user_metadata?.ship_house || '',
+                            ship_other: profileData.ship_other || data.user.user_metadata?.ship_other || '',
+                            bill_same: profileData.bill_same_as_ship !== undefined ? profileData.bill_same_as_ship : (data.user.user_metadata?.bill_same !== false),
+                            bill_zip: profileData.bill_zip || data.user.user_metadata?.bill_zip || '',
+                            bill_city: profileData.bill_city || data.user.user_metadata?.bill_city || '',
+                            bill_street: profileData.bill_street || data.user.user_metadata?.bill_street || '',
+                            bill_house: profileData.bill_house || data.user.user_metadata?.bill_house || '',
+                            bill_other: profileData.bill_other || data.user.user_metadata?.bill_other || '',
+                            company_name: profileData.company_name || data.user.user_metadata?.company_name || '',
+                            vat_number: profileData.vat_number || data.user.user_metadata?.vat_number || '',
+                            eu_vat_number: profileData.eu_vat_number || data.user.user_metadata?.eu_vat_number || ''
                         };
                         localStorage.setItem('active_session', JSON.stringify(currentUser));
                         updateNavbarUser();
@@ -2694,6 +2732,8 @@
                         renderProducts();
                         showNotification(`Üdvözöljük újra, ${currentUser.name}!`);
                         return;
+                    } else if (error) {
+                        console.error("Supabase belépési hiba:", error.message);
                     }
                 } catch (err) {
                     console.warn("Supabase Auth signin attempt failed:", err);
@@ -2775,8 +2815,39 @@
                         password: password,
                         options: { data: userMeta }
                     });
-                    if (!error && data.user) {
-                        currentUser = { email, ...userMeta };
+                    
+                    if (error) {
+                        console.error("Supabase Regisztrációs Hiba:", error.message);
+                        showNotification("Supabase hiba: " + error.message, "error");
+                    } else if (data && data.user) {
+                        // Közvetlen bejegyzés a public.profiles táblába
+                        const profileRecord = {
+                            id: data.user.id,
+                            name: name,
+                            phone: phone,
+                            type: selectedRegTypeState,
+                            country: country,
+                            ship_zip: ship_zip,
+                            ship_city: ship_city,
+                            ship_street: ship_street,
+                            ship_house: ship_house,
+                            ship_other: ship_other,
+                            bill_same_as_ship: bill_same,
+                            bill_zip: bill_zip,
+                            bill_city: bill_city,
+                            bill_street: bill_street,
+                            bill_house: bill_house,
+                            bill_other: bill_other,
+                            company_name: company_name,
+                            vat_number: vat_number,
+                            eu_vat_number: eu_vat_number
+                        };
+                        
+                        const { error: profError } = await supabaseClient.from('profiles').upsert([profileRecord]);
+                        if (profError) console.warn("Profil beszúrási tájékoztatás:", profError.message);
+                        else console.log("✅ Profil adatok elmentve a public.profiles táblába!");
+
+                        currentUser = { email, ...userMeta, id: data.user.id };
                         localStorage.setItem('active_session', JSON.stringify(currentUser));
                         updateNavbarUser();
                         closeAuthModal();
