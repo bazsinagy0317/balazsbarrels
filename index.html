@@ -48,30 +48,6 @@
                 }
             }
         }
-
-        const grantImgVariants = {
-            1: ['pályázat 1.jpg', 'palyazat 1.jpg', 'pályázat1.jpg', 'palyazat1.jpg', 'pályázat 1.JPG', 'palyazat 1.JPG', 'pályázat 1.png', 'palyazat 1.png', 'Pályázat 1.jpg', 'Palyazat 1.jpg'],
-            2: ['pályázat 2.png', 'palyazat 2.png', 'pályázat2.png', 'palyazat2.png', 'pályázat 2.PNG', 'palyazat 2.PNG', 'pályázat 2.jpg', 'palyazat 2.jpg', 'Pályázat 2.png', 'Palyazat 2.png'],
-            3: ['pályázat 3.jpg', 'palyazat 3.jpg', 'pályázat3.jpg', 'palyazat3.jpg', 'pályázat 3.JPG', 'palyazat 3.JPG', 'pályázat 3.png', 'palyazat 3.png', 'Pályázat 3.jpg', 'Palyazat 3.jpg']
-        };
-
-        function handleGrantImgError(img, boardNum) {
-            if (!img.dataset.tryIndex) {
-                img.dataset.tryIndex = "0";
-            }
-            let idx = parseInt(img.dataset.tryIndex, 10) + 1;
-            const list = grantImgVariants[boardNum] || [];
-            if (idx < list.length) {
-                img.dataset.tryIndex = idx.toString();
-                img.src = list[idx];
-            } else {
-                img.style.display = 'none';
-                if (img.parentElement) {
-                    const fallbackDiv = img.parentElement.querySelector('.grant-fallback-notice');
-                    if (fallbackDiv) fallbackDiv.classList.remove('hidden');
-                }
-            }
-        }
     </script>
 </head>
 <body class="bg-stone-50 text-stone-900 flex flex-col min-h-screen font-sans antialiased">
@@ -107,7 +83,7 @@
                 </ul>
             </div>
 
-            <!-- Jobb oldali ikonok (Kosár és Fiók) -->
+            <!-- Jobb oldali ikonok -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <button onclick="toggleCart(true)" class="relative p-2.5 text-stone-300 hover:text-amber-500 transition-colors rounded-full hover:bg-stone-800" aria-label="Kosár megnyitása">
                     <i class="fa-solid fa-shopping-cart text-lg sm:text-xl"></i>
@@ -174,6 +150,7 @@
             </div>
         </section>
 
+        <!-- About Section -->
         <section id="about" class="py-16 md:py-20 bg-stone-100 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-2xl sm:text-3xl font-serif font-bold text-center mb-10 md:mb-12">Cégünkről & Történetünk</h2>
@@ -267,7 +244,6 @@
             </div>
         </section>
 
-        <!-- Gallery Lightbox -->
         <div id="gallery-lightbox" onclick="closeGalleryLightboxOnBackdrop(event)" class="fixed inset-0 z-50 flex items-center justify-center bg-black/92 p-4 hidden transition-all duration-300">
             <button onclick="closeGalleryLightbox()" class="absolute top-5 right-5 text-white/80 hover:text-white text-2xl sm:text-3xl z-20 p-2" aria-label="Bezárás">
                 <i class="fa-solid fa-xmark"></i>
@@ -416,7 +392,6 @@
             </div>
         </section>
 
-        <!-- Pályázatok & Fejlesztések Szekció -->
         <section id="palyazatok" class="py-16 md:py-20 bg-stone-50 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-10 md:mb-12">
@@ -427,58 +402,48 @@
                     </p>
                 </div>
 
+                <!-- Hivatalos Támogatási Táblák Blokkk -->
                 <div class="mb-12">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-amber-800 mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-square-poll-vertical"></i> Hivatalos Támogatási Hirdetőtáblák
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         <!-- 1. Pályázati Tábla -->
-                        <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal(this)">
-                            <div class="overflow-hidden rounded-lg bg-stone-100 flex items-center justify-center relative min-h-[220px]">
-                                <img src="pályázat 1.jpg" alt="Pályázati hirdetőtábla 1" class="grant-img-1 w-full h-auto max-h-60 object-contain group-hover:scale-105 transition-transform duration-300" onerror="handleGrantImgError(this, 1)">
-                                <div class="grant-fallback-notice hidden text-stone-500 text-xs text-center p-4">
-                                    <i class="fa-solid fa-image text-stone-400 text-2xl mb-2 block"></i>
-                                    1. Pályázati Tábla
-                                </div>
-                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5 rounded-lg">
+                        <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal('pályázat 1.jpg')">
+                            <div class="overflow-hidden rounded-lg bg-stone-100 aspect-[4/3] flex items-center justify-center relative">
+                                <img src="pályázat 1.jpg" alt="Pályázati hirdetőtábla 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c1917/amber?text=P%C3%A1ly%C3%A1zati+T%C3%A1bla+1'">
+                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5">
                                     <i class="fa-solid fa-magnifying-glass-plus"></i> Nagyítás
                                 </div>
                             </div>
-                            <p class="text-xs font-bold text-stone-800 mt-3 text-center">Foglalkoztatásbővítés (GINOP-5.3.12-19)</p>
+                            <p class="text-[11px] font-bold text-stone-700 mt-2.5 text-center truncate">Foglalkoztatásbővítés (GINOP-5.3.12-19)</p>
                         </div>
 
                         <!-- 2. Pályázati Tábla -->
-                        <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal(this)">
-                            <div class="overflow-hidden rounded-lg bg-stone-100 flex items-center justify-center relative min-h-[220px]">
-                                <img src="pályázat 2.png" alt="Pályázati hirdetőtábla 2" class="grant-img-2 w-full h-auto max-h-60 object-contain group-hover:scale-105 transition-transform duration-300" onerror="handleGrantImgError(this, 2)">
-                                <div class="grant-fallback-notice hidden text-stone-500 text-xs text-center p-4">
-                                    <i class="fa-solid fa-image text-stone-400 text-2xl mb-2 block"></i>
-                                    2. Pályázati Tábla
-                                </div>
-                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5 rounded-lg">
+                        <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal('pályázat 2.png')">
+                            <div class="overflow-hidden rounded-lg bg-stone-100 aspect-[4/3] flex items-center justify-center relative">
+                                <img src="pályázat 2.png" alt="Pályázati hirdetőtábla 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c1917/amber?text=P%C3%A1ly%C3%A1zati+T%C3%A1bla+2'">
+                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5">
                                     <i class="fa-solid fa-magnifying-glass-plus"></i> Nagyítás
                                 </div>
                             </div>
-                            <p class="text-xs font-bold text-stone-800 mt-3 text-center">Innovatív hordókészítés (2020-1.1.1-KKV-START)</p>
+                            <p class="text-[11px] font-bold text-stone-700 mt-2.5 text-center truncate">Innovatív hordókészítési technológia</p>
                         </div>
 
                         <!-- 3. Pályázati Tábla -->
-                        <div class="bg-white p-4 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal(this)">
-                            <div class="overflow-hidden rounded-lg bg-stone-100 flex items-center justify-center relative min-h-[220px]">
-                                <img src="pályázat 3.jpg" alt="Pályázati hirdetőtábla 3" class="grant-img-3 w-full h-auto max-h-60 object-contain group-hover:scale-105 transition-transform duration-300" onerror="handleGrantImgError(this, 3)">
-                                <div class="grant-fallback-notice hidden text-stone-500 text-xs text-center p-4">
-                                    <i class="fa-solid fa-image text-stone-400 text-2xl mb-2 block"></i>
-                                    3. Pályázati Tábla
-                                </div>
-                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5 rounded-lg">
+                        <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal('pályázat 3.jpg')">
+                            <div class="overflow-hidden rounded-lg bg-stone-100 aspect-[4/3] flex items-center justify-center relative">
+                                <img src="pályázat 3.jpg" alt="Pályázati hirdetőtábla 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c1917/amber?text=P%C3%A1ly%C3%A1zati+T%C3%A1bla+3'">
+                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5">
                                     <i class="fa-solid fa-magnifying-glass-plus"></i> Nagyítás
                                 </div>
                             </div>
-                            <p class="text-xs font-bold text-stone-800 mt-3 text-center">Technológiafejlesztés (GINOP_PLUSZ-1.2.1-21)</p>
+                            <p class="text-[11px] font-bold text-stone-700 mt-2.5 text-center truncate">Technológiafejlesztés (GINOP_PLUSZ-1.2.1-21)</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- Pályázati Kártyák (Harmonika) -->
                 <div class="space-y-8">
                     <!-- 1. Pályázat: Foglalkoztatásbővítés -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
@@ -503,12 +468,6 @@
                         </div>
 
                         <div id="project-body-1" class="p-5 sm:p-7 hidden">
-                            <!-- Hivatalos Tábla Kép a kártyán belül -->
-                            <div class="mb-6 rounded-lg overflow-hidden border border-stone-200 bg-stone-100 p-3 text-center">
-                                <img src="pályázat 1.jpg" alt="Pályázati hirdetőtábla GINOP-5.3.12-19" class="grant-img-1 max-h-80 mx-auto object-contain rounded cursor-pointer hover:opacity-95 transition-opacity" onclick="openGrantBoardModal(this)" onerror="handleGrantImgError(this, 1)">
-                                <p class="text-[11px] text-stone-500 mt-2 font-medium"><i class="fa-solid fa-magnifying-glass-plus text-amber-700"></i> Kattintson a képre a tábla nagyításához</p>
-                            </div>
-
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-xs sm:text-sm">
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
@@ -593,12 +552,86 @@
                         </div>
 
                         <div id="project-body-2" class="p-5 sm:p-7 hidden">
-                            <!-- Hivatalos Tábla Kép a kártyán belül -->
-                            <div class="mb-6 rounded-lg overflow-hidden border border-stone-200 bg-stone-100 p-3 text-center">
-                                <img src="pályázat 2.png" alt="Pályázati hirdetőtábla 2020-1.1.1-KKV-START" class="grant-img-2 max-h-80 mx-auto object-contain rounded cursor-pointer hover:opacity-95 transition-opacity" onclick="openGrantBoardModal(this)" onerror="handleGrantImgError(this, 2)">
-                                <p class="text-[11px] text-stone-500 mt-2 font-medium"><i class="fa-solid fa-magnifying-glass-plus text-amber-700"></i> Kattintson a képre a tábla nagyításához</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-xs sm:text-sm">
+                                <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
+                                    <div class="flex justify-between border-b border-stone-200 pb-2">
+                                        <span class="text-stone-500 font-medium">Kedvezményezett neve:</span>
+                                        <strong class="text-stone-900 text-right">Balázs Barrels Zrt.</strong>
+                                    </div>
+                                    <div class="flex justify-between border-b border-stone-200 pb-2">
+                                        <span class="text-stone-500 font-medium">Projekt azonosító száma:</span>
+                                        <strong class="text-amber-800 font-mono text-right">2020-1.1.1-KKV-START-2020-00150</strong>
+                                    </div>
+                                    <div class="flex justify-between border-b border-stone-200 pb-2">
+                                        <span class="text-stone-500 font-medium">Szerződött támogatási összeg:</span>
+                                        <strong class="text-stone-900 font-bold text-right">19.645.409 Ft</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-stone-500 font-medium">Támogatás aránya:</span>
+                                        <strong class="text-stone-900 text-right">60 %</strong>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
+                                    <div class="flex justify-between border-b border-stone-200 pb-2">
+                                        <span class="text-stone-500 font-medium">Pályázati felhívás:</span>
+                                        <strong class="text-stone-900 text-right">KKV START INNOVÁCIÓ (2020-1.1.1-KKV START)</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-stone-500 font-medium">Megvalósítás helyszíne:</span>
+                                        <strong class="text-stone-900 text-right">7900 Botykapeterd, 017/022 hrsz.</strong>
+                                    </div>
+                                </div>
                             </div>
 
+                            <div class="border-t border-stone-200 pt-4 space-y-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
+                                <div>
+                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-file-lines text-xs"></i> Projekt leírása:
+                                    </h4>
+                                    <p class="mb-2">
+                                        Cégünk 19.645.409 Ft. vissza nem térítendő támogatást nyert el a KKV START INNOVÁCIÓ (2020-1.1.1-KKV START) kódszámú pályázati kiíráson.
+                                    </p>
+                                    <p>
+                                        A Balázs Barrels Zrt. 2011. december 21-én került bejegyzésre és kifejezetten azzal a céllal jött létre, hogy fahordókat értékesítsen világszerte. Kezdetben csak kereskedelmi tevékenységet végeztünk, majd ez 2017-től kiegészült a gyártási tevékenységünkkel is. Innentől kezdve az értékesítés helyett a gyártás lett a vállalkozásunk főtevékenysége, mely gyártási tevékenységet a botykapeterdi telephelyünkön végezzük. Jelenlegi termékpalettánk nagy vonalakban: Barrique fahordók - 225 L, 228 L, illetve 500 L-es kivitelekben, Ászokhordók – nagy űrtartalmú, Fahordók – kicsi űrtartalmúak – 1L-től 100 L-ig.
+                                    </p>
+                                </div>
+
+                                <div class="pt-2 border-t border-stone-100">
+                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalma:
+                                    </h4>
+                                    <p>
+                                        A fejlesztéssel az évszázados hordógyártási technológiában olyan változást eszközlünk, ami termékeinket egyedivé teszi, így a birtokunkba kerül egy olyan gyártástechnológia, melyet alkalmazva saját üzemünkben, jelentős előnyre tehetünk szert más gyártókkal szemben. A fejlesztés következményeképpen egy egyedi termékkör jön létre, mely hosszútávon is használható, jó minőségű termék, aminek gyártása költséghatékonyabbá, gyorsabbá válik és melyek együttesen mind nagyobb potenciált biztosítanak számunkra.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Pályázat: Technológiafejlesztés -->
+                    <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
+                        <div onclick="toggleProjectDetails(3)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-amber-500/20 text-amber-400 p-3 rounded-lg border border-amber-500/30 shrink-0">
+                                    <i class="fa-solid fa-industry text-xl sm:text-2xl"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP_PLUSZ-1.2.1-21</span>
+                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">Technológiafejlesztés a Balázs Barrels Zrt. botykapeterdi telephelyén</h3>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
+                                <span class="bg-amber-600/30 border border-amber-500/40 text-amber-300 text-[11px] font-bold px-3 py-1 rounded-full">
+                                    Megvalósult
+                                </span>
+                                <div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-amber-400 group-hover:bg-amber-600 group-hover:text-white transition-all">
+                                    <i id="project-icon-3" class="fa-solid fa-chevron-down text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="project-body-3" class="p-5 sm:p-7 hidden">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-xs sm:text-sm">
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
@@ -652,16 +685,21 @@
                                     <p>
                                         A vállalkozás főtevékenysége a TEÁOR 1624 Tároló fatermékek gyártása, mely tevékenységhez elengedhetetlenül szükséges a technológiailag fejlett géppark, a folyamatos innováció és fejlesztés, valamint az ennek helyet adó gyártó- és raktárkapacitás bővítése. Ezt szem előtt tartva került megtervezésre a beruházás jelen tartalom mellett, melyet a releváns üzleti igények indukáltak. A beruházással a folyamatosan növekvő rendelésállományt teljesíteni tudja cég, teljes biztonsággal meg tudja tartani a munkavállalói létszámát, a beruházás révén a vállalkozás kitettsége csökken, magasabb minőségben, gyorsabban, rugalmasabban és költséghatékonyabban tud majd gyártani. A beruházással egyrészről a gyártási folyamatot tudja a vállalkozás automatizálni, gyorsítani és hatékonyabbá tenni, másrészről jelentős gyártó- és raktárkapacitást is jelent számukra az infrastrukturális beruházás. A fűtési rendszer környezethatékony működéséhez szükséges a faelgázosító kazánrendszer kiépítése, mely szintén a projekt része, biztosítva ezzel a környezethatékony működést, az ökológiai lábnyomuk csökkentését. A beruházás megvalósítását követően valamennyi termék gyártását automatizálni, gyorsítani és hatékonyabbá tudja a vállalkozás tenni, másrészről pedig új piacok felé tud nyitni, melyek mind a további sikeres működés zálogai.
                                     </p>
-                    <!-- 3. Pályázat: Technológiafejlesztés -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Pályázat: Hitelprogram -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
-                        <div onclick="toggleProjectDetails(3)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
+                        <div onclick="toggleProjectDetails(4)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
                                 <div class="bg-amber-500/20 text-amber-400 p-3 rounded-lg border border-amber-500/30 shrink-0">
-                                    <i class="fa-solid fa-industry text-xl sm:text-2xl"></i>
+                                    <i class="fa-solid fa-coins text-xl sm:text-2xl"></i>
                                 </div>
                                 <div>
-                                    <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP_PLUSZ-1.2.1-21</span>
-                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">Technológiafejlesztés a Balázs Barrels Zrt. botykapeterdi telephelyén</h3>
+                                    <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP-8.3.5-18/A</span>
+                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">Mikro-, kis- és középvállalkozások technológiai korszerűsítése célú Hitelprogram</h3>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
@@ -669,18 +707,12 @@
                                     Megvalósult
                                 </span>
                                 <div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-amber-400 group-hover:bg-amber-600 group-hover:text-white transition-all">
-                                    <i id="project-icon-3" class="fa-solid fa-chevron-down text-sm"></i>
+                                    <i id="project-icon-4" class="fa-solid fa-chevron-down text-sm"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="project-body-3" class="p-5 sm:p-7 hidden">
-                            <!-- Hivatalos Tábla Kép a kártyán belül -->
-                            <div class="mb-6 rounded-lg overflow-hidden border border-stone-200 bg-stone-100 p-3 text-center">
-                                <img src="pályázat 3.jpg" alt="Pályázati hirdetőtábla GINOP_PLUSZ-1.2.1-21" class="grant-img-3 max-h-80 mx-auto object-contain rounded cursor-pointer hover:opacity-95 transition-opacity" onclick="openGrantBoardModal(this)" onerror="handleGrantImgError(this, 3)">
-                                <p class="text-[11px] text-stone-500 mt-2 font-medium"><i class="fa-solid fa-magnifying-glass-plus text-amber-700"></i> Kattintson a képre a tábla nagyításához</p>
-                            </div>
-
+                        <div id="project-body-4" class="p-5 sm:p-7 hidden">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-xs sm:text-sm">
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
@@ -853,28 +885,6 @@
             </div>
         </section>
 
-        <script>
-            function toggleProjectDetails(id) {
-                const body = document.getElementById('project-body-' + id);
-                const icon = document.getElementById('project-icon-' + id);
-                if (body) {
-                    if (body.classList.contains('hidden')) {
-                        body.classList.remove('hidden');
-                        if (icon) {
-                            icon.classList.remove('fa-chevron-down');
-                            icon.classList.add('fa-chevron-up');
-                        }
-                    } else {
-                        body.classList.add('hidden');
-                        if (icon) {
-                            icon.classList.remove('fa-chevron-up');
-                            icon.classList.add('fa-chevron-down');
-                        }
-                    }
-                }
-            }
-        </script>
-
         <section id="contact" class="py-16 md:py-20 bg-stone-900 text-stone-100 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div>
@@ -933,7 +943,6 @@
             </div>
 
             <div id="webshop-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Termékek dinamic JS render -->
             </div>
         </div>
     </div>
@@ -973,23 +982,32 @@
             }
         }
 
-        function openGrantBoardModal(elementOrSrc) {
+        function toggleProjectDetails(id) {
+            const body = document.getElementById('project-body-' + id);
+            const icon = document.getElementById('project-icon-' + id);
+            if (body) {
+                if (body.classList.contains('hidden')) {
+                    body.classList.remove('hidden');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
+                } else {
+                    body.classList.add('hidden');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                }
+            }
+        }
+
+        function openGrantBoardModal(imgSrc) {
             const lightbox = document.getElementById('gallery-lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxCounter = document.getElementById('lightbox-counter');
-            
-            let targetSrc = "";
-            if (typeof elementOrSrc === 'string') {
-                targetSrc = elementOrSrc;
-            } else if (elementOrSrc && elementOrSrc.tagName === 'IMG') {
-                targetSrc = elementOrSrc.src;
-            } else if (elementOrSrc && elementOrSrc.querySelector) {
-                const img = elementOrSrc.querySelector('img');
-                if (img) targetSrc = img.src;
-            }
-
-            if (lightbox && lightboxImg && targetSrc) {
-                lightboxImg.src = targetSrc;
+            if (lightbox && lightboxImg) {
+                lightboxImg.src = imgSrc;
                 if (lightboxCounter) lightboxCounter.textContent = "Hivatalos Támogatási Tábla";
                 lightbox.classList.remove('hidden');
             }
@@ -997,26 +1015,18 @@
 
         function closeGalleryLightbox() {
             const lightbox = document.getElementById('gallery-lightbox');
-            if (lightbox) {
-                lightbox.classList.add('hidden');
-            }
+            if (lightbox) lightbox.classList.add('hidden');
         }
 
         function closeGalleryLightboxOnBackdrop(e) {
-            if (e && e.target && e.target.id === 'gallery-lightbox') {
+            if (e.target.id === 'gallery-lightbox') {
                 closeGalleryLightbox();
             }
         }
 
-        function navigateGallery(direction) {
-            console.log('Galéria navigáció:', direction);
+        function navigateGallery(dir) {
+            // Galéria léptetés opció
         }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeGalleryLightbox();
-            }
-        });
     </script>
 </body>
 </html>
