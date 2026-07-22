@@ -93,7 +93,7 @@
                 <span class="text-lg sm:text-xl font-serif font-bold italic tracking-wide">Zrt.</span>
             </a>
             
-            <!-- Desktop / Tablet Menü -->
+            <!-- Desktop Navigation -->
             <div class="hidden lg:flex items-center gap-6">
                 <ul class="flex gap-5 text-xs uppercase tracking-wider font-semibold">
                     <li><a href="#home" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Kezdőlap</a></li>
@@ -110,7 +110,7 @@
                 </ul>
             </div>
 
-            <!-- Jobb oldali ikonok (Kosár és Fiók) -->
+            <!-- Header Action Buttons -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <button onclick="toggleCart(true)" class="relative p-2.5 text-stone-300 hover:text-amber-500 transition-colors rounded-full hover:bg-stone-800" aria-label="Kosár megnyitása">
                     <i class="fa-solid fa-shopping-cart text-lg sm:text-xl"></i>
@@ -142,6 +142,7 @@
             </div>
         </div>
 
+        <!-- Mobile Menu Container -->
         <div id="mobile-menu" class="hidden lg:hidden mt-3 border-t border-stone-800 pt-3 space-y-2">
             <a href="#home" onclick="switchToView('main'); toggleMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Kezdőlap</a>
             <a href="#about" onclick="switchToView('main'); toggleMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Cégünkről</a>
@@ -155,9 +156,11 @@
         </div>
     </nav>
 
+    <!-- Notification Container -->
     <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4"></div>
 
     <div id="main-view-container">
+        <!-- Hero Section -->
         <section id="home" class="relative py-20 md:py-28 px-4 sm:px-6 bg-stone-900 text-stone-100 overflow-hidden">
             <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="relative max-w-4xl mx-auto text-center z-10">
@@ -429,7 +432,7 @@
                     </p>
                 </div>
 
-                <!-- Pályázati hirdetőtáblák (Fixen látható képek) -->
+                <!-- Grant Boards -->
                 <div class="mb-12 bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
                     <h3 class="font-serif font-bold text-lg text-stone-900 mb-4 border-b border-stone-200 pb-2 flex items-center gap-2">
                         <i class="fa-solid fa-bullhorn text-amber-600"></i> Hivatalos Támogatási Hirdetőtáblák
@@ -451,7 +454,7 @@
                 </div>
 
                 <div class="space-y-6">
-                    <!-- 1. Pályázat: Foglalkoztatásbővítés -->
+                    <!-- Project 1 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(1)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -535,7 +538,7 @@
                         </div>
                     </div>
 
-                    <!-- 2. Pályázat: Innovatív technológia -->
+                    <!-- Project 2 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(2)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -592,7 +595,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. Pályázat: Technológiafejlesztés -->
+                    <!-- Project 3 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(3)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -653,7 +656,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. Pályázat: Hitelprogram A -->
+                    <!-- Project 4 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(4)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -702,7 +705,7 @@
                         </div>
                     </div>
 
-                    <!-- 5. Pályázat: Hitelprogram B -->
+                    <!-- Project 5 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(5)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -751,7 +754,7 @@
                         </div>
                     </div>
 
-                    <!-- 6. Pályázat: GINOP Plusz Forgóeszköz -->
+                    <!-- Project 6 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(6)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -888,7 +891,7 @@
                 </button>
             </div>
 
-            <!-- 1. Kategória: Kishordók -->
+            <!-- Category 1: Small Barrels -->
             <div class="mb-14">
                 <div class="border-b border-stone-200 pb-2.5 mb-6">
                     <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
@@ -900,7 +903,7 @@
                 </div>
             </div>
 
-            <!-- 2. Kategória: Barrique Hordók -->
+            <!-- Category 2: Barrique Barrels -->
             <div class="mb-14">
                 <div class="border-b border-stone-200 pb-2.5 mb-6">
                     <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
@@ -912,7 +915,7 @@
                 </div>
             </div>
 
-            <!-- 3. Kategória: Kiegészítők -->
+            <!-- Category 3: Accessories -->
             <div class="mb-10">
                 <div class="border-b border-stone-200 pb-2.5 mb-6">
                     <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
@@ -1038,7 +1041,6 @@
                             <span id="co-final-total" class="text-xl sm:text-2xl font-black text-amber-500 font-mono">0 Ft</span>
                         </div>
 
-                        <!-- Jogi elfogadás kötelező kocka -->
                         <div class="border-t border-stone-800 pt-3">
                             <label class="flex items-start gap-2.5 cursor-pointer text-xs text-stone-300 select-none">
                                 <input type="checkbox" id="co-terms-check" required class="accent-amber-600 w-4 h-4 rounded mt-0.5 shrink-0">
@@ -1048,7 +1050,6 @@
                             </label>
                         </div>
 
-                        <!-- Egyedi gravírozási kivétel figyelmeztetés -->
                         <p class="text-[10px] text-amber-400/90 bg-amber-950/40 p-2.5 rounded border border-amber-600/30 leading-relaxed">
                             <i class="fa-solid fa-triangle-exclamation mr-1"></i> <strong>Fontos tájékoztatás:</strong> Egyedi lézergravírozással/felirattal kért hordók esetén a 45/2014. (II.26.) Korm. rendelet 29. § (1) c) pontja értelmében a vásárlót <strong>nem illeti meg a 14 napos indokolás nélküli elállási jog</strong>.
                         </p>
@@ -1083,6 +1084,7 @@
         </div>
     </footer>
 
+    <!-- Cookie Banner -->
     <div id="cookie-banner" class="fixed bottom-0 inset-x-0 z-50 bg-stone-900/95 border-t border-amber-600/40 p-4 sm:p-5 text-stone-200 shadow-2xl backdrop-blur-md hidden">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
             <div class="flex items-center gap-3 text-stone-300">
@@ -1099,6 +1101,7 @@
         </div>
     </div>
 
+    <!-- Floating Cart Mobile Button -->
     <button id="floating-cart-btn" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-amber-600 text-stone-950 p-4 rounded-full shadow-2xl scale-0 hover:scale-105 active:scale-95 transition-all duration-300 md:hidden flex items-center justify-center">
         <i class="fa-solid fa-shopping-basket text-xl"></i>
         <span id="floating-cart-count" class="absolute -top-1 -right-1 bg-white text-stone-900 text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center shadow">0</span>
@@ -1140,7 +1143,6 @@
         </div>
     </div>
 
-    <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProductModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative z-10 flex flex-col md:flex-row">
@@ -1203,7 +1205,6 @@
         </div>
     </div>
 
-    <!-- Auth Modal -->
     <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-85" onclick="closeAuthModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1267,7 +1268,7 @@
                     </div>
                 </div>
 
-                <!-- Céges Mezők -->
+                <!-- Company Registration Fields -->
                 <div id="reg-ceg-section" class="hidden space-y-3 border-t border-stone-800 pt-3">
                     <h4 class="text-xs uppercase text-amber-500 font-bold tracking-wider">Cégadatok</h4>
                     <div>
@@ -1329,7 +1330,7 @@
                     </div>
                 </div>
 
-                <!-- Szállítási Cím Megadása -->
+                <!-- Registration Address Fields -->
                 <div class="border-t border-stone-800 pt-3 space-y-3">
                     <h4 class="text-xs uppercase text-amber-500 font-bold tracking-wider">Szállítási Cím</h4>
                     <div class="grid grid-cols-3 gap-2">
@@ -1358,7 +1359,7 @@
                     </div>
                 </div>
 
-                <!-- Számlázási Cím Opció -->
+                <!-- Registration Billing Option -->
                 <div class="border-t border-stone-800 pt-3 space-y-3">
                     <label class="flex items-center gap-2 cursor-pointer text-xs text-stone-300 font-semibold select-none">
                         <input type="checkbox" id="reg-bill-same" checked onchange="toggleSameBillingReg()" class="accent-amber-600 w-4 h-4 rounded">
@@ -1394,7 +1395,6 @@
                     </div>
                 </div>
 
-                <!-- Kötelező GDPR Regisztrációs Nyilatkozat -->
                 <div class="border-t border-stone-800 pt-3">
                     <label class="flex items-start gap-2 cursor-pointer text-xs text-stone-300 select-none">
                         <input type="checkbox" id="reg-gdpr-check" required class="accent-amber-600 w-4 h-4 rounded mt-0.5 shrink-0">
@@ -1411,7 +1411,6 @@
         </div>
     </div>
 
-    <!-- Profile Modal -->
     <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProfileModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-4xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1481,7 +1480,6 @@
         </div>
     </div>
 
-    <!-- Success Modal -->
     <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-90"></div>
         <div class="bg-stone-900 border border-amber-600/30 text-white rounded-lg p-6 sm:p-8 max-w-md w-full text-center relative z-10 shadow-2xl">
@@ -1503,7 +1501,6 @@
         </div>
     </div>
 
-    <!-- Legal Documents Modal (ÁSZF, GDPR, Impresszum, ÉÉÁ) -->
     <div id="legal-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-85" onclick="closeLegalModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-4xl w-full p-5 sm:p-8 shadow-2xl relative z-10 max-h-[92vh] flex flex-col">
@@ -1518,7 +1515,6 @@
                 <button onclick="showLegalTab('impresszum')" id="legal-tab-impresszum" class="py-2 px-3 font-bold rounded bg-stone-800 text-stone-300 hover:text-white transition-colors shrink-0">Impresszum &amp; ÉÉÁ</button>
             </div>
 
-            <!-- Content Area -->
             <div class="overflow-y-auto pr-2 space-y-6 text-xs sm:text-sm leading-relaxed text-stone-300">
                 <!-- ÁSZF TAB -->
                 <div id="legal-content-aszf" class="space-y-4">
@@ -1620,7 +1616,6 @@
         let supabaseClient = null;
         if (window.supabase && typeof window.supabase.createClient === 'function') {
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            // Globális hivatkozások beállítása a konzolos teszteléshez és a JS függvényekhez
             window.supabaseClient = supabaseClient;
             window.supabase = supabaseClient;
         }
@@ -1638,7 +1633,6 @@
             }
         }
 
-        // Cookie Banner
         function checkCookieConsent() {
             if (!localStorage.getItem('cookie_consent_accepted')) {
                 document.getElementById('cookie-banner').classList.remove('hidden');
@@ -1651,7 +1645,6 @@
             showNotification("Sütik beállításai elmentve.");
         }
 
-        // Legal Modal Logic
         function openLegalModal(tab = 'aszf') {
             document.getElementById('legal-modal').classList.remove('hidden');
             showLegalTab(tab);
@@ -2820,7 +2813,6 @@
                         console.error("Supabase Regisztrációs Hiba:", error.message);
                         showNotification("Supabase hiba: " + error.message, "error");
                     } else if (data && data.user) {
-                        // Közvetlen bejegyzés a public.profiles táblába
                         const profileRecord = {
                             id: data.user.id,
                             name: name,
