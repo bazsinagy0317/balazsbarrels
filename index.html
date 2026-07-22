@@ -48,6 +48,28 @@
                 }
             }
         }
+
+        function handleGrantImgError(img, filename) {
+            if (!img.dataset.attempt) img.dataset.attempt = "0";
+            let attempt = parseInt(img.dataset.attempt, 10);
+            
+            const attempts = [
+                'https://raw.githubusercontent.com/bazsinagy0317/balazsbarrels/main/' + encodeURIComponent(filename),
+                'https://raw.githubusercontent.com/bazsinagy0317/balazsbarrels/main/' + filename,
+                filename,
+                encodeURI(filename)
+            ];
+
+            if (attempt < attempts.length) {
+                img.dataset.attempt = (attempt + 1).toString();
+                img.src = attempts[attempt];
+            } else {
+                img.style.display = 'none';
+                if (img.nextElementSibling) {
+                    img.nextElementSibling.classList.remove('hidden');
+                }
+            }
+        }
     </script>
 </head>
 <body class="bg-stone-50 text-stone-900 flex flex-col min-h-screen font-sans antialiased">
@@ -83,7 +105,7 @@
                 </ul>
             </div>
 
-            <!-- Jobb oldali ikonok -->
+            <!-- Jobb oldali ikonok (Kosár és Fiók) -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <button onclick="toggleCart(true)" class="relative p-2.5 text-stone-300 hover:text-amber-500 transition-colors rounded-full hover:bg-stone-800" aria-label="Kosár megnyitása">
                     <i class="fa-solid fa-shopping-cart text-lg sm:text-xl"></i>
@@ -130,7 +152,6 @@
     <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4"></div>
 
     <div id="main-view-container">
-        <!-- Hero Section -->
         <section id="home" class="relative py-20 md:py-28 px-4 sm:px-6 bg-stone-900 text-stone-100 overflow-hidden">
             <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="relative max-w-4xl mx-auto text-center z-10">
@@ -150,7 +171,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="py-16 md:py-20 bg-stone-100 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-2xl sm:text-3xl font-serif font-bold text-center mb-10 md:mb-12">Cégünkről & Történetünk</h2>
@@ -244,6 +264,7 @@
             </div>
         </section>
 
+        <!-- Gallery Lightbox -->
         <div id="gallery-lightbox" onclick="closeGalleryLightboxOnBackdrop(event)" class="fixed inset-0 z-50 flex items-center justify-center bg-black/92 p-4 hidden transition-all duration-300">
             <button onclick="closeGalleryLightbox()" class="absolute top-5 right-5 text-white/80 hover:text-white text-2xl sm:text-3xl z-20 p-2" aria-label="Bezárás">
                 <i class="fa-solid fa-xmark"></i>
@@ -402,59 +423,38 @@
                     </p>
                 </div>
 
-                <!-- Hivatalos Támogatási Táblák Blokkk -->
-                <div class="mb-12">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-amber-800 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-square-poll-vertical"></i> Hivatalos Támogatási Hirdetőtáblák
+                <!-- Pályázati hirdetőtáblák (Fixen látható képek) -->
+                <div class="mb-12 bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                    <h3 class="font-serif font-bold text-lg text-stone-900 mb-4 border-b border-stone-200 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-bullhorn text-amber-600"></i> Hivatalos Támogatási Hirdetőtáblák
                     </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        <!-- 1. Pályázati Tábla -->
-                        <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal('pályázat 1.jpg')">
-                            <div class="overflow-hidden rounded-lg bg-stone-100 aspect-[4/3] flex items-center justify-center relative">
-                                <img src="pályázat 1.jpg" alt="Pályázati hirdetőtábla 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c1917/amber?text=P%C3%A1ly%C3%A1zati+T%C3%A1bla+1'">
-                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5">
-                                    <i class="fa-solid fa-magnifying-glass-plus"></i> Nagyítás
-                                </div>
-                            </div>
-                            <p class="text-[11px] font-bold text-stone-700 mt-2.5 text-center truncate">Foglalkoztatásbővítés (GINOP-5.3.12-19)</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-stone-100 p-2 rounded-lg border border-stone-300 shadow-inner flex flex-col items-center">
+                            <img src="pályázat 1.jpg" alt="1. Pályázati tábla - Foglalkoztatásbővítés" class="w-full h-56 object-contain rounded bg-white" onerror="handleGrantImgError(this, 'pályázat 1.jpg')">
+                            <span class="text-[11px] font-bold text-stone-700 mt-2 text-center">1. Foglalkoztatásbővítés (GINOP-5.3.12-19)</span>
                         </div>
-
-                        <!-- 2. Pályázati Tábla -->
-                        <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal('pályázat 2.png')">
-                            <div class="overflow-hidden rounded-lg bg-stone-100 aspect-[4/3] flex items-center justify-center relative">
-                                <img src="pályázat 2.png" alt="Pályázati hirdetőtábla 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c1917/amber?text=P%C3%A1ly%C3%A1zati+T%C3%A1bla+2'">
-                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5">
-                                    <i class="fa-solid fa-magnifying-glass-plus"></i> Nagyítás
-                                </div>
-                            </div>
-                            <p class="text-[11px] font-bold text-stone-700 mt-2.5 text-center truncate">Innovatív hordókészítési technológia</p>
+                        <div class="bg-stone-100 p-2 rounded-lg border border-stone-300 shadow-inner flex flex-col items-center">
+                            <img src="pályázat 2.png" alt="2. Pályázati tábla - Innováció" class="w-full h-56 object-contain rounded bg-white" onerror="handleGrantImgError(this, 'pályázat 2.png')">
+                            <span class="text-[11px] font-bold text-stone-700 mt-2 text-center">2. Innovatív technológia (KKV START)</span>
                         </div>
-
-                        <!-- 3. Pályázati Tábla -->
-                        <div class="bg-white p-3 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="openGrantBoardModal('pályázat 3.jpg')">
-                            <div class="overflow-hidden rounded-lg bg-stone-100 aspect-[4/3] flex items-center justify-center relative">
-                                <img src="pályázat 3.jpg" alt="Pályázati hirdetőtábla 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1c1917/amber?text=P%C3%A1ly%C3%A1zati+T%C3%A1bla+3'">
-                                <div class="absolute inset-0 bg-stone-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-1.5">
-                                    <i class="fa-solid fa-magnifying-glass-plus"></i> Nagyítás
-                                </div>
-                            </div>
-                            <p class="text-[11px] font-bold text-stone-700 mt-2.5 text-center truncate">Technológiafejlesztés (GINOP_PLUSZ-1.2.1-21)</p>
+                        <div class="bg-stone-100 p-2 rounded-lg border border-stone-300 shadow-inner flex flex-col items-center">
+                            <img src="pályázat 3.jpg" alt="3. Pályázati tábla - Technológiafejlesztés" class="w-full h-56 object-contain rounded bg-white" onerror="handleGrantImgError(this, 'pályázat 3.jpg')">
+                            <span class="text-[11px] font-bold text-stone-700 mt-2 text-center">3. Technológiafejlesztés (GINOP PLUSZ-1.2.1-21)</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Pályázati Kártyák (Harmonika) -->
-                <div class="space-y-8">
+                <div class="space-y-6">
                     <!-- 1. Pályázat: Foglalkoztatásbővítés -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
-                        <div onclick="toggleProjectDetails(1)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
+                        <div onclick="toggleProjectDetails(1)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
                                 <div class="bg-amber-500/20 text-amber-400 p-3 rounded-lg border border-amber-500/30 shrink-0">
-                                    <i class="fa-solid fa-users-gear text-xl sm:text-2xl"></i>
+                                    <i class="fa-solid fa-users-gear text-xl"></i>
                                 </div>
                                 <div>
-                                    <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP-5.3.12-19</span>
-                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">Foglalkoztatásbővítés a Balázs Barrels Zrt. botykapeterdi telephelyén</h3>
+                                    <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP-5.3.12-19-2020-00373</span>
+                                    <h3 class="font-serif font-bold text-base sm:text-lg text-white group-hover:text-amber-300 transition-colors">Foglalkoztatásbővítés a Balázs Barrels Zrt. botykapeterdi telephelyén</h3>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
@@ -529,16 +529,16 @@
                         </div>
                     </div>
 
-                    <!-- 2. Pályázat: Innovatív hordókészítési technológia -->
+                    <!-- 2. Pályázat: Innovatív technológia -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
-                        <div onclick="toggleProjectDetails(2)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
+                        <div onclick="toggleProjectDetails(2)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
                                 <div class="bg-amber-500/20 text-amber-400 p-3 rounded-lg border border-amber-500/30 shrink-0">
-                                    <i class="fa-solid fa-lightbulb text-xl sm:text-2xl"></i>
+                                    <i class="fa-solid fa-lightbulb text-xl"></i>
                                 </div>
                                 <div>
-                                    <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">2020-1.1.1-KKV-START</span>
-                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">Innovatív hordókészítési technológia kifejlesztése a Balázs Barrels Zrt-nél</h3>
+                                    <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">2020-1.1.1-KKV-START-2020-00150</span>
+                                    <h3 class="font-serif font-bold text-base sm:text-lg text-white group-hover:text-amber-300 transition-colors">Innovatív hordókészítési technológia kifejlesztése a Balázs Barrels Zrt-nél</h3>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
@@ -577,9 +577,9 @@
                                         <span class="text-stone-500 font-medium">Pályázati felhívás:</span>
                                         <strong class="text-stone-900 text-right">KKV START INNOVÁCIÓ (2020-1.1.1-KKV START)</strong>
                                     </div>
-                                    <div class="flex justify-between">
+                                    <div class="flex justify-between border-b border-stone-200 pb-2">
                                         <span class="text-stone-500 font-medium">Megvalósítás helyszíne:</span>
-                                        <strong class="text-stone-900 text-right">7900 Botykapeterd, 017/022 hrsz.</strong>
+                                        <strong class="text-stone-900 text-right">7900 Botykapeterd, hrsz. 017/22.</strong>
                                     </div>
                                 </div>
                             </div>
@@ -611,14 +611,14 @@
 
                     <!-- 3. Pályázat: Technológiafejlesztés -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
-                        <div onclick="toggleProjectDetails(3)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
+                        <div onclick="toggleProjectDetails(3)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
                                 <div class="bg-amber-500/20 text-amber-400 p-3 rounded-lg border border-amber-500/30 shrink-0">
-                                    <i class="fa-solid fa-industry text-xl sm:text-2xl"></i>
+                                    <i class="fa-solid fa-industry text-xl"></i>
                                 </div>
                                 <div>
                                     <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP_PLUSZ-1.2.1-21</span>
-                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">Technológiafejlesztés a Balázs Barrels Zrt. botykapeterdi telephelyén</h3>
+                                    <h3 class="font-serif font-bold text-base sm:text-lg text-white group-hover:text-amber-300 transition-colors">Technológiafejlesztés a Balázs Barrels Zrt. botykapeterdi telephelyén</h3>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
@@ -643,22 +643,22 @@
                                         <strong class="text-amber-800 font-mono text-right">GINOP_PLUSZ-1.2.1-21</strong>
                                     </div>
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
-                                        <span class="text-stone-500 font-medium">Feltételesen visszatérítendő támogatás:</span>
-                                        <strong class="text-stone-900 font-bold text-right">67 216 119 Ft</strong>
+                                        <span class="text-stone-500 font-medium">Szerződött támogatási összeg:</span>
+                                        <strong class="text-stone-900 font-bold text-right">67.216.119 Ft</strong>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-stone-500 font-medium">Projekt összköltsége:</span>
-                                        <strong class="text-stone-900 text-right">96 023 027 Ft (Saját forrás: 28 806 908 Ft)</strong>
+                                        <span class="text-stone-500 font-medium">Projekt összköltségvetése:</span>
+                                        <strong class="text-stone-900 text-right">96.023.027 Ft</strong>
                                     </div>
                                 </div>
 
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
-                                        <span class="text-stone-500 font-medium">Pályázati felhívás / Program:</span>
-                                        <strong class="text-stone-900 text-right">GINOP_PLUSZ-1.2.1-21 (Széchenyi PLUSZ)</strong>
+                                        <span class="text-stone-500 font-medium">Saját forrás összege:</span>
+                                        <strong class="text-stone-900 text-right">28.806.908 Ft</strong>
                                     </div>
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
-                                        <span class="text-stone-500 font-medium">Tervezett befejezési dátum:</span>
+                                        <span class="text-stone-500 font-medium">Tervezett befejezés:</span>
                                         <strong class="text-stone-900 font-mono text-right">2023.09.30.</strong>
                                     </div>
                                     <div class="flex justify-between">
@@ -671,35 +671,32 @@
                             <div class="border-t border-stone-200 pt-4 space-y-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
                                 <div>
                                     <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-file-lines text-xs"></i> Projekt leírása:
+                                        <i class="fa-solid fa-file-lines text-xs"></i> A projekt részletes bemutatása:
                                     </h4>
-                                    <p>
-                                        A Balázs Barrels Zrt. 67.216.119 Ft összegű uniós támogatást nyert a „GINOP_PLUSZ-1.2.1-21 - A mikro-, kis- és középvállalkozások modern üzleti és termelési kihívásokhoz való alkalmazkodását segítő fejlesztések támogatása” című pályázati kiíráson a Széchenyi PLUSZ program keretében. A 96.023.027 Ft összköltségű beruházás révén a vállalkozás infrastrukturális fejlesztést, megújuló energiaforrás hasznosítását, valamint gyártó eszközök beszerzést valósít meg. A visszatérítendő támogatás bizonyos feltételek teljesülése mellett részben vagy egészben vissza nem térítendővé válik.
+                                    <p class="mb-2">
+                                        A Balázs Barrels Zrt. 67.216.119 Ft összegű uniós támogatást nyert a „GINOP_PLUSZ-1.2.1-21 - A mikro-, kis- és középvállalkozások modern üzleti és termelési kihívásokhoz való alkalmazkodását segítő fejlesztések támogatása” című pályázati kiíráson a Széchényi PLUSZ program keretében. A 96.023.027 Ft összköltségű beruházás révén a vállalkozás infrastrukturális fejlesztést, megújuló energiaforrás hasznosítását, valamint gyártó eszközök beszerzését valósítja meg.
                                     </p>
-                                </div>
-
-                                <div class="pt-2 border-t border-stone-100">
-                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalma:
-                                    </h4>
                                     <p>
-                                        A vállalkozás főtevékenysége a TEÁOR 1624 Tároló fatermékek gyártása, mely tevékenységhez elengedhetetlenül szükséges a technológiailag fejlett géppark, a folyamatos innováció és fejlesztés, valamint az ennek helyet adó gyártó- és raktárkapacitás bővítése. Ezt szem előtt tartva került megtervezésre a beruházás jelen tartalom mellett, melyet a releváns üzleti igények indukáltak. A beruházással a folyamatosan növekvő rendelésállományt teljesíteni tudja cég, teljes biztonsággal meg tudja tartani a munkavállalói létszámát, a beruházás révén a vállalkozás kitettsége csökken, magasabb minőségben, gyorsabban, rugalmasabban és költséghatékonyabban tud majd gyártani. A beruházással egyrészről a gyártási folyamatot tudja a vállalkozás automatizálni, gyorsítani és hatékonyabbá tenni, másrészről jelentős gyártó- és raktárkapacitást is jelent számukra az infrastrukturális beruházás. A fűtési rendszer környezethatékony működéséhez szükséges a faelgázosító kazánrendszer kiépítése, mely szintén a projekt része, biztosítva ezzel a környezethatékony működést, az ökológiai lábnyomuk csökkentését. A beruházás megvalósítását követően valamennyi termék gyártását automatizálni, gyorsítani és hatékonyabbá tudja a vállalkozás tenni, másrészről pedig új piacok felé tud nyitni, melyek mind a további sikeres működés zálogai.
+                                        A vállalkozás főtevékenysége a TEÁOR 1624 Tároló fatermékek gyártása, mely tevékenységhez elengedhetetlenül szükséges a technológiailag fejlett géppark, a folyamatos innováció és fejlesztés, valamint az ennek helyet adó gyártó- és raktárkapacitás bővítése. Ezt szem előtt tartva került megtervezésre a beruházás jelen tartalom mellett, melyet a releváns üzleti igények indukáltak. A beruházással a folyamatosan növekvő rendelésállományt teljesíteni tudja cég, teljes biztonsággal meg tudja tartani a munkavállalói létszámát, a beruházás révén a vállalkozás kitettsége csökken, magasabb minőségben, gyorsabban, rugalmasabban és költséghatékonyabban tud majd gyártani.
+                                    </p>
+                                    <p class="mt-2">
+                                        A beruházással egyrészről a gyártási folyamatot tudja a vállalkozás automatizálni, gyorsítani és hatékonyabbá tenni, másrészről jelentős gyártó- és raktárkapacitást is jelent számukra az infrastrukturális beruházás. A fűtési rendszer környezethatékony működéséhez szükséges a faelgázosító kazánrendszer kiépítése, mely szintén a projekt része, biztosítva ezzel a környezethatékony működést, az ökológiai lábnyomuk csökkentését.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 4. Pályázat: Hitelprogram -->
+                    <!-- 4. Pályázat: Hitelprogram A -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
-                        <div onclick="toggleProjectDetails(4)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
+                        <div onclick="toggleProjectDetails(4)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
                                 <div class="bg-amber-500/20 text-amber-400 p-3 rounded-lg border border-amber-500/30 shrink-0">
-                                    <i class="fa-solid fa-coins text-xl sm:text-2xl"></i>
+                                    <i class="fa-solid fa-fan text-xl"></i>
                                 </div>
                                 <div>
                                     <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP-8.3.5-18/A</span>
-                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">Mikro-, kis- és középvállalkozások technológiai korszerűsítése célú Hitelprogram</h3>
+                                    <h3 class="font-serif font-bold text-base sm:text-lg text-white group-hover:text-amber-300 transition-colors">Mikro-, kis- és középvállalkozások technológiai korszerűsítése célú Hitelprogram</h3>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
@@ -713,11 +710,11 @@
                         </div>
 
                         <div id="project-body-4" class="p-5 sm:p-7 hidden">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-xs sm:text-sm">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4 text-xs sm:text-sm">
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
                                         <span class="text-stone-500 font-medium">Kedvezményezett neve:</span>
-                                        <strong class="text-stone-900 text-right">Balázs Barrels Zártkörűen Működő Részvénytársaság</strong>
+                                        <strong class="text-stone-900 text-right">Balázs Barrels Zrt.</strong>
                                     </div>
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
                                         <span class="text-stone-500 font-medium">Projekt azonosító száma:</span>
@@ -731,39 +728,33 @@
 
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
-                                        <span class="text-stone-500 font-medium">Pályázati felhívás / Hitelprogram:</span>
-                                        <strong class="text-stone-900 text-right">GINOP-8.3.5-18/A Technológiai korszerűsítés</strong>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-stone-500 font-medium">Fizikai befejezés dátuma:</span>
+                                        <span class="text-stone-500 font-medium">Fizikai befejezés időpontja:</span>
                                         <strong class="text-stone-900 font-mono text-right">2021.02.15.</strong>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="border-t border-stone-200 pt-4 space-y-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
-                                <div>
-                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalma:
-                                    </h4>
-                                    <p>
-                                        Beruházás műszaki gépekre, amelyek segítik a hordógyártás során keletkezett forgács és por eltávolítását a légtérből.
-                                    </p>
-                                </div>
+                            <div class="border-t border-stone-200 pt-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
+                                <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalmának rövid bemutatása:
+                                </h4>
+                                <p>
+                                    Beruházás műszaki gépekre, amelyek segítik a hordógyártás során keletkezett forgács és por eltávolítását a légtérből.
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 5. Pályázat: Hitelprogram (Dongafa beszerzés) -->
+                    <!-- 5. Pályázat: Hitelprogram B -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
-                        <div onclick="toggleProjectDetails(5)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
+                        <div onclick="toggleProjectDetails(5)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
                                 <div class="bg-amber-500/20 text-amber-400 p-3 rounded-lg border border-amber-500/30 shrink-0">
-                                    <i class="fa-solid fa-boxes-stacked text-xl sm:text-2xl"></i>
+                                    <i class="fa-solid fa-tree text-xl"></i>
                                 </div>
                                 <div>
                                     <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP-8.3.5-18/B</span>
-                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">Mikro-, kis- és középvállalkozások technológiai korszerűsítése célú Hitelprogram</h3>
+                                    <h3 class="font-serif font-bold text-base sm:text-lg text-white group-hover:text-amber-300 transition-colors">Mikro-, kis- és középvállalkozások technológiai korszerűsítése célú Hitelprogram</h3>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
@@ -777,11 +768,11 @@
                         </div>
 
                         <div id="project-body-5" class="p-5 sm:p-7 hidden">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-xs sm:text-sm">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4 text-xs sm:text-sm">
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
                                         <span class="text-stone-500 font-medium">Kedvezményezett neve:</span>
-                                        <strong class="text-stone-900 text-right">Balázs Barrels Zártkörűen Működő Részvénytársaság</strong>
+                                        <strong class="text-stone-900 text-right">Balázs Barrels Zrt.</strong>
                                     </div>
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
                                         <span class="text-stone-500 font-medium">Projekt azonosító száma:</span>
@@ -795,44 +786,38 @@
 
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
-                                        <span class="text-stone-500 font-medium">Pályázati felhívás / Hitelprogram:</span>
-                                        <strong class="text-stone-900 text-right">GINOP-8.3.5-18/B Technológiai korszerűsítés</strong>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-stone-500 font-medium">Fizikai befejezés dátuma:</span>
+                                        <span class="text-stone-500 font-medium">Fizikai befejezés időpontja:</span>
                                         <strong class="text-stone-900 font-mono text-right">2021.01.04.</strong>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="border-t border-stone-200 pt-4 space-y-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
-                                <div>
-                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalma:
-                                    </h4>
-                                    <p>
-                                        Fahordógyártáshoz szükséges alapanyag, dongafa beszerzése.
-                                    </p>
-                                </div>
+                            <div class="border-t border-stone-200 pt-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
+                                <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalmának rövid bemutatása:
+                                </h4>
+                                <p>
+                                    Fahordógyártáshoz szükséges alapanyag, dongafa beszerzése.
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 6. Pályázat: KKV Technológia Plusz Hitelprogram -->
+                    <!-- 6. Pályázat: GINOP Plusz Forgóeszköz -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
-                        <div onclick="toggleProjectDetails(6)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-6 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
+                        <div onclick="toggleProjectDetails(6)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
                                 <div class="bg-amber-500/20 text-amber-400 p-3 rounded-lg border border-amber-500/30 shrink-0">
-                                    <i class="fa-solid fa-vault text-xl sm:text-2xl"></i>
+                                    <i class="fa-solid fa-coins text-xl"></i>
                                 </div>
                                 <div>
                                     <span class="text-[10px] uppercase font-mono tracking-widest text-amber-400 block">GINOP Plusz-1.4.3-24/B</span>
-                                    <h3 class="font-serif font-bold text-base sm:text-xl text-white group-hover:text-amber-300 transition-colors">KKV Technológia Plusz Hitelprogram „B” forgóeszköz hitelcél</h3>
+                                    <h3 class="font-serif font-bold text-base sm:text-lg text-white group-hover:text-amber-300 transition-colors">KKV Technológia Plusz Hitelprogram „B” forgóeszköz hitelcél</h3>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 self-end sm:self-center shrink-0">
                                 <span class="bg-amber-600/30 border border-amber-500/40 text-amber-300 text-[11px] font-bold px-3 py-1 rounded-full">
-                                    Megvalósult
+                                    Folyamatban
                                 </span>
                                 <div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-amber-400 group-hover:bg-amber-600 group-hover:text-white transition-all">
                                     <i id="project-icon-6" class="fa-solid fa-chevron-down text-sm"></i>
@@ -841,192 +826,1673 @@
                         </div>
 
                         <div id="project-body-6" class="p-5 sm:p-7 hidden">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-xs sm:text-sm">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4 text-xs sm:text-sm">
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
                                         <span class="text-stone-500 font-medium">Kedvezményezett neve:</span>
-                                        <strong class="text-stone-900 text-right">Balázs Barrels Zártkörűen Működő Részvénytársaság</strong>
+                                        <strong class="text-stone-900 text-right">Balázs Barrels Zrt.</strong>
                                     </div>
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
                                         <span class="text-stone-500 font-medium">Projekt azonosító száma:</span>
                                         <strong class="text-amber-800 font-mono text-right">GINOP Plusz-1.4.3-24/B</strong>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-stone-500 font-medium">Szerződött támogatás összege:</span>
+                                        <span class="text-stone-500 font-medium">Szerződött támogatási összeg:</span>
                                         <strong class="text-stone-900 font-bold text-right">20.000.000 Ft</strong>
                                     </div>
                                 </div>
 
                                 <div class="space-y-3 bg-stone-50 p-4 rounded-lg border border-stone-200/80">
                                     <div class="flex justify-between border-b border-stone-200 pb-2">
-                                        <span class="text-stone-500 font-medium">Pályázati felhívás / Hitelprogram:</span>
-                                        <strong class="text-stone-900 text-right">GINOP Plusz-1.4.3-24 „B” forgóeszköz hitelcél</strong>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-stone-500 font-medium">Fizikai befejezés dátuma:</span>
+                                        <span class="text-stone-500 font-medium">Fizikai befejezés időpontja:</span>
                                         <strong class="text-stone-900 font-mono text-right">2026.03.30.</strong>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="border-t border-stone-200 pt-4 space-y-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
-                                <div>
-                                    <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalma:
-                                    </h4>
-                                    <p>
-                                        Forgóeszköz finanszírozás.
-                                    </p>
-                                </div>
+                            <div class="border-t border-stone-200 pt-4 text-stone-700 text-xs sm:text-sm leading-relaxed">
+                                <h4 class="font-bold text-amber-800 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-list-check text-xs"></i> A projekt tartalmának rövid bemutatása:
+                                </h4>
+                                <p>
+                                    Forgóeszköz finanszírozás a vállalkozás folyamatos és hatékony működésének biztosítására.
+                                </p>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
 
         <section id="contact" class="py-16 md:py-20 bg-stone-900 text-stone-100 px-4 sm:px-6">
-            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center">
                 <div>
-                    <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-6">Kapcsolat</h2>
-                    <p class="text-stone-300 text-sm mb-6 leading-relaxed">
-                        Kérdése van termékeinkkel, egyedi hordóméretekkel vagy árajánlattal kapcsolatban? Keressen minket bizalommal!
-                    </p>
-                    <div class="space-y-4 text-sm text-stone-300">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-location-dot text-amber-500 w-5 text-center"></i>
-                            <span>7900 Botykapeterd, 017/022 hrsz.</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif mb-6 text-amber-500 font-bold">Kapcsolat</h2>
+                    
+                    <div class="space-y-4 text-stone-300 text-sm sm:text-base">
+                        <div class="border-b border-stone-800 pb-3">
+                            <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Cégnév</p>
+                            <p class="text-lg sm:text-xl font-bold text-white">Balazs Barrels Zrt.</p>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-envelope text-amber-500 w-5 text-center"></i>
-                            <a href="mailto:info@balazsbarrels.hu" class="hover:text-amber-400 transition-colors">info@balazsbarrels.hu</a>
+                        
+                        <div class="border-b border-stone-800 pb-3">
+                            <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Gyártás Helye</p>
+                            <p class="text-white font-medium">7900 Botykapeterd, hrsz: 017/22</p>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-phone text-amber-500 w-5 text-center"></i>
-                            <a href="tel:+36301234567" class="hover:text-amber-400 transition-colors">+36 30 123 4567</a>
+                        
+                        <div class="border-b border-stone-800 pb-3">
+                            <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">Telefonszám</p>
+                            <p>
+                                <a href="tel:+36705628453" class="font-bold text-amber-500 hover:text-amber-400 transition-colors">
+                                    +36 70 562 8453
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <div class="pb-3">
+                            <p class="text-[10px] sm:text-xs uppercase text-stone-500 tracking-widest font-semibold mb-1">E-mail cím</p>
+                            <p>
+                                <a href="mailto:info@balazsbarrels.com" class="font-bold text-amber-500 hover:text-amber-400 transition-colors font-mono text-sm sm:text-base">
+                                    info@balazsbarrels.com
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-
-                <form onsubmit="event.preventDefault(); alert('Köszönjük megkeresését! Hamarosan felvesszük Önnel a kapcsolatot.');" class="bg-stone-800 p-6 rounded-lg border border-stone-700 space-y-4">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase text-stone-400 mb-1">Név</label>
-                        <input type="text" required placeholder="Az Ön neve" class="w-full bg-stone-900 border border-stone-700 rounded p-2.5 text-sm focus:border-amber-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase text-stone-400 mb-1">E-mail cím</label>
-                        <input type="email" required placeholder="email@pelda.hu" class="w-full bg-stone-900 border border-stone-700 rounded p-2.5 text-sm focus:border-amber-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase text-stone-400 mb-1">Üzenet</label>
-                        <textarea rows="4" required placeholder="Írja meg üzenetét..." class="w-full bg-stone-900 border border-stone-700 rounded p-2.5 text-sm focus:border-amber-500 focus:outline-none"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-amber-700 hover:bg-amber-600 text-white font-bold py-3 rounded transition-colors text-sm">
-                        Üzenet küldése
-                    </button>
-                </form>
+                
+                <div class="w-full h-64 sm:h-80 bg-stone-800 rounded-lg overflow-hidden border border-stone-700 shadow-2xl relative">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2729.8!2d17.8!3d46.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4769c9b4e9f7832f%3A0x6b610c3f5d5b7a0!2sBotykapeterd%2C%20017%2F22%2C%207900!5e0!3m2!1shu!2shu!4v1600000000000!5m2!1shu!2shu" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
             </div>
         </section>
     </div>
 
-    <!-- Webshop nézet -->
-    <div id="webshop-view-container" class="hidden min-h-screen bg-stone-100 py-12 px-4 sm:px-6">
+    <section id="webshop-view" class="py-8 sm:py-12 bg-stone-50 px-4 sm:px-6 hidden flex-grow">
         <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-4 border-b border-stone-300">
-                <div>
-                    <h1 class="text-3xl font-serif font-bold text-stone-900">Webáruház</h1>
-                    <p class="text-sm text-stone-600 mt-1">Válogasson prémium kádártermékeink közül</p>
+            <div class="relative rounded-lg overflow-hidden mb-8 p-6 sm:p-10 md:p-12 text-white shadow-lg border border-stone-800">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="absolute inset-0 bg-stone-950/75"></div>
+                <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-2xl sm:text-3xl font-serif font-bold flex items-center justify-center md:justify-start gap-2.5 text-white drop-shadow-md">
+                            <i class="fa-solid fa-store text-amber-500"></i> Balázs Barrels Webáruház
+                        </h2>
+                        <p class="text-xs sm:text-sm text-stone-300 mt-2 drop-shadow">Válassza ki a kádármesterünk által kézzel készített prémium hordóit.</p>
+                    </div>
+                    
+                    <div class="w-full md:w-80 relative" id="shop-search-container">
+                        <input type="text" id="shop-search" oninput="handleSearch(this.value)" placeholder="Keresés a termékek között..." class="w-full bg-stone-900/90 text-white pl-10 pr-4 py-3 rounded border border-stone-700 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all text-sm !text-white">
+                        <i class="fa-solid fa-magnifying-glass text-stone-400 absolute left-3.5 top-4 text-sm"></i>
+                    </div>
                 </div>
-                <button onclick="switchToView('main')" class="bg-stone-800 hover:bg-stone-700 text-stone-200 text-xs font-bold py-2.5 px-4 rounded transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-arrow-left"></i> Vissza a főoldalra
+            </div>
+
+            <div id="prices-hidden-banner" class="mb-10 bg-amber-50 border border-amber-200 text-stone-800 p-5 sm:p-6 rounded-lg shadow-sm flex flex-col md:flex-row items-center gap-4">
+                <div class="bg-amber-600 text-white rounded-full p-4 shrink-0 flex items-center justify-center w-12 h-12 shadow">
+                    <i class="fa-solid fa-lock text-lg"></i>
+                </div>
+                <div class="text-center md:text-left flex-grow">
+                    <h3 class="font-bold text-base sm:text-lg text-stone-900">Az árak és a konfigurációs opciók rejtettek</h3>
+                    <p class="text-xs sm:text-sm text-stone-600">Prémium hordóink árainak megtekintéséhez, a fafajták és pörkölési szintek testreszabásához, valamint a megrendelés leadásához kérjük, jelentkezzen be vagy regisztráljon.</p>
+                </div>
+                <button onclick="openAuthModal()" class="w-full md:w-auto bg-amber-700 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded transition-all shadow active:scale-95 text-xs sm:text-sm text-center">
+                    Bejelentkezés / Regisztráció
                 </button>
             </div>
 
-            <div id="webshop-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 1. Kategória: Kishordók -->
+            <div class="mb-14">
+                <div class="border-b border-stone-200 pb-2.5 mb-6">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
+                        <span class="w-2.5 h-6 bg-amber-600 rounded-sm"></span> Kishordók (1L - 112L)
+                    </h3>
+                    <p class="text-[11px] sm:text-xs text-stone-500 mt-1">Kézműves hordók pálinka és bor érleléséhez, tölgyfa, akácfa, cseresznyefa, eperfa vagy kőrisfából.</p>
+                </div>
+                <div id="kishordo-grid" class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+            </div>
+
+            <!-- 2. Kategória: Barrique Hordók -->
+            <div class="mb-14">
+                <div class="border-b border-stone-200 pb-2.5 mb-6">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
+                        <span class="w-2.5 h-6 bg-amber-600 rounded-sm"></span> Barrique Hordók
+                    </h3>
+                    <p class="text-[11px] sm:text-xs text-stone-500 mt-1">225L, 228L, 300L és 500L méretű professzionális tölgyfahordók minőségi borkészítéshez és párlatokhoz.</p>
+                </div>
+                <div id="barrique-grid" class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+            </div>
+
+            <!-- 3. Kategória: Kiegészítők -->
+            <div class="mb-10">
+                <div class="border-b border-stone-200 pb-2.5 mb-6">
+                    <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
+                        <span class="w-2.5 h-6 bg-amber-600 rounded-sm"></span> Kiegészítők &amp; Egyedi Kádártermékek
+                    </h3>
+                    <p class="text-[11px] sm:text-xs text-stone-500 mt-1">Kerti virágedények, díszkádak és ecetes hordók a háztartások és kertek díszítésére.</p>
+                </div>
+                <div id="kiegeszito-grid" class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="checkout-view" class="py-8 sm:py-12 bg-stone-100 px-4 sm:px-6 hidden flex-grow">
+        <div class="max-w-4xl mx-auto bg-stone-900 text-white p-5 sm:p-8 rounded-lg shadow-2xl border border-stone-800">
+            <h2 class="text-xl sm:text-2xl font-serif font-bold text-amber-500 mb-6 border-b border-stone-800 pb-3 flex items-center gap-2">
+                <i class="fa-solid fa-receipt"></i> Megrendelés Véglegesítése
+            </h2>
+
+            <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm">
+                <div class="space-y-4">
+                    <h3 class="text-xs sm:text-sm uppercase text-stone-400 font-bold tracking-widest border-b border-stone-800 pb-1">Vevő és Számlázási Adatok</h3>
+                    <div>
+                        <label class="block text-stone-400 mb-0.5">Név / Cégnév</label>
+                        <input type="text" id="co-name" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-stone-400 mb-0.5">Telefonszám</label>
+                            <input type="tel" id="co-phone" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
+                        </div>
+                        <div>
+                            <label class="block text-stone-400 mb-0.5">E-mail cím</label>
+                            <input type="email" id="co-email" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-950 p-3 sm:p-4 rounded border border-stone-800 space-y-2">
+                        <span class="block text-amber-500 font-bold">Számlázási cím</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label class="block text-stone-400 mb-0.5">Irányítószám</label>
+                                <input type="text" id="co-bill-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-stone-400 mb-0.5">Település</label>
+                                <input type="text" id="co-bill-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-stone-400 mb-0.5">Közterület neve és jellege</label>
+                            <input type="text" id="co-bill-street" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label class="block text-stone-400 mb-0.5">Házszám</label>
+                                <input type="text" id="co-bill-house" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-stone-400 mb-0.5">Egyéb</label>
+                                <input type="text" id="co-bill-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-950 p-3 sm:p-4 rounded border border-stone-800 space-y-2">
+                        <span class="block text-amber-500 font-bold">Szállítási cím</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label class="block text-stone-400 mb-0.5">Irányítószám</label>
+                                <input type="text" id="co-ship-zip" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-stone-400 mb-0.5">Település</label>
+                                <input type="text" id="co-ship-city" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-stone-400 mb-0.5">Közterület neve és jellege</label>
+                            <input type="text" id="co-ship-street" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-1">
+                                <label class="block text-stone-400 mb-0.5">Házszám</label>
+                                <input type="text" id="co-ship-house" required class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-stone-400 mb-0.5">Egyéb</label>
+                                <input type="text" id="co-ship-other" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xs sm:text-sm uppercase text-stone-400 font-bold tracking-widest border-b border-stone-800 pb-1 mb-3">Szállítási és Fizetési Opciók</h3>
+                        
+                        <div class="space-y-2 mb-4">
+                            <label class="block text-stone-400 mb-1">Átvétel módja</label>
+                            <select id="co-delivery" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
+                                <option value="delivery">Házhozszállítás futárszolgálattal (+0 Ft)</option>
+                                <option value="pickup">Személyes átvétel Botykapeterden</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-stone-400 mb-1">Fizetési mód</label>
+                            <select id="co-payment" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
+                                <option value="cod">Utánvétel a futárnál készpénzzel vagy kártyával</option>
+                                <option value="transfer">Banki előreutalás (díjbekérő alapján)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-800 pt-4 bg-stone-950 p-4 sm:p-5 rounded border border-stone-800">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+                            <span class="text-stone-400 text-xs">Végső bruttó fizetendő összeg:</span>
+                            <span id="co-final-total" class="text-xl sm:text-2xl font-black text-amber-500 font-mono">0 Ft</span>
+                        </div>
+                        <p class="text-[10px] text-stone-400 mb-4 leading-relaxed">Megrendelésével Ön kijelenti, hogy elfogadta a Balazs Barrels Zrt. Általános Szerződési Feltételeit és Adatkezelési tájékoztatóját.</p>
+                        
+                        <div class="flex flex-col xs:flex-row gap-2">
+                            <button type="button" onclick="switchToView('webshop')" class="w-full xs:w-1/2 bg-stone-800 hover:bg-stone-700 text-stone-300 font-bold py-3.5 rounded text-center transition-all active:scale-95 text-xs sm:text-sm">
+                                Vissza a Webshopba
+                            </button>
+                            <button type="submit" class="w-full xs:w-1/2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded transition-all shadow-lg active:scale-95 text-center text-xs sm:text-sm">
+                                Rendelés Leadása
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-6 text-center text-stone-500 bg-stone-950 text-xs sm:text-sm mt-auto border-t border-stone-900 px-4">
+        <p>&copy; 2026 Balazs Barrels Zrt. Minden jog fenntartva.</p>
+    </footer>
+
+    <button id="floating-cart-btn" onclick="toggleCart(true)" class="fixed bottom-6 right-6 z-40 bg-amber-600 text-stone-950 p-4 rounded-full shadow-2xl scale-0 hover:scale-105 active:scale-95 transition-all duration-300 md:hidden flex items-center justify-center">
+        <i class="fa-solid fa-shopping-basket text-xl"></i>
+        <span id="floating-cart-count" class="absolute -top-1 -right-1 bg-white text-stone-900 text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center shadow">0</span>
+    </button>
+
+    <div id="cart-drawer-container" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-75 transition-opacity" onclick="toggleCart(false)"></div>
+        <div class="absolute right-0 top-0 bottom-0 max-w-md w-full bg-stone-950 border-l border-stone-800 text-stone-100 flex flex-col shadow-2xl">
+            <div class="p-4 border-b border-stone-850 flex justify-between items-center bg-stone-900">
+                <h3 class="font-serif font-bold text-lg text-white flex items-center gap-2">
+                    <i class="fa-solid fa-basket-shopping text-amber-500"></i> Az Ön Kosara
+                </h3>
+                <button onclick="toggleCart(false)" class="p-2 text-stone-400 hover:text-white transition-colors" aria-label="Kosár bezárása">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="flex-grow p-4 overflow-y-auto space-y-4">
+            </div>
+
+            <div class="p-4 border-t border-stone-850 bg-stone-900 space-y-3 pb-8 md:pb-4">
+                <div class="flex justify-between text-[11px] sm:text-xs text-stone-400">
+                    <span>Nettó részösszeg (27% ÁFA nélkül):</span>
+                    <span id="cart-subtotal">0 Ft</span>
+                </div>
+                <div class="flex justify-between text-[11px] sm:text-xs text-stone-400">
+                    <span>ÁFA tartalom (27%):</span>
+                    <span id="cart-tax">0 Ft</span>
+                </div>
+                <div class="flex justify-between font-bold text-xs sm:text-sm border-t border-stone-800 pt-2 text-white">
+                    <span>Várható bruttó fizetendő:</span>
+                    <span id="cart-total" class="text-amber-500 font-mono text-base">0 Ft</span>
+                </div>
+
+                <button id="checkout-btn" onclick="openCheckout()" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg text-sm">
+                    Tovább a Pénztárhoz <i class="fa-solid fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Lábléc -->
-    <footer class="bg-stone-950 text-stone-500 py-8 px-4 border-t border-stone-900 text-center text-xs mt-auto">
-        <div class="max-w-6xl mx-auto space-y-3">
-            <p>&copy; 2026 Balazs Barrels Zrt. Minden jog fenntartva.</p>
-            <p class="text-stone-600">7900 Botykapeterd, 017/022 hrsz. | Cégjegyzékszám: 01-10-047239</p>
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProductModal()"></div>
+        <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative z-10 flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 p-4 sm:p-6 flex flex-col gap-4 bg-stone-950 justify-center">
+                <div class="relative overflow-hidden aspect-[4/3] rounded-lg border border-stone-800 shadow-inner">
+                    <img id="modal-product-img" src="" alt="Termék" class="w-full h-full object-cover">
+                </div>
+                <div id="modal-thumbnails-container" class="flex gap-2 overflow-x-auto py-1 justify-center scrollbar-none">
+                </div>
+                <button onclick="closeProductModal()" class="md:hidden absolute top-4 right-4 bg-black bg-opacity-70 text-white p-2.5 rounded-full hover:bg-opacity-90 transition-all z-20 w-10 h-10 flex items-center justify-center">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+
+            <div class="w-full md:w-1/2 p-4 sm:p-6 flex flex-col justify-between">
+                <div>
+                    <div class="hidden md:flex justify-end mb-2">
+                        <button onclick="closeProductModal()" class="text-stone-400 hover:text-white transition-colors text-xl p-1">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                    </div>
+                    <span id="modal-product-category" class="text-amber-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider block mb-1">Kategória</span>
+                    <h3 id="modal-product-name" class="text-lg sm:text-xl font-serif font-bold text-white mb-2 sm:mb-3">Termék neve</h3>
+                    
+                    <div class="mb-4">
+                        <p id="modal-product-desc" class="text-stone-300 text-xs sm:text-sm leading-relaxed max-h-[120px] md:max-h-[160px] overflow-y-auto pr-1">Leírás.</p>
+                    </div>
+
+                    <div id="modal-custom-laser-notice" class="hidden mb-4 p-3 bg-stone-950/65 border border-amber-600/30 rounded-lg text-[11px] sm:text-xs text-stone-300 flex items-start gap-2.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-500 mt-0.5 shrink-0"></i>
+                        <div>
+                            <strong class="text-amber-400 block mb-0.5">Egyedi feliratozás és logózás!</strong>
+                            Személyre szabott hordó rendelhető: felár ellenében maximum 150x150 mm méretű egyedi logó, családi címer vagy tetszőleges szöveges felirat elhelyezést vállalunk.
+                        </div>
+                    </div>
+
+                    <div id="modal-wood-section" class="mb-5 hidden">
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1.5">Fa típusa</label>
+                        <div id="modal-wood-container" class="grid grid-cols-2 xs:grid-cols-3 gap-2 text-[11px] sm:text-xs">
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <label id="modal-toast-label" class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1.5">Égetési / pörkölési szint</label>
+                        <div id="modal-toast-container" class="grid grid-cols-2 xs:grid-cols-3 gap-2 text-[11px] sm:text-xs">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-stone-800 pt-4 mt-2">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-stone-400 text-xs">Várható bruttó ár:</span>
+                        <span id="modal-product-price" class="text-xl sm:text-2xl font-black text-amber-500">0 Ft</span>
+                    </div>
+                    <button onclick="addProductToCart()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-95 text-xs sm:text-sm">
+                        Hozzáadás a Kosárhoz <i class="fa-solid fa-shopping-basket"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-    </footer>
+    </div>
+
+    <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-85" onclick="closeAuthModal()"></div>
+        <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-lg w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors p-1" aria-label="Bezárás">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="flex border-b border-stone-800 mb-6 text-sm sm:text-base">
+                <button onclick="toggleAuthTab('login')" id="tab-login" class="flex-1 py-2 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500">Bejelentkezés</button>
+                <button onclick="toggleAuthTab('register')" id="tab-register" class="flex-1 py-2 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white">Regisztráció</button>
+            </div>
+
+            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4 text-xs sm:text-sm">
+                <div>
+                    <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">E-mail cím</label>
+                    <input type="email" id="login-email" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
+                </div>
+                <div>
+                    <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Jelszó</label>
+                    <input type="password" id="login-password" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 focus:border-amber-500 focus:outline-none text-xs sm:text-sm">
+                </div>
+                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded transition-all active:scale-95 text-xs sm:text-sm mt-4">
+                    Belépés a Fiókba
+                </button>
+                
+                <div class="border-t border-stone-800 pt-4 mt-2">
+                    <button type="button" onclick="loadDemoAccount()" class="w-full bg-stone-850 hover:bg-stone-800 text-amber-400 font-bold py-2.5 rounded text-xs border border-amber-500/25 transition-all active:scale-95 flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Gyors teszt fiók betöltése
+                    </button>
+                </div>
+            </form>
+
+            <form id="register-form" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden text-xs sm:text-sm">
+                <div>
+                    <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Ügyféltípus</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" id="reg-type-magan" onclick="selectRegType('maganszemely')" class="py-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all">Magánszemély</button>
+                        <button type="button" id="reg-type-ceg" onclick="selectRegType('ceg')" class="py-2.5 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all">Cég</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Név / Kapcsolattartó</label>
+                        <input type="text" id="reg-name" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Telefonszám</label>
+                        <input type="tel" id="reg-phone" placeholder="+36 30 123 4567" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">E-mail cím</label>
+                        <input type="email" id="reg-email" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Jelszó</label>
+                        <input type="password" id="reg-password" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                    </div>
+                </div>
+
+                <div id="reg-ceg-section" class="hidden space-y-4 border-t border-stone-800 pt-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Cégnév</label>
+                            <input type="text" id="reg-company-name" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Adószám</label>
+                            <input type="text" id="reg-vat-number" placeholder="12345678-1-12" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded transition-all active:scale-95 text-xs sm:text-sm mt-4">
+                    Sikeres Regisztráció
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProfileModal()"></div>
+        <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-4xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors p-1">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <h3 class="font-serif font-bold text-xl sm:text-2xl text-white mb-6 border-b border-stone-800 pb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-user text-amber-500"></i> Az Ön Felhasználói Fiókja
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h4 class="text-xs sm:text-sm uppercase text-amber-500 font-bold tracking-wider border-b border-stone-800 pb-1">Profil Adatok Frissítése</h4>
+                    <form id="profile-form" onsubmit="handleProfileUpdate(event)" class="space-y-3.5 text-xs">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-stone-400 font-bold mb-0.5">Név</label>
+                                <input type="text" id="prof-name" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs sm:text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-stone-400 font-bold mb-0.5">Telefonszám</label>
+                                <input type="text" id="prof-phone" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs sm:text-sm">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3 rounded mt-2 transition-all active:scale-95 text-xs">
+                            Adatok mentése
+                        </button>
+                    </form>
+                </div>
+
+                <div>
+                    <h4 class="text-xs sm:text-sm uppercase text-amber-500 font-bold tracking-wider mb-4 border-b border-stone-800 pb-1">Rendelési Előzmények</h4>
+                    <div id="profile-orders" class="space-y-4 max-h-[340px] md:max-h-[380px] overflow-y-auto pr-1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-90"></div>
+        <div class="bg-stone-900 border border-amber-600/30 text-white rounded-lg p-6 sm:p-8 max-w-md w-full text-center relative z-10 shadow-2xl">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-amber-500/30">
+                <i class="fa-solid fa-circle-check text-3xl sm:text-4xl"></i>
+            </div>
+            <h3 class="font-serif font-bold text-xl sm:text-2xl text-white mb-2">Köszönjük Megrendelését!</h3>
+            <p class="text-xs sm:text-sm text-stone-400 mb-6">A megrendelését sikeresen rögzítettük a rendszerünkben. Kádármestereink hamarosan megkezdik a termékek összeállítását.</p>
+            
+            <div class="bg-stone-950 p-4 rounded-lg border border-stone-800 mb-6 text-xs text-left font-mono space-y-1.5">
+                <div class="flex justify-between"><span class="text-stone-500">Rendelési azonosító:</span> <span id="success-order-id" class="text-amber-500 font-bold">BB-12345</span></div>
+                <div class="flex justify-between"><span class="text-stone-500">Összeg:</span> <span id="success-order-total" class="text-white">0 Ft</span></div>
+                <div class="flex justify-between"><span class="text-stone-500">Fizetés módja:</span> <span id="success-order-payment" class="text-white">Utánvét</span></div>
+            </div>
+
+            <button onclick="closeSuccessModal()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3.5 rounded-md transition-all active:scale-95 text-xs sm:text-sm">
+                Vissza a Webáruházba
+            </button>
+        </div>
+    </div>
 
     <script>
-        function switchToView(view) {
-            const mainContainer = document.getElementById('main-view-container');
-            const webshopContainer = document.getElementById('webshop-view-container');
-            
-            if (view === 'webshop') {
-                if (mainContainer) mainContainer.classList.add('hidden');
-                if (webshopContainer) webshopContainer.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                if (webshopContainer) webshopContainer.classList.add('hidden');
-                if (mainContainer) mainContainer.classList.remove('hidden');
-            }
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden');
-        }
-
-        function closeMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu && !menu.classList.contains('hidden')) {
-                menu.classList.add('hidden');
-            }
-        }
-
         function toggleProjectDetails(id) {
             const body = document.getElementById('project-body-' + id);
             const icon = document.getElementById('project-icon-' + id);
-            if (body) {
-                if (body.classList.contains('hidden')) {
-                    body.classList.remove('hidden');
-                    if (icon) {
-                        icon.classList.remove('fa-chevron-down');
-                        icon.classList.add('fa-chevron-up');
-                    }
-                } else {
-                    body.classList.add('hidden');
-                    if (icon) {
-                        icon.classList.remove('fa-chevron-up');
-                        icon.classList.add('fa-chevron-down');
-                    }
-                }
+            if (!body) return;
+            if (body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                if (icon) icon.className = "fa-solid fa-chevron-up text-sm";
+            } else {
+                body.classList.add('hidden');
+                if (icon) icon.className = "fa-solid fa-chevron-down text-sm";
             }
         }
 
-        function openGrantBoardModal(imgSrc) {
-            const lightbox = document.getElementById('gallery-lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lightboxCounter = document.getElementById('lightbox-counter');
-            if (lightbox && lightboxImg) {
-                lightboxImg.src = imgSrc;
-                if (lightboxCounter) lightboxCounter.textContent = "Hivatalos Támogatási Tábla";
-                lightbox.classList.remove('hidden');
+        const products = [
+            {
+                id: 'kishordo-1l',
+                category: 'kishordo',
+                name: 'Kishordó 1 liter',
+                volume: '1 liter',
+                price: 18000,
+                desc: 'Hagyományos módszerekkel kézzel készített kishordó nemes pálinkák érleléséhez.',
+                images: [
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-2l',
+                category: 'kishordo',
+                name: 'Kishordó 2 liter',
+                volume: '2 liter',
+                price: 22000,
+                desc: 'Kisméretű hordó, mely kiválóan alkalmas gyümölcspárlatok háztartási érleléséhez.',
+                images: [
+                    'https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-3l',
+                category: 'kishordo',
+                name: 'Kishordó 3 liter',
+                volume: '3 liter',
+                price: 26000,
+                desc: 'Díszes kishordó minőségi belső pörköléssel, pálinkához és borpárlathoz.',
+                images: [
+                    'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-5l',
+                category: 'kishordo',
+                name: 'Kishordó 5 liter',
+                volume: '5 liter',
+                price: 32000,
+                desc: 'Esztétikus kialakítású asztali hordó választható fafajtából, ideális méretben.',
+                images: [
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-10l',
+                category: 'kishordo',
+                name: 'Kishordó 10 liter',
+                volume: '10 liter',
+                price: 42000,
+                desc: 'Professzionális méretű pálinkáshordó, mely kiváló aromát biztosít az érlelt párlatnak.',
+                images: [
+                    'https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-15l',
+                category: 'kishordo',
+                name: 'Kishordó 15 liter',
+                volume: '15 liter',
+                price: 49000,
+                desc: 'Gondosan válogatott dongákból készített közepes hordó igényes pálinkafőzőknek.',
+                images: [
+                    'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-20l',
+                category: 'kishordo',
+                name: 'Kishordó 20 liter',
+                volume: '20 liter',
+                price: 58000,
+                desc: 'Remekül záró, acél abroncsokkal szerelt, évekig természetesen szárított prémium hordó.',
+                images: [
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-28l',
+                category: 'kishordo',
+                name: 'Kishordó 28 liter',
+                volume: '28 liter',
+                price: 69000,
+                desc: 'A kádárszakma hagyományos magyar űrmértéke, ideális párlat finomításhoz.',
+                images: [
+                    'https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-56l',
+                category: 'kishordo',
+                name: 'Kishordó 56 liter',
+                volume: '56 liter',
+                price: 95000,
+                desc: 'Nagyobb kapacitású kishordó, mely testes borok és pálinkák közép-hosszú tárolására alkalmas.',
+                images: [
+                    'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'kishordo-112l',
+                category: 'kishordo',
+                name: 'Kishordó 112 liter',
+                volume: '112 liter',
+                price: 145000,
+                desc: 'Maximális kishordó méretünk, amely átmenetet képez a pincei ászokhordók világába.',
+                images: [
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
+            },
+            {
+                id: 'barrique-225l',
+                category: 'barrique',
+                name: 'Barrique Hordó 225 liter',
+                volume: '225 liter',
+                price: 185000,
+                desc: 'Világszerte elismert klasszikus bordeaux-i méretű prémium tölgyfahordó borérleléshez.',
+                images: [
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky']
+            },
+            {
+                id: 'barrique-228l',
+                category: 'barrique',
+                name: 'Barrique Hordó 228 liter',
+                volume: '228 liter',
+                price: 190000,
+                desc: 'Burgundi stílusú, vastagabb dongával szerelt prémium hordó testes fehér és vörösborokhoz.',
+                images: [
+                    'https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky']
+            },
+            {
+                id: 'barrique-300l',
+                category: 'barrique',
+                name: 'Barrique Hordó 300 liter',
+                volume: '300 liter',
+                price: 215000,
+                desc: 'Közép-európai igényekre szabott, tágas barrique hordó finom, egyedi ízkicsatolással.',
+                images: [
+                    'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky']
+            },
+            {
+                id: 'barrique-500l',
+                category: 'barrique',
+                name: 'Barrique Hordó 500 liter',
+                volume: '500 liter',
+                price: 280000,
+                desc: 'Nagyobb barrique tárolóhordó, melyben a tölgyfajegyek visszafogottabban érvényesülnek.',
+                images: [
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky']
+            },
+            {
+                id: 'edeny-kicsi',
+                category: 'kiegeszito',
+                name: 'Kerti Virágedény 30L',
+                volume: '30 liter',
+                price: 15000,
+                desc: 'Kisméretű, kerti dísznövények elhelyezésére és kültéri esztétikai célokra szánt faedény.',
+                images: [
+                    'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Kezeletlen', 'Olajozott', 'Lakkozott']
+            },
+            {
+                id: 'edeny-nagy',
+                category: 'kiegeszito',
+                name: 'Kerti Virágedény 70L',
+                volume: '70 liter',
+                price: 28000,
+                desc: 'Tágas virágedény fenyő- vagy tölgyfa dongákból kialakítva, rozsdamentes pántokkal.',
+                images: [
+                    'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Kezeletlen', 'Olajozott', 'Lakkozott']
+            },
+            {
+                id: 'ecetes-kad',
+                category: 'kiegeszito',
+                name: 'Kézműves Ecetes Kád 50L',
+                volume: '50 liter',
+                price: 45000,
+                desc: 'Egyedi ecet- és savanyúságérlelő kád, kíméletes kádáripari felületkezeléssel.',
+                images: [
+                    'https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'
+                ],
+                toastLevels: ['Kezeletlen', 'Olajozott', 'Lakkozott']
             }
+        ];
+
+        let currentView = 'main';
+        let searchQuery = '';
+        let currentUser = null;
+        let cart = [];
+        let selectedProduct = null;
+        let selectedConfig = { toast: null, wood: null };
+
+        const galleryData = [
+            { id: 1, img: 'kishordó.JPG' },
+            { id: 2, img: 'barrique 2.jpg' },
+            { id: 3, img: 'barrique hordók.jpg' },
+            { id: 4, img: 'nagyhordo.jpg' },
+            { id: 5, img: 'nagykádak.JPG' },
+            { id: 6, img: 'kádak 1.jpg' },
+            { id: 7, img: 'kádak 2.jpg' },
+            { id: 8, img: 'kádak3.jpg' },
+            { id: 9, img: 'kádak4.JPG' },
+            { id: 10, img: 'virágedény.jpg' }
+        ];
+
+        let currentLightboxIndex = 0;
+
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+
+            galleryData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "group relative overflow-hidden rounded-lg shadow-md aspect-[4/3] bg-stone-200 cursor-pointer border border-stone-200 hover:border-amber-600 transition-all duration-300";
+                card.onclick = () => openGalleryLightbox(index);
+
+                const encodedImg = encodeURI(item.img);
+                card.innerHTML = `
+                    <img src="${encodedImg}" alt="Balázs Barrels" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/bazsinagy0317/balazsbarrels/main/' + encodeURIComponent('${item.img}');">
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openGalleryLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('gallery-lightbox');
+            updateLightboxContent();
+            lightbox.classList.remove('hidden');
         }
 
         function closeGalleryLightbox() {
-            const lightbox = document.getElementById('gallery-lightbox');
-            if (lightbox) lightbox.classList.add('hidden');
+            document.getElementById('gallery-lightbox').classList.add('hidden');
         }
 
         function closeGalleryLightboxOnBackdrop(e) {
-            if (e.target.id === 'gallery-lightbox') {
+            if (e.target.id === 'gallery-lightbox' || e.target.id === 'lightbox-content-box') {
                 closeGalleryLightbox();
             }
         }
 
-        function navigateGallery(dir) {
-            // Galéria léptetés opció
+        function navigateGallery(direction) {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) {
+                currentLightboxIndex = galleryData.length - 1;
+            } else if (currentLightboxIndex >= galleryData.length) {
+                currentLightboxIndex = 0;
+            }
+            updateLightboxContent();
         }
+
+        function updateLightboxContent() {
+            const item = galleryData[currentLightboxIndex];
+            if (!item) return;
+
+            const lightboxImg = document.getElementById('lightbox-img');
+            const encodedImg = encodeURI(item.img);
+            lightboxImg.src = encodedImg;
+            lightboxImg.onerror = function() {
+                this.onerror = null;
+                this.src = 'https://raw.githubusercontent.com/bazsinagy0317/balazsbarrels/main/' + encodeURIComponent(item.img);
+            };
+
+            document.getElementById('lightbox-counter').textContent = `${currentLightboxIndex + 1} / ${galleryData.length}`;
+        }
+
+        const DB = {
+            getUsers: function() {
+                let u = localStorage.getItem('local_users');
+                if (!u) {
+                    const defaultUsers = [{
+                        email: 'teszt@barrels.hu',
+                        password: '123',
+                        name: 'Minta János',
+                        phone: '+36 30 987 6543',
+                        type: 'maganszemely',
+                        ship_zip: '7900',
+                        ship_city: 'Botykapeterd',
+                        ship_street: 'Fő út',
+                        ship_house: '14.',
+                        ship_other: 'Barna kapu'
+                    }];
+                    localStorage.setItem('local_users', JSON.stringify(defaultUsers));
+                    return defaultUsers;
+                }
+                return JSON.parse(u);
+            },
+            saveUser: function(userObj) {
+                let users = this.getUsers();
+                const idx = users.findIndex(u => u.email.toLowerCase() === userObj.email.toLowerCase());
+                if (idx > -1) {
+                    users[idx] = userObj;
+                } else {
+                    users.push(userObj);
+                }
+                localStorage.setItem('local_users', JSON.stringify(users));
+            }
+        };
+
+        window.onload = function() {
+            const savedSession = localStorage.getItem('active_session');
+            if (savedSession) {
+                currentUser = JSON.parse(savedSession);
+                updateNavbarUser();
+            }
+
+            const savedCart = localStorage.getItem('local_cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            }
+
+            renderProducts();
+            renderGallery();
+            updateCart();
+            switchToView('main');
+        };
+
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-lg shadow-lg text-xs font-bold text-white flex items-center gap-2 transform translate-x-12 opacity-0 transition-all duration-300 pointer-events-auto ${
+                type === 'success' ? 'bg-amber-600 border border-amber-500' : 'bg-red-600 border border-red-500'
+            }`;
+
+            const icon = type === 'success' ? '<i class="fa-solid fa-check-circle"></i>' : '<i class="fa-solid fa-triangle-exclamation"></i>';
+            toast.innerHTML = `${icon} <span>${message}</span>`;
+            
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-x-12', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('translate-x-12', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('hamburger-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = "fa-solid fa-bars text-xl";
+            } else {
+                icon.className = "fa-solid fa-xmark text-xl";
+            }
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('hamburger-icon');
+            if (menu && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars text-xl";
+            }
+        }
+
+        function switchToView(view) {
+            currentView = view;
+            const mainContainer = document.getElementById('main-view-container');
+            const shopContainer = document.getElementById('webshop-view');
+            const checkoutContainer = document.getElementById('checkout-view');
+
+            if (view === 'main') {
+                mainContainer.classList.remove('hidden');
+                shopContainer.classList.add('hidden');
+                checkoutContainer.classList.add('hidden');
+            } else if (view === 'webshop') {
+                mainContainer.classList.add('hidden');
+                shopContainer.classList.remove('hidden');
+                checkoutContainer.classList.add('hidden');
+                renderProducts();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'checkout') {
+                mainContainer.classList.add('hidden');
+                shopContainer.classList.add('hidden');
+                checkoutContainer.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function toggleUserDropdown() {
+            const dd = document.getElementById('user-dropdown');
+            dd.classList.toggle('hidden');
+        }
+
+        window.addEventListener('click', function(e) {
+            const menuContainer = document.getElementById('user-menu-container');
+            const dd = document.getElementById('user-dropdown');
+            if (menuContainer && !menuContainer.contains(e.target)) {
+                if (dd) dd.classList.add('hidden');
+            }
+        });
+
+        function handleSearch(val) {
+            searchQuery = val.toLowerCase().trim();
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const kishordoGrid = document.getElementById('kishordo-grid');
+            const barriqueGrid = document.getElementById('barrique-grid');
+            const kiegeszitoGrid = document.getElementById('kiegeszito-grid');
+
+            if (!kishordoGrid || !barriqueGrid || !kiegeszitoGrid) return;
+
+            kishordoGrid.innerHTML = '';
+            barriqueGrid.innerHTML = '';
+            kiegeszitoGrid.innerHTML = '';
+
+            const banner = document.getElementById('prices-hidden-banner');
+            if (currentUser) {
+                if (banner) banner.classList.add('hidden');
+            } else {
+                if (banner) banner.classList.remove('hidden');
+            }
+
+            const filtered = products.filter(p => {
+                if (!searchQuery) return true;
+                return p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
+            });
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white border border-stone-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between";
+
+                let priceHtml = '';
+                let actionBtn = '';
+
+                if (currentUser) {
+                    priceHtml = `<span class="text-lg sm:text-xl font-bold text-amber-600 font-mono">${new Intl.NumberFormat('hu-HU').format(p.price)} Ft</span>`;
+                    actionBtn = `
+                        <button onclick="openProductModal('${p.id}')" class="w-full bg-stone-900 hover:bg-amber-600 hover:text-stone-950 text-white font-bold py-3 rounded text-xs transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-[0.98]">
+                            Megtekintés és konfigurálás <i class="fa-solid fa-sliders text-[10px]"></i>
+                        </button>
+                    `;
+                } else {
+                    priceHtml = `
+                        <div class="flex items-center gap-1.5 text-xs text-stone-400 italic font-medium">
+                            <i class="fa-solid fa-lock text-[10px]"></i> Árakhoz lépjen be!
+                        </div>
+                    `;
+                    actionBtn = `
+                        <button onclick="openAuthModal()" class="w-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-3 rounded text-xs transition-colors uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-[0.98]">
+                            Belépés a vásárláshoz <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    `;
+                }
+
+                const coverImg = p.images && p.images.length > 0 ? p.images[0] : 'https://placehold.co/400x300/e7e5e4/44403c?text=Hordo';
+
+                card.innerHTML = `
+                    <div class="relative aspect-[4/3] bg-stone-100 overflow-hidden cursor-pointer" onclick="${currentUser ? `openProductModal('${p.id}')` : 'openAuthModal()'}">
+                        <img src="${coverImg}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/e7e5e4/44403c?text=Hordo'">
+                        <span class="absolute top-2.5 left-2.5 bg-stone-900/80 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">${p.volume}</span>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between gap-3">
+                        <div>
+                            <h4 class="font-serif font-bold text-base text-stone-900 truncate">${p.name}</h4>
+                            <p class="text-xs text-stone-500 line-clamp-2 mt-1 leading-relaxed">${p.desc}</p>
+                        </div>
+                        <div class="border-t border-stone-100 pt-3 flex flex-col gap-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] text-stone-400 font-bold uppercase tracking-wider">Bruttó ár</span>
+                                ${priceHtml}
+                            </div>
+                            ${actionBtn}
+                        </div>
+                    </div>
+                `;
+
+                if (p.category === 'kishordo') {
+                    kishordoGrid.appendChild(card);
+                } else if (p.category === 'barrique') {
+                    barriqueGrid.appendChild(card);
+                } else if (p.category === 'kiegeszito') {
+                    kiegeszitoGrid.appendChild(card);
+                }
+            });
+
+            if (kishordoGrid.children.length === 0) kishordoGrid.innerHTML = `<p class="col-span-full text-center text-xs text-stone-400 py-6">Nincs a keresésnek megfelelő kishordó.</p>`;
+            if (barriqueGrid.children.length === 0) barriqueGrid.innerHTML = `<p class="col-span-full text-center text-xs text-stone-400 py-6">Nincs a keresésnek megfelelő barrique hordó.</p>`;
+            if (kiegeszitoGrid.children.length === 0) kiegeszitoGrid.innerHTML = `<p class="col-span-full text-center text-xs text-stone-400 py-6">Nincs a keresésnek megfelelő kiegészítő.</p>`;
+        }
+
+        function openProductModal(productId) {
+            selectedProduct = products.find(p => p.id === productId);
+            if (!selectedProduct) return;
+
+            selectedConfig.toast = selectedProduct.toastLevels[0];
+
+            const mainImg = document.getElementById('modal-product-img');
+            mainImg.src = selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[0] : 'https://placehold.co/600x450/e7e5e4/44403c?text=Hordo';
+            mainImg.onerror = function() {
+                this.src = 'https://placehold.co/600x450/e7e5e4/44403c?text=' + encodeURIComponent(selectedProduct.name);
+            };
+
+            const thumbContainer = document.getElementById('modal-thumbnails-container');
+            thumbContainer.innerHTML = '';
+            
+            if (selectedProduct.images && selectedProduct.images.length > 0) {
+                selectedProduct.images.forEach((imgUrl, idx) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = `w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded overflow-hidden cursor-pointer border-2 transition-all shrink-0 ${
+                        idx === 0 ? 'border-amber-500 scale-105 shadow' : 'border-stone-800 hover:border-stone-500'
+                    }`;
+                    
+                    thumb.innerHTML = `
+                        <img src="${imgUrl}" alt="${selectedProduct.name} ${idx + 1}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/78716c/ffffff?text=${idx + 1}'">
+                    `;
+                    
+                    thumb.onclick = () => {
+                        mainImg.src = imgUrl;
+                        Array.from(thumbContainer.children).forEach(child => {
+                            child.classList.remove('border-amber-500', 'scale-105', 'shadow');
+                            child.classList.add('border-stone-800');
+                        });
+                        thumb.classList.remove('border-stone-800');
+                        thumb.classList.add('border-amber-500', 'scale-105', 'shadow');
+                    };
+                    
+                    thumbContainer.appendChild(thumb);
+                });
+            }
+
+            document.getElementById('modal-product-name').textContent = selectedProduct.name;
+            document.getElementById('modal-product-category').textContent = selectedProduct.category === 'kishordo' ? 'Kishordó' : selectedProduct.category === 'barrique' ? 'Barrique hordó' : 'Kiegészítő';
+            document.getElementById('modal-product-desc').textContent = selectedProduct.desc;
+
+            const laserNotice = document.getElementById('modal-custom-laser-notice');
+            if (selectedProduct.category === 'kishordo' || selectedProduct.category === 'barrique') {
+                laserNotice.classList.remove('hidden');
+            } else {
+                laserNotice.classList.add('hidden');
+            }
+
+            const woodSection = document.getElementById('modal-wood-section');
+            let woodTypes = null;
+            
+            if (selectedProduct.category === 'kishordo' || selectedProduct.id === 'barrique-225l' || selectedProduct.id === 'barrique-228l') {
+                woodTypes = ['Tölgyfa', 'Akácfa', 'Cseresznyefa', 'Eperfa', 'Kőrisfa'];
+            } else if (selectedProduct.id === 'barrique-300l' || selectedProduct.id === 'barrique-500l') {
+                woodTypes = ['Tölgyfa', 'Akácfa'];
+            }
+
+            if (woodTypes) {
+                woodSection.classList.remove('hidden');
+                selectedConfig.wood = 'Tölgyfa';
+                const woodContainer = document.getElementById('modal-wood-container');
+                woodContainer.innerHTML = '';
+                
+                woodTypes.forEach(w => {
+                    const btn = document.createElement('button');
+                    btn.type = "button";
+                    btn.className = w === selectedConfig.wood 
+                        ? "p-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all active:scale-95" 
+                        : "p-2.5 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all active:scale-95";
+                    btn.textContent = w;
+                    btn.onclick = () => selectWoodType(w);
+                    woodContainer.appendChild(btn);
+                });
+            } else {
+                woodSection.classList.add('hidden');
+                selectedConfig.wood = null;
+            }
+
+            const toastLabel = document.getElementById('modal-toast-label');
+            if (selectedProduct.category === 'kiegeszito') {
+                toastLabel.textContent = 'Felületkezelés';
+            } else {
+                toastLabel.textContent = 'Égetési / pörkölési szint';
+            }
+
+            const toastContainer = document.getElementById('modal-toast-container');
+            toastContainer.innerHTML = '';
+            selectedProduct.toastLevels.forEach(lvl => {
+                const btn = document.createElement('button');
+                btn.type = "button";
+                btn.id = `toast-${encodeURIComponent(lvl)}`;
+                btn.className = lvl === selectedConfig.toast 
+                    ? "p-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all active:scale-95" 
+                    : "p-2.5 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all active:scale-95";
+                btn.textContent = lvl;
+                btn.onclick = () => selectToastLevel(lvl);
+                toastContainer.appendChild(btn);
+            });
+
+            calculateModalPrice();
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function selectWoodType(wood) {
+            selectedConfig.wood = wood;
+            const woodContainer = document.getElementById('modal-wood-container');
+            if (woodContainer) {
+                Array.from(woodContainer.children).forEach(btn => {
+                    const btnWood = btn.textContent;
+                    if (btnWood === wood) {
+                        btn.className = "p-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all active:scale-95";
+                    } else {
+                        btn.className = "p-2.5 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all active:scale-95";
+                    }
+                });
+            }
+            calculateModalPrice();
+        }
+
+        function selectToastLevel(level) {
+            selectedConfig.toast = level;
+            selectedProduct.toastLevels.forEach(lvl => {
+                const btn = document.getElementById(`toast-${encodeURIComponent(lvl)}`);
+                if (btn) {
+                    if (lvl === level) {
+                        btn.className = "p-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-center transition-all active:scale-95";
+                    } else {
+                        btn.className = "p-2.5 rounded border border-stone-700 bg-stone-800 text-stone-300 text-center hover:border-amber-500 transition-all active:scale-95";
+                    }
+                }
+            });
+            calculateModalPrice();
+        }
+
+        function calculateModalPrice() {
+            if (!selectedProduct) return;
+            let finalPrice = selectedProduct.price;
+
+            if (selectedConfig.wood) {
+                if (selectedConfig.wood === 'Cseresznyefa') finalPrice += 3000;
+                else if (selectedConfig.wood === 'Eperfa') finalPrice += 4000;
+                else if (selectedConfig.wood === 'Kőrisfa') finalPrice += 2000;
+                else if (selectedConfig.wood === 'Akácfa') finalPrice += 1500;
+            }
+
+            document.getElementById('modal-product-price').textContent = `${new Intl.NumberFormat('hu-HU').format(finalPrice)} Ft`;
+        }
+
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProductModal();
+                closeAuthModal();
+                closeProfileModal();
+                closeGalleryLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                const lightbox = document.getElementById('gallery-lightbox');
+                if (lightbox && !lightbox.classList.contains('hidden')) {
+                    navigateGallery(-1);
+                }
+            } else if (e.key === 'ArrowRight') {
+                const lightbox = document.getElementById('gallery-lightbox');
+                if (lightbox && !lightbox.classList.contains('hidden')) {
+                    navigateGallery(1);
+                }
+            }
+        });
+
+        function addProductToCart() {
+            if (!selectedProduct) return;
+            
+            let price = selectedProduct.price;
+            if (selectedConfig.wood) {
+                if (selectedConfig.wood === 'Cseresznyefa') price += 3000;
+                else if (selectedConfig.wood === 'Eperfa') price += 4000;
+                else if (selectedConfig.wood === 'Kőrisfa') price += 2000;
+                else if (selectedConfig.wood === 'Akácfa') price += 1500;
+            }
+
+            const woodPart = selectedConfig.wood ? `-${encodeURIComponent(selectedConfig.wood)}` : '';
+            const itemId = `${selectedProduct.id}-${encodeURIComponent(selectedConfig.toast)}${woodPart}`;
+            
+            const existingItem = cart.find(item => item.id === itemId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: itemId,
+                    productId: selectedProduct.id,
+                    name: selectedProduct.name,
+                    volume: selectedProduct.volume,
+                    toast: selectedConfig.toast,
+                    wood: selectedConfig.wood,
+                    price: price,
+                    quantity: 1,
+                    img: selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[0] : 'https://placehold.co/100x100/78716c/ffffff?text=Hordo'
+                });
+            }
+
+            updateCart();
+            closeProductModal();
+            toggleCart(true);
+            showNotification("Termék sikeresen hozzáadva a kosárhoz!");
+        }
+
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCart();
+            showNotification("Tétel törölve a kosárból.");
+        }
+
+        function updateQuantity(itemId, change) {
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(itemId);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        function updateCart() {
+            const container = document.getElementById('cart-items-container');
+            const countBadge = document.getElementById('cart-count');
+            const floatingBtn = document.getElementById('floating-cart-btn');
+            const floatingCount = document.getElementById('floating-cart-count');
+            
+            container.innerHTML = '';
+            
+            let totalItemsCount = 0;
+            let subtotal = 0;
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-64 flex flex-col items-center justify-center text-stone-500">
+                        <i class="fa-solid fa-basket-shopping text-5xl mb-4 text-stone-700"></i>
+                        <p class="text-sm">Az Ön kosara még üres.</p>
+                        <button onclick="toggleCart(false); switchToView('webshop');" class="mt-4 text-xs font-bold text-amber-500 uppercase tracking-widest hover:underline">Vásárlás elkezdése</button>
+                    </div>
+                `;
+                document.getElementById('checkout-btn').disabled = true;
+                document.getElementById('checkout-btn').classList.add('opacity-50', 'cursor-not-allowed');
+                
+                floatingBtn.classList.remove('scale-100');
+                floatingBtn.classList.add('scale-0');
+            } else {
+                document.getElementById('checkout-btn').disabled = false;
+                document.getElementById('checkout-btn').classList.remove('opacity-50', 'cursor-not-allowed');
+                
+                floatingBtn.classList.remove('scale-0');
+                floatingBtn.classList.add('scale-100');
+
+                cart.forEach(item => {
+                    totalItemsCount += item.quantity;
+                    subtotal += (item.price * item.quantity);
+                    
+                    const woodText = item.wood ? ` | Fa: ${item.wood}` : '';
+                    const itemElement = document.createElement('div');
+                    itemElement.className = "flex gap-3 p-3 bg-stone-900 border border-stone-800 rounded items-center";
+                    itemElement.innerHTML = `
+                        <div class="w-16 h-16 bg-stone-800 rounded overflow-hidden shrink-0">
+                            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/78716c/ffffff?text=Hordo'">
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <h4 class="font-bold text-sm text-white truncate">${item.name}</h4>
+                            <p class="text-[10px] text-stone-400 font-mono mt-0.5">${item.volume} | Pörkölés: ${item.toast}${woodText}</p>
+                            <p class="text-xs sm:text-sm font-bold text-amber-500 mt-1">${new Intl.NumberFormat('hu-HU').format(item.price)} Ft</p>
+                        </div>
+                        <div class="flex flex-col items-end gap-2 shrink-0">
+                            <button onclick="removeFromCart('${item.id}')" class="text-stone-550 hover:text-red-500 p-1 transition-colors text-sm" aria-label="Törlés">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                            <div class="flex items-center bg-stone-800 rounded border border-stone-700 text-xs overflow-hidden">
+                                <button onclick="updateQuantity('${item.id}', -1)" class="px-2.5 py-1 hover:bg-stone-700 text-white font-bold">-</button>
+                                <span class="px-2 font-bold text-white min-w-[20px] text-center">${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.id}', 1)" class="px-2.5 py-1 hover:bg-stone-700 text-white font-bold">+</button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(itemElement);
+                });
+            }
+
+            if (totalItemsCount > 0) {
+                countBadge.textContent = totalItemsCount;
+                countBadge.classList.remove('hidden');
+                floatingCount.textContent = totalItemsCount;
+            } else {
+                countBadge.classList.add('hidden');
+            }
+
+            const total = subtotal;
+            const nettSubtotal = Math.round(total / 1.27);
+            const tax = total - nettSubtotal;
+
+            document.getElementById('cart-subtotal').textContent = `${new Intl.NumberFormat('hu-HU').format(nettSubtotal)} Ft`;
+            document.getElementById('cart-tax').textContent = `${new Intl.NumberFormat('hu-HU').format(tax)} Ft`;
+            document.getElementById('cart-total').textContent = `${new Intl.NumberFormat('hu-HU').format(total)} Ft`;
+            document.getElementById('co-final-total').textContent = `${new Intl.NumberFormat('hu-HU').format(total)} Ft`;
+
+            localStorage.setItem('local_cart', JSON.stringify(cart));
+        }
+
+        function toggleCart(show) {
+            const drawer = document.getElementById('cart-drawer-container');
+            if (show) {
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) return;
+            toggleCart(false);
+
+            if (!currentUser) {
+                showNotification("A megrendeléshez kérjük jelentkezzen be!", "error");
+                openAuthModal();
+                return;
+            }
+
+            document.getElementById('co-name').value = currentUser.name || '';
+            document.getElementById('co-phone').value = currentUser.phone || '';
+            document.getElementById('co-email').value = currentUser.email || '';
+
+            document.getElementById('co-bill-zip').value = currentUser.bill_zip || currentUser.ship_zip || '';
+            document.getElementById('co-bill-city').value = currentUser.bill_city || currentUser.ship_city || '';
+            document.getElementById('co-bill-street').value = currentUser.bill_street || currentUser.ship_street || '';
+            document.getElementById('co-bill-house').value = currentUser.bill_house || currentUser.ship_house || '';
+            document.getElementById('co-bill-other').value = currentUser.bill_other || currentUser.ship_other || '';
+
+            document.getElementById('co-ship-zip').value = currentUser.ship_zip || '';
+            document.getElementById('co-ship-city').value = currentUser.ship_city || '';
+            document.getElementById('co-ship-street').value = currentUser.ship_street || '';
+            document.getElementById('co-ship-house').value = currentUser.ship_house || '';
+            document.getElementById('co-ship-other').value = currentUser.ship_other || '';
+
+            switchToView('checkout');
+        }
+
+        function handleCheckoutSubmit(e) {
+            e.preventDefault();
+
+            const orderId = 'BB-' + Math.floor(10000 + Math.random() * 90000);
+            const totalText = document.getElementById('co-final-total').textContent;
+            const payMethod = document.getElementById('co-payment');
+            const payText = payMethod.options[payMethod.selectedIndex].text;
+
+            document.getElementById('success-order-id').textContent = orderId;
+            document.getElementById('success-order-total').textContent = totalText;
+            document.getElementById('success-order-payment').textContent = payText;
+
+            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
+            const newOrder = {
+                orderId: orderId,
+                customerEmail: currentUser.email,
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                items: JSON.parse(JSON.stringify(cart)),
+                date: new Date().toLocaleDateString('hu-HU'),
+                status: 'Feldolgozás alatt'
+            };
+            orders.push(newOrder);
+            localStorage.setItem('local_orders', JSON.stringify(orders));
+
+            cart = [];
+            updateCart();
+
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            switchToView('webshop');
+        }
+
+        function openAuthModal() {
+            document.getElementById('auth-modal').classList.remove('hidden');
+            toggleAuthTab('login');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function toggleAuthTab(tab) {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const tabLogin = document.getElementById('tab-login');
+            const tabRegister = document.getElementById('tab-register');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+                tabLogin.className = "flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500";
+                tabRegister.className = "flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white";
+            } else {
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+                tabLogin.className = "flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white";
+                tabRegister.className = "flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500";
+            }
+        }
+
+        let selectedRegTypeState = 'maganszemely';
+
+        function selectRegType(type) {
+            selectedRegTypeState = type;
+            const btnMagan = document.getElementById('reg-type-magan');
+            const btnCeg = document.getElementById('reg-type-ceg');
+            const cegSection = document.getElementById('reg-ceg-section');
+
+            if (type === 'maganszemely') {
+                btnMagan.className = "py-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all active:scale-95";
+                btnCeg.className = "py-2.5 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all active:scale-95";
+                cegSection.classList.add('hidden');
+            } else {
+                btnMagan.className = "py-2.5 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all active:scale-95";
+                btnCeg.className = "py-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all active:scale-95";
+                cegSection.classList.remove('hidden');
+            }
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
+            const pass = document.getElementById('login-password').value;
+
+            const users = DB.getUsers();
+            const found = users.find(u => u.email.toLowerCase() === email && u.password === pass);
+
+            if (found) {
+                currentUser = found;
+                localStorage.setItem('active_session', JSON.stringify(currentUser));
+                updateNavbarUser();
+                closeAuthModal();
+                renderProducts();
+                showNotification(`Üdvözöljük újra, ${currentUser.name}!`);
+            } else {
+                showNotification("Hibás e-mail cím vagy jelszó!", "error");
+            }
+        }
+
+        function handleRegisterSubmit(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('reg-email').value.trim().toLowerCase();
+            const name = document.getElementById('reg-name').value.trim();
+            const phone = document.getElementById('reg-phone').value.trim();
+            const password = document.getElementById('reg-password').value;
+
+            const users = DB.getUsers();
+            if (users.find(u => u.email.toLowerCase() === email)) {
+                showNotification("Ez az e-mail cím már regisztrálva van!", "error");
+                return;
+            }
+
+            let newUser = {
+                email: email,
+                name: name,
+                phone: phone,
+                password: password,
+                type: selectedRegTypeState
+            };
+
+            DB.saveUser(newUser);
+            currentUser = newUser;
+            localStorage.setItem('active_session', JSON.stringify(currentUser));
+            
+            updateNavbarUser();
+            closeAuthModal();
+            renderProducts();
+            showNotification("Sikeres regisztráció és belépés!");
+        }
+
+        function loadDemoAccount() {
+            document.getElementById('login-email').value = 'teszt@barrels.hu';
+            document.getElementById('login-password').value = '123';
+            showNotification("Minta adatok beillesztve, kattintson a Belépés gombra.");
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('active_session');
+            updateNavbarUser();
+            renderProducts();
+            switchToView('main');
+            showNotification("Sikeresen kijelentkezett a fiókjából.");
+        }
+
+        function updateNavbarUser() {
+            const loggedInBtn = document.getElementById('user-logged-in-btn');
+            const guestBtn = document.getElementById('user-guest-btn');
+            const navName = document.getElementById('nav-user-name');
+
+            if (currentUser) {
+                loggedInBtn.classList.remove('hidden');
+                guestBtn.classList.add('hidden');
+                navName.textContent = currentUser.name;
+            } else {
+                loggedInBtn.classList.add('hidden');
+                guestBtn.classList.remove('hidden');
+            }
+        }
+
+        function openProfileModal() {
+            if (!currentUser) return;
+
+            document.getElementById('prof-name').value = currentUser.name || '';
+            document.getElementById('prof-phone').value = currentUser.phone || '';
+
+            renderProfileOrders();
+            document.getElementById('profile-modal').classList.remove('hidden');
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profile-modal').classList.add('hidden');
+        }
+
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+
+            currentUser.name = document.getElementById('prof-name').value.trim();
+            currentUser.phone = document.getElementById('prof-phone').value.trim();
+
+            DB.saveUser(currentUser);
+            localStorage.setItem('active_session', JSON.stringify(currentUser));
+            
+            updateNavbarUser();
+            closeProfileModal();
+            showNotification("Profil adatai sikeresen módosítva!");
+        }
+
+        function renderProfileOrders() {
+            const container = document.getElementById('profile-orders');
+            container.innerHTML = '';
+
+            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
+            const userOrders = orders.filter(o => o.customerEmail.toLowerCase() === currentUser.email.toLowerCase());
+
+            if (userOrders.length === 0) {
+                container.innerHTML = `
+                    <div class="p-6 text-center text-stone-500 text-xs">
+                        Önnek még nincs leadott rendelése.
+                    </div>
+                `;
+                return;
+            }
+
+            userOrders.forEach(o => {
+                const block = document.createElement('div');
+                block.className = "bg-stone-950 p-4 rounded border border-stone-800 space-y-2";
+                
+                let itemsListHtml = '';
+                o.items.forEach(it => {
+                    const woodText = it.wood ? `, Fa: ${it.wood}` : '';
+                    itemsListHtml += `<div class="text-[11px] sm:text-xs text-stone-300">• ${it.name} (${it.volume}, ${it.toast}${woodText}) - ${it.quantity} db</div>`;
+                });
+
+                block.innerHTML = `
+                    <div class="flex justify-between items-center text-xs border-b border-stone-900 pb-1.5 mb-1.5">
+                        <span class="font-mono text-amber-500 font-bold">${o.orderId}</span>
+                        <span class="text-stone-400 font-mono">${o.date}</span>
+                    </div>
+                    <div class="space-y-1">
+                        ${itemsListHtml}
+                    </div>
+                    <div class="flex justify-between items-center text-xs pt-1 border-t border-stone-900 mt-2 font-bold">
+                        <span class="text-stone-400">Végösszeg:</span>
+                        <span class="text-white">${new Intl.NumberFormat('hu-HU').format(o.total)} Ft</span>
+                    </div>
+                    <div class="flex justify-end pt-1">
+                        <span class="text-[9px] uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20">${o.status}</span>
+                    </div>
+                `;
+                container.appendChild(block);
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    switchToView('main');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        history.pushState(null, null, targetId);
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
