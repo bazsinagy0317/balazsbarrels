@@ -2400,7 +2400,7 @@
             checkCookieConsent();
             switchToView('main');
 
-            // Listen to automatic Supabase Auth status changes (including GitHub OAuth redirects)
+            // Listen to automatic Supabase Auth status changes
             if (supabaseClient) {
                 supabaseClient.auth.onAuthStateChange(async (event, session) => {
                     if (session && session.user) {
@@ -2413,17 +2413,16 @@
                         }
 
                         const userEmail = session.user.email || '';
-                        const isGithubUser = session.user.app_metadata?.provider === 'github';
                         const isAdmin = profileData.is_admin || 
                                         session.user.user_metadata?.is_admin || 
-                                        isGithubUser || 
+                                        userEmail.toLowerCase() === 'bazsinagy0317@gmail.com' || 
                                         userEmail.includes('admin') || 
                                         userEmail === 'teszt@barrels.hu';
 
                         currentUser = {
                             id: session.user.id,
                             email: userEmail,
-                            name: profileData.name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || userEmail.split('@')[0] || 'Felhasználó',
+                            name: profileData.name || session.user.user_metadata?.name || 'Nagy Balázs (Admin)',
                             phone: profileData.phone || session.user.user_metadata?.phone || '',
                             is_admin: isAdmin,
                             ship_country: profileData.country || 'Magyarország',
@@ -2450,25 +2449,30 @@
             }
         };
 
-        async function loginWithGithub() {
-            if (!supabaseClient) {
-                showNotification("A Supabase hitelesítés nem érhető el!", "error");
-                return;
+        // Scroll listener for "Back to top" button
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('back-to-top');
+            if (!btn) return;
+            const scrollPos = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            if (scrollPos > 250) {
+                btn.classList.remove('opacity-0', 'pointer-events-none');
+                btn.classList.add('opacity-100', 'pointer-events-auto');
+            } else {
+                btn.classList.remove('opacity-100', 'pointer-events-auto');
+                btn.classList.add('opacity-0', 'pointer-events-none');
             }
-            try {
-                showNotification("Átirányítás a GitHub bejelentkezésre...");
-                const { data, error } = await supabaseClient.auth.signInWithOAuth({
-                    provider: 'github',
-                    options: {
-                        redirectTo: window.location.origin + window.location.pathname
-                    }
-                });
-                if (error) {
-                    showNotification("GitHub bejelentkezési hiba: " + error.message, "error");
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('hamburger-icon');
+            if (menu) menu.classList.toggle('hidden');
+            if (icon) {
+                if (menu.classList.contains('hidden')) {
+                    icon.className = "fa-solid fa-bars text-xl";
+                } else {
+                    icon.className = "fa-solid fa-xmark text-xl";
                 }
-            } catch (err) {
-                console.error("GitHub OAuth hiba:", err);
-                showNotification("Hiba történt a GitHub belépés során!", "error");
             }
         }
 
@@ -2477,7 +2481,7 @@
             const icon = document.getElementById('hamburger-icon');
             if (menu && !menu.classList.contains('hidden')) {
                 menu.classList.add('hidden');
-                icon.className = "fa-solid fa-bars text-xl";
+                if (icon) icon.className = "fa-solid fa-bars text-xl";
             }
         }
 
@@ -3142,7 +3146,36 @@
             const email = document.getElementById('login-email').value.trim().toLowerCase();
             const pass = document.getElementById('login-password').value;
 
-            // Elsőként megpróbáljuk a Supabase felhős bejelentkezést
+            // KÖZVETLEN ADMINISZTRÁTORI BELÉPÉS KIVÉTEL
+            if (email === 'bazsinagy0317@gmail.com' && pass === 'Balazs0313') {
+                currentUser = {
+                    id: 'admin-bazsinagy0317',
+                    email: 'bazsinagy0317@gmail.com',
+                    name: 'Nagy Balázs (Admin)',
+                    phone: '+36 70 562 8453',
+                    is_admin: true,
+                    ship_country: 'Magyarország',
+                    ship_zip: '7900',
+                    ship_city: 'Botykapeterd',
+                    ship_street: 'Fő út',
+                    ship_house: '017/22',
+                    company_name: 'Balazs Barrels Zrt.'
+                };
+                
+                // Mentsük a Supabase felhőbe is a háttérben
+                if (supabaseClient) {
+                    supabaseClient.auth.signInWithPassword({ email, password: pass }).catch(() => {});
+                }
+
+                localStorage.setItem('active_session', JSON.stringify(currentUser));
+                updateNavbarUser();
+                closeAuthModal();
+                renderProducts();
+                showNotification(`Üdvözöljük újra, ${currentUser.name}! (Adminisztrátor)`);
+                return;
+            }
+
+            // Supabase felhős bejelentkezési kísérlet egyéb fiókokhoz
             if (supabaseClient) {
                 try {
                     const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -3194,7 +3227,7 @@
                 }
             }
 
-            // Ha a Supabase-ben nem található a fiók, megnézzük a helyi (localStorage / teszt) fiókokat
+            // Helyi teszt fiók ellenőrzése
             const users = DB.getUsers();
             const found = users.find(u => u.email.toLowerCase() === email && u.password === pass);
 
@@ -3594,6 +3627,7 @@
             showNotification(`Rendelés (${orderId}) státusza frissítve: ${newStatus}`);
         }
 
+        // Keyboard & Smooth Scroll Event Handlers
         window.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeProductModal();
