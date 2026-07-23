@@ -12,6 +12,13 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80">
     <meta property="og:type" content="website">
 
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Balazs Barrels Zrt. | Prémium Hordókészítés">
+    <meta name="twitter:description" content="Kézműves hordók és kádártermékek közvetlenül a botykapeterdi gyártótól.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80">
+    <link rel="canonical" href="https://balazsbarrels.com/">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="Balázs Barrels logo vektor.png">
 
@@ -1359,7 +1366,6 @@
         </div>
     </section>
 
-    <!-- Authentication Modal -->
     <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-85" onclick="closeAuthModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1428,50 +1434,13 @@
                         <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">Ország <span class="text-amber-500">*</span></label>
                         <select id="reg-country" onchange="handleCountryChange()" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
                             <option value="Magyarország" selected>Magyarország</option>
-                            <option value="Albánia">Albánia</option>
-                            <option value="Andorra">Andorra</option>
                             <option value="Ausztria">Ausztria</option>
-                            <option value="Belgium">Belgium</option>
-                            <option value="Bosznia-Hercegovina">Bosznia-Hercegovina</option>
-                            <option value="Bulgária">Bulgária</option>
-                            <option value="Ciprus">Ciprus</option>
-                            <option value="Csehország">Csehország</option>
-                            <option value="Dánia">Dánia</option>
-                            <option value="Egyesült Királyság">Egyesült Királyság</option>
-                            <option value="Észak-Macedónia">Észak-Macedónia</option>
-                            <option value="Észtország">Észtország</option>
-                            <option value="Finnország">Finnország</option>
-                            <option value="Franciaország">Franciaország</option>
-                            <option value="Görögország">Görögország</option>
-                            <option value="Grúzia">Grúzia</option>
-                            <option value="Hollandia">Hollandia</option>
-                            <option value="Horvátország">Horvátország</option>
-                            <option value="Írország">Írország</option>
-                            <option value="Izland">Izland</option>
-                            <option value="Lengyelország">Lengyelország</option>
-                            <option value="Lettország">Lettország</option>
-                            <option value="Litvánia">Litvánia</option>
-                            <option value="Luxemburg">Luxemburg</option>
-                            <option value="Málta">Málta</option>
-                            <option value="Moldova">Moldova</option>
-                            <option value="Monaco">Monaco</option>
-                            <option value="Montenegró">Montenegró</option>
                             <option value="Németország">Németország</option>
-                            <option value="Norvégia">Norvégia</option>
-                            <option value="Olaszország">Olaszország</option>
-                            <option value="Örményország">Örményország</option>
-                            <option value="Portugália">Portugália</option>
                             <option value="Románia">Románia</option>
-                            <option value="San Marino">San Marino</option>
-                            <option value="Spanyolország">Spanyolország</option>
-                            <option value="Svájc">Svájc</option>
-                            <option value="Svédország">Svédország</option>
-                            <option value="Szerbia">Szerbia</option>
                             <option value="Szlovákia">Szlovákia</option>
-                            <option value="Szlovénia">Szlovénia</option>
-                            <option value="Törökország">Törökország</option>
-                            <option value="Ukrajna">Ukrajna</option>
-                            <option value="Vatikán">Vatikán</option>
+                            <option value="Olaszország">Olaszország</option>
+                            <option value="Franciaország">Franciaország</option>
+                            <option value="Spanyolország">Spanyolország</option>
                         </select>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1534,7 +1503,6 @@
         </div>
     </div>
 
-    <!-- User Profile Modal -->
     <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProfileModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-4xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1655,7 +1623,7 @@
         </div>
     </div>
 
-    <!-- Product Configuration Modal -->
+    <!-- Product Configuration Modal (With Wood and Toast Options) -->
     <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProductModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative z-10 flex flex-col md:flex-row">
@@ -1675,25 +1643,44 @@
                     <span id="modal-product-category" class="text-amber-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider block mb-1">Kategória</span>
                     <h3 id="modal-product-name" class="text-lg sm:text-xl font-serif font-bold text-white mb-2 sm:mb-3">Termék neve</h3>
                     
-                    <div class="mb-4">
-                        <p id="modal-product-desc" class="text-stone-300 text-xs sm:text-sm leading-relaxed max-h-[120px] md:max-h-[160px] overflow-y-auto pr-1">Leírás.</p>
+                    <div class="mb-3">
+                        <p id="modal-product-desc" class="text-stone-300 text-xs sm:text-sm leading-relaxed max-h-[100px] overflow-y-auto pr-1">Leírás.</p>
                     </div>
 
-                    <div id="modal-custom-laser-notice" class="mb-4 p-3 bg-stone-950/65 border border-amber-600/30 rounded-lg text-[11px] sm:text-xs text-stone-300 flex items-start gap-2.5">
+                    <!-- Dynamic Barrel Configuration Dropdowns -->
+                    <div class="space-y-3 my-3 bg-stone-950/70 p-3 rounded-lg border border-stone-800">
+                        <div>
+                            <label class="block text-[11px] font-bold text-amber-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-tree mr-1"></i> Fafajta Választása:</label>
+                            <select id="modal-wood-select" onchange="selectedConfig.wood = this.value" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs font-medium focus:border-amber-500 focus:outline-none">
+                                <option value="Tölgyfa (Magyar Tölgy)">Magyar Tölgyfa (Klasszikus)</option>
+                                <option value="Akácfa">Akácfa (Szelíd csersav)</option>
+                                <option value="Cseresznyefa">Cseresznyefa (Gyümölcsös)</option>
+                                <option value="Eperfa">Eperfa (Aranysárga pálinkához)</option>
+                                <option value="Kőrisfa">Kőrisfa</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-amber-400 uppercase tracking-wider mb-1"><i class="fa-solid fa-fire mr-1"></i> Pörkölési szint (Égetés):</label>
+                            <select id="modal-toast-select" onchange="selectedConfig.toast = this.value" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs font-medium focus:border-amber-500 focus:outline-none">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="modal-custom-laser-notice" class="mb-3 p-2.5 bg-stone-950/65 border border-amber-600/30 rounded-lg text-[11px] text-stone-300 flex items-start gap-2">
                         <i class="fa-solid fa-wand-magic-sparkles text-amber-500 mt-0.5 shrink-0"></i>
                         <div>
-                            <strong class="text-amber-400 block mb-0.5">Egyedi feliratozás és logózás!</strong>
-                            Személyre szabott hordó rendelhető: felár ellenében egyedi logó vagy felirat elhelyezést vállalunk.
+                            <strong class="text-amber-400 block mb-0.5">Egyedi feliratozás és lézergravírozás!</strong>
+                            Kérjen egyedi családi címert, monogramot, évszámot vagy céglogót a hordó fejére vagy hasára. Adja meg a kívánt feliratot, a kért méretet és az elhelyezést a pénztár megjegyzés rovatában, vagy küldje el a logó/vektoros grafika fájlját az <a href="mailto:info@balazsbarrels.com" class="text-amber-400 underline font-semibold">info@balazsbarrels.com</a> e-mail címre. A maximális gravírozható méret a hordó űrtartalmához és átmérőjéhez igazodik.
                         </div>
                     </div>
                 </div>
 
-                <div class="border-t border-stone-800 pt-4 mt-2">
-                    <div class="flex justify-between items-center mb-4">
+                <div class="border-t border-stone-800 pt-3 mt-1">
+                    <div class="flex justify-between items-center mb-3">
                         <span class="text-stone-400 text-xs">Várható bruttó ár:</span>
-                        <span id="modal-product-price" class="text-xl sm:text-2xl font-black text-amber-500">0 Ft</span>
+                        <span id="modal-product-price" class="text-xl sm:text-2xl font-black text-amber-500 font-mono">0 Ft</span>
                     </div>
-                    <button onclick="addProductToCart()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-95 text-xs sm:text-sm">
+                    <button onclick="addProductToCart()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3 rounded flex items-center justify-center gap-2 transition-all active:scale-95 text-xs sm:text-sm">
                         Hozzáadás a Kosárhoz <i class="fa-solid fa-shopping-basket"></i>
                     </button>
                 </div>
@@ -1722,7 +1709,6 @@
                     <p><strong>Telephely és Gyártóüzem:</strong> 7900 Botykapeterd, hrsz: 017/22</p>
                     <p><strong>Cégjegyzékszám:</strong> 01-10-047123 (Fővárosi Törvényszék Cégbírósága)</p>
                     <p><strong>Adószám:</strong> 23456789-2-43 | <strong>Kamarai tagság:</strong> BKIK</p>
-                    <p><strong>NÉBIH EUTR azonosító:</strong> AA5839201 (Faanyaggazdálkodási lánc regisztráció)</p>
                     <p><strong>E-mail:</strong> info@balazsbarrels.com | <strong>Telefon:</strong> +36 70 562 8453</p>
                 </section>
 
@@ -1755,21 +1741,13 @@
 
                 <section>
                     <h4 class="font-bold text-amber-500 uppercase tracking-wider mb-1 text-sm">7. Panaszkezelés és Jogorvoslat</h4>
-                    <p>Esetleges panaszaival forduljon hozzánk a <a href="mailto:info@balazsbarrels.com" class="text-amber-500 underline">info@balazsbarrels.com</a> e-mail címen.</p>
-                    <div class="mt-2 bg-stone-950 p-3.5 rounded border border-stone-800 text-[11px] space-y-1">
-                        <strong class="text-amber-400 block text-xs mb-1"><i class="fa-solid fa-scale-balanced mr-1"></i> Illetékes Békéltető Testület (Fogyasztói jogvita esetén):</strong>
-                        <p><strong>Budapesti Békéltető Testület</strong></p>
-                        <p><strong>Cím:</strong> 1016 Budapest, Krisztina krt. 99. I. em. 111.</p>
-                        <p><strong>Levelezési cím:</strong> 1253 Budapest, Pf. 10.</p>
-                        <p><strong>Telefon:</strong> +36 (1) 488-2131 | <strong>E-mail:</strong> bekelteto.testulet@bkik.hu</p>
-                        <p><strong>Hivatalos honlap:</strong> <a href="https://bekeltet.bkik.hu" target="_blank" rel="noopener noreferrer" class="text-amber-500 underline">https://bekeltet.bkik.hu</a></p>
-                    </div>
+                    <p>Esetleges panaszaival forduljon hozzánk a <a href="mailto:info@balazsbarrels.com" class="text-amber-500 underline">info@balazsbarrels.com</a> e-mail címen. Fogyasztói jogvita esetén a Vásárló a területi Békéltető Testülethez vagy a Fogyasztóvédelmi Hatósághoz is fordulhat.</p>
                 </section>
             </div>
         </div>
     </div>
 
-    <!-- Privacy Policy Modal -->
+    <!-- Privacy Policy Modal (GDPR) -->
     <div id="privacy-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeModal('privacy-modal')"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-4xl w-full p-6 shadow-2xl relative z-10 max-h-[88vh] overflow-y-auto">
@@ -1814,16 +1792,7 @@
 
                 <section>
                     <h4 class="font-bold text-amber-500 uppercase tracking-wider mb-1 text-sm">5. Jogorvoslat</h4>
-                    <p>Jogainak megsértése esetén Ön a **Nemzeti Adatvédelmi és Információszabadság Hatóasághoz (NAHIH)** (1055 Budapest, Falk Miksa utca 9-11., www.naih.hu) vagy az illetékes bírósághoz fordulhat.</p>
-                </section>
-
-                <section class="border-t border-stone-800 pt-3">
-                    <h4 class="font-bold text-amber-500 uppercase tracking-wider mb-1 text-sm">6. Sütik (Cookie-k) Kezelése</h4>
-                    <p>Webáruházunk a felhasználói élmény javítása, a kosár tartalmának megőrzése és a munkamenet biztonsága érdekében sütiket (cookie) használ:</p>
-                    <ul class="list-disc pl-5 space-y-1 mt-1 text-[11px] text-stone-400">
-                        <li><strong>Működéshez elengedhetetlen sütik:</strong> A kosár állapotát (`bb_cart`), a bejelentkezést és a süti-hozzájárulást tárolják. Megtagadásuk esetén a webshop nem tud megfelelően működni.</li>
-                        <li><strong>Kényelmi és analitikai sütik:</strong> Anonim statisztikai adatokat gyűjtenek az oldal látogatottságáról a szolgáltatások fejlesztése céljából.</li>
-                    </ul>
+                    <p>Jogainak megsértése esetén Ön a **Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAHIH)** (1055 Budapest, Falk Miksa utca 9-11., www.naih.hu) vagy az illetékes bírósághoz fordulhat.</p>
                 </section>
             </div>
         </div>
@@ -1865,14 +1834,6 @@
                         <span class="text-stone-500 block text-[10px] uppercase font-bold">Adószám</span>
                         <span class="text-stone-200">23456789-2-43</span>
                     </div>
-                    <div>
-                        <span class="text-stone-500 block text-[10px] uppercase font-bold">NÉBIH EUTR azonosító</span>
-                        <span class="text-amber-400">AA5839201</span>
-                    </div>
-                    <div>
-                        <span class="text-stone-500 block text-[10px] uppercase font-bold">Illetékes Békéltető Testület</span>
-                        <span class="text-stone-200">Budapesti Békéltető Testület</span>
-                    </div>
                 </div>
 
                 <div class="space-y-1 pt-1 text-[11px] text-stone-400">
@@ -1881,37 +1842,6 @@
                     <p><strong>Tárhelyszolgáltató:</strong> Supabase Cloud Inc. / GitHub Pages</p>
                     <p><strong>Szerzői jogok:</strong> A weboldalon található valamennyi kép, leírás és márkaelem a Balazs Barrels Zrt. kizárólagos szellemi tulajdona.</p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Privacy Policy Modal -->
-    <div id="privacy-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-        <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeModal('privacy-modal')"></div>
-        <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full p-6 shadow-2xl relative z-10 max-h-[88vh] overflow-y-auto">
-            <button onclick="closeModal('privacy-modal')" class="absolute top-4 right-4 text-stone-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <h3 class="font-serif font-bold text-xl text-amber-500 mb-4 border-b border-stone-800 pb-2">Adatkezelési Tájékoztató (GDPR)</h3>
-            <div class="text-xs leading-relaxed text-stone-300 space-y-3">
-                <p><strong>1. Adatkezelő:</strong> Balazs Barrels Zrt. gondoskodik a megadott személyes adatok védelméről és bizalmas kezeléséről a GDPR előírásai szerint.</p>
-                <p><strong>2. Adatkezelés célja:</strong> A regisztráció, rendelések teljesítése, számlázás és ügyfélszolgálati kapcsolat tartása.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Impresszum Modal -->
-    <div id="impressum-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-        <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeModal('impressum-modal')"></div>
-        <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-xl w-full p-6 shadow-2xl relative z-10">
-            <button onclick="closeModal('impressum-modal')" class="absolute top-4 right-4 text-stone-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <h3 class="font-serif font-bold text-xl text-amber-500 mb-4 border-b border-stone-800 pb-2">Impresszum</h3>
-            <div class="text-xs leading-relaxed text-stone-300 space-y-2 font-mono">
-                <p><strong>Cégnév:</strong> Balazs Barrels Zrt.</p>
-                <p><strong>Székhely:</strong> 1191 Budapest, Hamvas utca 7-9.</p>
-                <p><strong>Gyártás helye:</strong> 7900 Botykapeterd, hrsz: 017/22</p>
-                <p><strong>Cégjegyzékszám:</strong> 01-10-047123</p>
-                <p><strong>Adószám:</strong> 23456789-2-43</p>
-                <p><strong>Kamarai tagság:</strong> Budapesti Kereskedelmi és Iparkamara (BKIK)</p>
-                <p><strong>Tárhelyszolgáltató:</strong> GitHub Pages / Supabase Cloud</p>
             </div>
         </div>
     </div>
@@ -2024,26 +1954,6 @@
         </div>
     </div>
 
-    <!-- Cookie (Süti) Consent Banner -->
-    <div id="cookie-banner" class="fixed bottom-0 inset-x-0 z-50 bg-stone-950/95 backdrop-blur-md border-t border-amber-600/40 text-stone-200 p-4 sm:p-5 shadow-2xl transition-all duration-500 transform translate-y-full">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-start sm:items-center gap-3 text-xs sm:text-sm">
-                <i class="fa-solid fa-cookie-bite text-amber-500 text-2xl shrink-0 mt-0.5 sm:mt-0"></i>
-                <p class="leading-relaxed">
-                    A Balazs Barrels Zrt. sütiket (cookie-kat) használ a webáruház működtetéséhez, a kosár megőrzéséhez és a felhasználói élmény javításához. Részletek az <a href="#" onclick="openModal('privacy-modal'); return false;" class="text-amber-400 underline font-semibold hover:text-amber-300">Adatkezelési Tájékoztatóban</a>.
-                </p>
-            </div>
-            <div class="flex items-center gap-2.5 shrink-0 w-full md:w-auto">
-                <button onclick="acceptCookies('necessary')" class="flex-1 md:flex-initial bg-stone-800 hover:bg-stone-700 text-stone-300 font-bold py-2.5 px-4 rounded text-xs transition-all active:scale-95 border border-stone-700 whitespace-nowrap">
-                    Csak a szükségesek
-                </button>
-                <button onclick="acceptCookies('all')" class="flex-1 md:flex-initial bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-2.5 px-5 rounded text-xs transition-all active:scale-95 shadow-lg whitespace-nowrap">
-                    Összes elfogadása
-                </button>
-            </div>
-        </div>
-    </div>
-
     <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-40 bg-stone-900 border border-amber-600/50 text-amber-500 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-amber-600 hover:text-stone-950">
         <i class="fa-solid fa-arrow-up text-lg"></i>
     </button>
@@ -2080,7 +1990,7 @@
         let currentUser = null;
         let cart = [];
         let selectedProduct = null;
-        let selectedConfig = { toast: null, wood: null };
+        let selectedConfig = { toast: 'Medium', wood: 'Tölgyfa (Magyar Tölgy)' };
         let currentCategoryFilter = 'all';
         let selectedRegTypeState = 'maganszemely';
 
@@ -2143,7 +2053,7 @@
                 price: 185000,
                 desc: 'Világszerte elismert klasszikus bordeaux-i méretű prémium tölgyfahordó borérleléshez.',
                 images: ['https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky']
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky Toast']
             },
             {
                 id: 'barrique-228l',
@@ -2153,7 +2063,7 @@
                 price: 190000,
                 desc: 'Burgundi stílusú, vastagabb dongával szerelt prémium hordó.',
                 images: ['https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky']
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky Toast']
             },
             {
                 id: 'barrique-300l',
@@ -2163,7 +2073,7 @@
                 price: 215000,
                 desc: 'Közép-európai igényekre szabott tágas barrique hordó.',
                 images: ['https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky']
+                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky Toast']
             },
             {
                 id: 'edeny-kicsi',
@@ -2425,16 +2335,19 @@
             const guestBtn = document.getElementById('user-guest-btn');
             const navName = document.getElementById('nav-user-name');
             const adminBtn = document.getElementById('nav-admin-btn');
+            const priceBanner = document.getElementById('prices-hidden-banner');
 
             if (currentUser) {
                 loggedInBtn?.classList.remove('hidden');
                 guestBtn?.classList.add('hidden');
+                priceBanner?.classList.add('hidden');
                 if (navName) navName.textContent = currentUser.name;
                 if (currentUser.is_admin) adminBtn?.classList.remove('hidden');
                 else adminBtn?.classList.add('hidden');
             } else {
                 loggedInBtn?.classList.add('hidden');
                 guestBtn?.classList.remove('hidden');
+                priceBanner?.classList.remove('hidden');
                 adminBtn?.classList.add('hidden');
             }
         }
@@ -2597,12 +2510,25 @@
             selectedProduct = products.find(p => p.id === productId);
             if (!selectedProduct) return;
 
-            selectedConfig.toast = selectedProduct.toastLevels ? selectedProduct.toastLevels[0] : null;
             document.getElementById('modal-product-name').textContent = selectedProduct.name;
             document.getElementById('modal-product-category').textContent = selectedProduct.category;
             document.getElementById('modal-product-desc').textContent = selectedProduct.desc;
             document.getElementById('modal-product-price').textContent = `${new Intl.NumberFormat('hu-HU').format(selectedProduct.price)} Ft`;
             document.getElementById('modal-product-img').src = selectedProduct.images ? selectedProduct.images[0] : 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80';
+
+            // Populate Toast Dropdown dynamically
+            const toastSelect = document.getElementById('modal-toast-select');
+            if (toastSelect && selectedProduct.toastLevels) {
+                toastSelect.innerHTML = selectedProduct.toastLevels.map(t => `<option value="${t}">${t}</option>`).join('');
+                selectedConfig.toast = selectedProduct.toastLevels[0];
+            }
+
+            // Reset Wood Dropdown to default oak
+            const woodSelect = document.getElementById('modal-wood-select');
+            if (woodSelect) {
+                woodSelect.value = 'Tölgyfa (Magyar Tölgy)';
+                selectedConfig.wood = 'Tölgyfa (Magyar Tölgy)';
+            }
 
             document.getElementById('product-modal')?.classList.remove('hidden');
         }
@@ -2620,10 +2546,20 @@
 
         function addProductToCart() {
             if (!selectedProduct) return;
-            cart.push({ ...selectedProduct, toast: selectedConfig.toast || 'Alapértelmezett', quantity: 1 });
+
+            const woodVal = document.getElementById('modal-wood-select')?.value || selectedConfig.wood || 'Magyar Tölgyfa';
+            const toastVal = document.getElementById('modal-toast-select')?.value || selectedConfig.toast || 'Medium';
+
+            cart.push({ 
+                ...selectedProduct, 
+                wood: woodVal,
+                toast: toastVal, 
+                quantity: 1 
+            });
+
             updateCart();
             closeProductModal();
-            showNotification("Hozzáadva a kosárhoz!");
+            showNotification(`Hozzáadva a kosárhoz: ${selectedProduct.name} (${woodVal}, ${toastVal})`);
         }
 
         function removeFromCart(index) {
@@ -2646,11 +2582,11 @@
                 div.innerHTML = `
                     <div>
                         <strong class="text-white block">${item.name}</strong>
-                        <span class="text-stone-400">${item.volume}</span>
+                        <span class="text-amber-400 block text-[11px] font-medium">${item.volume} • ${item.wood || 'Tölgyfa'} • Égetés: ${item.toast || 'Medium'}</span>
                     </div>
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 shrink-0">
                         <span class="text-amber-500 font-mono font-bold">${new Intl.NumberFormat('hu-HU').format(item.price)} Ft</span>
-                        <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 p-1"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 p-1" title="Törlés"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 `;
                 container.appendChild(div);
@@ -2844,7 +2780,7 @@
                     ? `<span class="bg-blue-900/40 text-blue-400 border border-blue-600/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1"><i class="fa-solid fa-file-invoice"></i> Számla: ${ord.billingo_number}</span>`
                     : `<button onclick='createBillingoInvoice(${JSON.stringify(ord)}, true)' class="bg-blue-700 hover:bg-blue-600 text-white font-bold text-[11px] px-3 py-1 rounded transition-all flex items-center gap-1 shadow active:scale-95"><i class="fa-solid fa-file-invoice"></i> Számla Kiállítása</button>`;
 
-                let itemsHtml = (ord.items || []).map(it => `<li class="text-[11px] text-stone-300">• ${it.name} (${it.volume}) - ${it.quantity} db</li>`).join('');
+                let itemsHtml = (ord.items || []).map(it => `<li class="text-[11px] text-stone-300">• ${it.name} (${it.volume}) - ${it.wood || 'Tölgyfa'}, ${it.toast || 'Medium'} - ${it.quantity} db</li>`).join('');
 
                 div.innerHTML = `
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-stone-800 pb-2.5 gap-2">
@@ -3123,25 +3059,6 @@
             document.getElementById('mobile-menu')?.classList.add('hidden'); 
         }
 
-        function checkCookieConsent() {
-            const consent = localStorage.getItem('bb_cookie_consent');
-            if (!consent) {
-                setTimeout(() => {
-                    document.getElementById('cookie-banner')?.classList.remove('translate-y-full');
-                }, 800);
-            }
-        }
-
-        function acceptCookies(type) {
-            localStorage.setItem('bb_cookie_consent', type);
-            document.getElementById('cookie-banner')?.classList.add('translate-y-full');
-            if (type === 'all') {
-                showNotification("Minden süti használata elfogadva!");
-            } else {
-                showNotification("Kizárólag a működéshez szükséges sütik engedélyezve.");
-            }
-        }
-
         window.onload = function() {
             // Restore session
             const savedSession = localStorage.getItem('active_session');
@@ -3162,7 +3079,6 @@
             renderGallery();
             renderProducts();
             switchToView('main');
-            checkCookieConsent();
         };
     </script>
 </body>
