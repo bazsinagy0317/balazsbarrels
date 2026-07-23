@@ -87,6 +87,14 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        /* Honeypot field styling for anti-spam */
+        .hp-field {
+            display: none !important;
+            position: absolute !important;
+            left: -9999px !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
     </style>
     
     <script>
@@ -225,7 +233,8 @@
         </div>
     </nav>
 
-    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4"></div>
+    <!-- Toast container with aria-live="polite" for accessibility -->
+    <div id="toast-container" aria-live="polite" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4"></div>
 
     <div id="main-view-container">
         <section id="home" class="relative py-20 md:py-28 px-4 sm:px-6 bg-stone-900 text-stone-100 overflow-hidden">
@@ -265,7 +274,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="w-full md:w-2/3 leading-relaxed text-stone-700 text-sm sm:text-base">
+                    <div class="w-full md:2/3 leading-relaxed text-stone-700 text-sm sm:text-base">
                         <p class="mb-4">
                             A <strong>Balazs Barrels Zrt.</strong>-t 2011 decemberében alapította <strong>Nagy Balázs</strong> vezérigazgató, aki a nemzetközi borvilágban már korábban is nevet szerzett magának az elismert Trust hordógyártó vállalat alapítójaként és vezetőjeként. 
                         </p>
@@ -1234,6 +1243,9 @@
             </h2>
 
             <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm">
+                <!-- Anti-spam Honeypot field -->
+                <input type="text" name="co_hp" id="co-hp" class="hp-field" tabindex="-1" autocomplete="off">
+
                 <div class="space-y-4">
                     <h3 class="text-xs sm:text-sm uppercase text-stone-400 font-bold tracking-widest border-b border-stone-800 pb-1">Vevő és Számlázási Adatok</h3>
                     <div>
@@ -1396,6 +1408,9 @@
             </form>
 
             <form id="register-form" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden text-xs sm:text-sm">
+                <!-- Anti-spam Honeypot field -->
+                <input type="text" name="reg_hp" id="reg-hp" class="hp-field" tabindex="-1" autocomplete="off">
+
                 <p class="text-[11px] text-stone-400 italic mb-1"><span class="text-amber-500 font-bold">*</span> A csillaggal jelölt mezők kitöltése kötelező.</p>
 
                 <div>
@@ -1571,7 +1586,6 @@
         </div>
     </div>
 
-    <!-- Care Guide Modal -->
     <div id="care-guide-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeCareGuideModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full p-5 sm:p-8 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1589,7 +1603,6 @@
         </div>
     </div>
 
-    <!-- Quote Request Modal -->
     <div id="quote-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeQuoteModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-2xl w-full p-5 sm:p-8 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1600,6 +1613,9 @@
                 <i class="fa-solid fa-paper-plane"></i> Egyedi Ajánlatkérés Borászatoknak
             </h3>
             <form id="quote-form" onsubmit="handleQuoteSubmit(event)" class="space-y-4 text-xs sm:text-sm">
+                <!-- Anti-spam Honeypot field -->
+                <input type="text" name="quote_hp" id="quote-hp" class="hp-field" tabindex="-1" autocomplete="off">
+
                 <div>
                     <label class="block text-stone-400 font-bold mb-1">Borászat / Cégnév *</label>
                     <input type="text" id="q-company" required class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700">
@@ -1623,7 +1639,7 @@
         </div>
     </div>
 
-    <!-- Product Configuration Modal (With Wood and Toast Options) -->
+    <!-- Product Configuration Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProductModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative z-10 flex flex-col md:flex-row">
@@ -1688,7 +1704,6 @@
         </div>
     </div>
 
-    <!-- ÁSZF Modal -->
     <div id="aszf-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeModal('aszf-modal')"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-4xl w-full p-6 shadow-2xl relative z-10 max-h-[88vh] overflow-y-auto">
@@ -1747,7 +1762,6 @@
         </div>
     </div>
 
-    <!-- Privacy Policy Modal (GDPR) -->
     <div id="privacy-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeModal('privacy-modal')"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-4xl w-full p-6 shadow-2xl relative z-10 max-h-[88vh] overflow-y-auto">
@@ -1798,7 +1812,6 @@
         </div>
     </div>
 
-    <!-- Impresszum Modal -->
     <div id="impressum-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeModal('impressum-modal')"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-2xl w-full p-6 shadow-2xl relative z-10">
@@ -1846,7 +1859,6 @@
         </div>
     </div>
 
-    <!-- Shopping Cart Drawer -->
     <div id="cart-drawer-container" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black bg-opacity-75 transition-opacity" onclick="toggleCart(false)"></div>
         <div class="absolute right-0 top-0 bottom-0 max-w-md w-full bg-stone-950 border-l border-stone-800 text-stone-100 flex flex-col shadow-2xl">
@@ -2102,6 +2114,21 @@
 
         let currentLightboxIndex = 0;
 
+        // Accessibility & Esc Key listener to close all open modals/drawers
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAllModalsAndDrawers();
+            }
+        });
+
+        function closeAllModalsAndDrawers() {
+            const modals = ['auth-modal', 'profile-modal', 'care-guide-modal', 'quote-modal', 'product-modal', 'aszf-modal', 'privacy-modal', 'impressum-modal', 'admin-product-modal', 'success-modal'];
+            modals.forEach(id => closeModal(id));
+            closeGalleryLightbox();
+            toggleCart(false);
+            closeMobileMenu();
+        }
+
         function showNotification(message, type = 'success') {
             const container = document.getElementById('toast-container');
             if (!container) return;
@@ -2227,6 +2254,13 @@
 
         async function handleRegisterSubmit(e) {
             e.preventDefault();
+
+            // Spam Honeypot validation
+            const hpVal = document.getElementById('reg-hp')?.value;
+            if (hpVal) {
+                console.warn('Spam submission detected via Honeypot.');
+                return;
+            }
 
             const gdprCheck = document.getElementById('reg-gdpr-check');
             if (gdprCheck && !gdprCheck.checked) {
@@ -2550,16 +2584,33 @@
             const woodVal = document.getElementById('modal-wood-select')?.value || selectedConfig.wood || 'Magyar Tölgyfa';
             const toastVal = document.getElementById('modal-toast-select')?.value || selectedConfig.toast || 'Medium';
 
-            cart.push({ 
-                ...selectedProduct, 
-                wood: woodVal,
-                toast: toastVal, 
-                quantity: 1 
-            });
+            // Check if identical configuration already exists in cart
+            const existingIndex = cart.findIndex(item => item.id === selectedProduct.id && item.wood === woodVal && item.toast === toastVal);
+
+            if (existingIndex !== -1) {
+                cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + 1;
+            } else {
+                cart.push({ 
+                    ...selectedProduct, 
+                    wood: woodVal,
+                    toast: toastVal, 
+                    quantity: 1 
+                });
+            }
 
             updateCart();
             closeProductModal();
             showNotification(`Hozzáadva a kosárhoz: ${selectedProduct.name} (${woodVal}, ${toastVal})`);
+        }
+
+        function changeCartQuantity(index, delta) {
+            if (cart[index]) {
+                cart[index].quantity = (cart[index].quantity || 1) + delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+                updateCart();
+            }
         }
 
         function removeFromCart(index) {
@@ -2570,34 +2621,71 @@
         function updateCart() {
             const container = document.getElementById('cart-items-container');
             const cartCountBadge = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
             if (!container) return;
 
             container.innerHTML = '';
             let total = 0;
+            let totalItemCount = 0;
 
-            cart.forEach((item, index) => {
-                total += item.price * (item.quantity || 1);
-                const div = document.createElement('div');
-                div.className = "flex justify-between items-center bg-stone-900 p-3 rounded border border-stone-800 text-xs";
-                div.innerHTML = `
-                    <div>
-                        <strong class="text-white block">${item.name}</strong>
-                        <span class="text-amber-400 block text-[11px] font-medium">${item.volume} • ${item.wood || 'Tölgyfa'} • Égetés: ${item.toast || 'Medium'}</span>
-                    </div>
-                    <div class="flex items-center gap-3 shrink-0">
-                        <span class="text-amber-500 font-mono font-bold">${new Intl.NumberFormat('hu-HU').format(item.price)} Ft</span>
-                        <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 p-1" title="Törlés"><i class="fa-solid fa-trash"></i></button>
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-12 text-center text-stone-500">
+                        <i class="fa-solid fa-basket-shopping text-5xl mb-4 text-stone-700"></i>
+                        <h4 class="font-bold text-base text-stone-300">Az Ön kosara jelenleg üres</h4>
+                        <p class="text-xs text-stone-500 mt-1 mb-6 max-w-xs">Nézzen körül a webáruházunkban és válassza ki az Önnek megfelelő kézműves fahordót!</p>
+                        <button onclick="switchToView('webshop'); toggleCart(false);" class="bg-amber-700 hover:bg-amber-600 text-white font-bold px-5 py-2.5 rounded text-xs transition-all active:scale-95 shadow">
+                            Böngészés a Webshopban
+                        </button>
                     </div>
                 `;
-                container.appendChild(div);
-            });
+                if (checkoutBtn) {
+                    checkoutBtn.disabled = true;
+                    checkoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            } else {
+                if (checkoutBtn) {
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+
+                cart.forEach((item, index) => {
+                    const qty = item.quantity || 1;
+                    totalItemCount += qty;
+                    const itemTotal = item.price * qty;
+                    total += itemTotal;
+
+                    const div = document.createElement('div');
+                    div.className = "flex flex-col gap-2 bg-stone-900 p-3.5 rounded-lg border border-stone-800 text-xs shadow-sm";
+                    div.innerHTML = `
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <strong class="text-white block font-serif text-sm">${item.name}</strong>
+                                <span class="text-amber-400 block text-[11px] font-medium mt-0.5">${item.volume} • ${item.wood || 'Tölgyfa'} • ${item.toast || 'Medium'}</span>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-stone-500 hover:text-red-400 p-1 transition-colors" title="Tétel törlése">
+                                <i class="fa-solid fa-trash-can text-sm"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-stone-800/80 pt-2.5 mt-1">
+                            <!-- Quantity Controls -->
+                            <div class="flex items-center border border-stone-700 rounded bg-stone-950 overflow-hidden">
+                                <button onclick="changeCartQuantity(${index}, -1)" class="px-2.5 py-1 text-stone-300 hover:bg-stone-800 hover:text-amber-400 font-bold transition-colors" aria-label="Mennyiség csökkentése">-</button>
+                                <span class="px-3 py-1 font-mono font-bold text-white text-xs bg-stone-900 min-w-[28px] text-center">${qty}</span>
+                                <button onclick="changeCartQuantity(${index}, 1)" class="px-2.5 py-1 text-stone-300 hover:bg-stone-800 hover:text-amber-400 font-bold transition-colors" aria-label="Mennyiség növelése">+</button>
+                            </div>
+                            <span class="text-amber-500 font-mono font-bold text-sm">${new Intl.NumberFormat('hu-HU').format(itemTotal)} Ft</span>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
 
             localStorage.setItem('bb_cart', JSON.stringify(cart));
 
-            const count = cart.length;
             if (cartCountBadge) {
-                cartCountBadge.textContent = count;
-                if (count > 0) cartCountBadge.classList.remove('hidden');
+                cartCountBadge.textContent = totalItemCount;
+                if (totalItemCount > 0) cartCountBadge.classList.remove('hidden');
                 else cartCountBadge.classList.add('hidden');
             }
 
@@ -2780,7 +2868,7 @@
                     ? `<span class="bg-blue-900/40 text-blue-400 border border-blue-600/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1"><i class="fa-solid fa-file-invoice"></i> Számla: ${ord.billingo_number}</span>`
                     : `<button onclick='createBillingoInvoice(${JSON.stringify(ord)}, true)' class="bg-blue-700 hover:bg-blue-600 text-white font-bold text-[11px] px-3 py-1 rounded transition-all flex items-center gap-1 shadow active:scale-95"><i class="fa-solid fa-file-invoice"></i> Számla Kiállítása</button>`;
 
-                let itemsHtml = (ord.items || []).map(it => `<li class="text-[11px] text-stone-300">• ${it.name} (${it.volume}) - ${it.wood || 'Tölgyfa'}, ${it.toast || 'Medium'} - ${it.quantity} db</li>`).join('');
+                let itemsHtml = (ord.items || []).map(it => `<li class="text-[11px] text-stone-300">• ${it.name} (${it.volume}) - ${it.wood || 'Tölgyfa'}, ${it.toast || 'Medium'} - ${it.quantity || 1} db</li>`).join('');
 
                 div.innerHTML = `
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-stone-800 pb-2.5 gap-2">
@@ -2816,6 +2904,13 @@
 
         async function handleCheckoutSubmit(e) {
             e.preventDefault();
+
+            // Anti-spam Honeypot validation
+            const hpVal = document.getElementById('co-hp')?.value;
+            if (hpVal) {
+                console.warn('Spam submission detected via Honeypot.');
+                return;
+            }
 
             const termsCheck = document.getElementById('co-terms-check');
             if (!termsCheck.checked) {
@@ -2997,6 +3092,14 @@
 
         function handleQuoteSubmit(e) {
             e.preventDefault();
+
+            // Anti-spam Honeypot validation
+            const hpVal = document.getElementById('quote-hp')?.value;
+            if (hpVal) {
+                console.warn('Spam submission detected via Honeypot.');
+                return;
+            }
+
             closeQuoteModal();
             showNotification("Ajánlatkérését sikeresen elküldtük!");
         }
