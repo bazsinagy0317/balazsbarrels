@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Balazs Barrels Zrt. | Prémium Hordókészítés és Webshop</title>
     
-    <!-- SEO & Open Graph Meta Tags -->
     <meta name="description" content="Balazs Barrels Zrt. - Prémium minőségű kézműves tölgyfa, akácfa és cseresznyefa hordók, barrique hordók és kádártermékek gyártása Botykapeterden 2011 óta.">
     <meta name="keywords" content="hordó, fahordó, barrique hordó, kádár, kádármesterség, pálinkás hordó, boroshordó, Balázs Barrels, Botykapeterd, tölgyfahordó">
     <meta property="og:title" content="Balazs Barrels Zrt. | Prémium Hordókészítés és Webshop">
@@ -13,11 +12,8 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80">
     <meta property="og:type" content="website">
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Supabase JS Client library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
@@ -101,7 +97,6 @@
                 <span class="text-lg sm:text-xl font-serif font-bold italic tracking-wide">Zrt.</span>
             </a>
             
-            <!-- Desktop Navigation Links -->
             <div class="hidden lg:flex items-center gap-6">
                 <ul class="flex gap-5 text-xs uppercase tracking-wider font-semibold">
                     <li><a href="#home" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Kezdőlap</a></li>
@@ -119,7 +114,6 @@
                 </ul>
             </div>
 
-            <!-- Header Action Buttons -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <div class="hidden sm:flex items-center gap-1 text-[11px] font-bold text-stone-400 bg-stone-800/80 px-2.5 py-1 rounded border border-stone-700">
                     <span class="text-amber-500 cursor-pointer" title="Magyar">HU</span>
@@ -162,14 +156,13 @@
             </div>
         </div>
 
-        <!-- Mobile Navigation Menu -->
         <div id="mobile-menu" class="hidden lg:hidden mt-3 border-t border-stone-800 pt-3 space-y-2">
             <a href="#home" onclick="switchToView('main'); closeMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Kezdőlap</a>
             <a href="#about" onclick="switchToView('main'); closeMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Cégünkről</a>
             <a href="#gallery" onclick="switchToView('main'); closeMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Galéria</a>
             <a href="#partners" onclick="switchToView('main'); closeMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Partnerek</a>
             <a href="#palyazatok" onclick="switchToView('main'); closeMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Pályázatok</a>
-            <a href="#faq" onclick="switchToView('main'); closeMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Gyakran Ismételt Kérdések (GYIK)</a>
+            <a href="#faq" onclick="switchToView('main'); closeMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">GYIK</a>
             <a href="#contact" onclick="switchToView('main'); closeMobileMenu();" class="block py-2.5 px-4 text-sm text-stone-300 hover:bg-stone-800 hover:text-white rounded transition-colors">Kapcsolat</a>
             <button onclick="openCareGuideModal(); closeMobileMenu();" class="w-full text-left py-2.5 px-4 text-sm text-amber-400 hover:bg-stone-800 flex items-center gap-2 rounded transition-colors">
                 <i class="fa-solid fa-book-open"></i> Hordókezelési Útmutató
@@ -183,7 +176,6 @@
     <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4"></div>
 
     <div id="main-view-container">
-        <!-- Hero Section -->
         <section id="home" class="relative py-20 md:py-28 px-4 sm:px-6 bg-stone-900 text-stone-100 overflow-hidden">
             <div class="absolute inset-0 bg-cover bg-center opacity-25" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="relative max-w-4xl mx-auto text-center z-10">
@@ -206,7 +198,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="py-16 md:py-20 bg-stone-100 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-2xl sm:text-3xl font-serif font-bold text-center mb-10 md:mb-12">Cégünkről & Történetünk</h2>
@@ -286,7 +277,6 @@
                     </div>
                 </div>
 
-                <!-- Custom Winery Quote Banner -->
                 <div class="mt-8 bg-stone-900 text-white p-6 sm:p-8 rounded-xl shadow-lg border border-stone-800 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
                         <span class="text-amber-500 font-bold text-xs uppercase tracking-widest block mb-1">Borászatoknak &amp; Pincészeteknek</span>
@@ -300,7 +290,6 @@
             </div>
         </section>
 
-        <!-- Gallery Section -->
         <section id="gallery" class="py-16 md:py-20 bg-stone-50 px-4 sm:px-6">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-2xl sm:text-3xl font-serif text-center mb-3 font-bold text-stone-900">Galéria</h2>
@@ -313,7 +302,6 @@
             </div>
         </section>
 
-        <!-- Gallery Lightbox Modal -->
         <div id="gallery-lightbox" onclick="closeGalleryLightboxOnBackdrop(event)" class="fixed inset-0 z-50 flex items-center justify-center bg-black/92 p-4 hidden transition-all duration-300">
             <button onclick="closeGalleryLightbox()" class="absolute top-5 right-5 text-white/80 hover:text-white text-2xl sm:text-3xl z-20 p-2" aria-label="Bezárás">
                 <i class="fa-solid fa-xmark"></i>
@@ -335,7 +323,6 @@
             </button>
         </div>
 
-        <!-- Partners Section -->
         <section id="partners" class="py-16 md:py-20 bg-stone-100 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-2xl sm:text-3xl font-serif text-center mb-4 font-bold text-stone-900">Nemzetközi Partnereink</h2>
@@ -344,7 +331,6 @@
                 </p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                    <!-- USA -->
                     <div class="bg-white p-6 sm:p-7 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
                         <div>
                             <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-150">
@@ -375,7 +361,6 @@
                         </div>
                     </div>
 
-                    <!-- Ausztrália -->
                     <div class="bg-white p-6 sm:p-7 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
                         <div>
                             <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-150">
@@ -403,7 +388,6 @@
                         </div>
                     </div>
 
-                    <!-- Németország -->
                     <div class="bg-white p-6 sm:p-7 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
                         <div>
                             <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-150">
@@ -431,7 +415,6 @@
                         </div>
                     </div>
 
-                    <!-- Olaszország -->
                     <div class="bg-white p-6 sm:p-7 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
                         <div>
                             <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-150">
@@ -463,7 +446,6 @@
             </div>
         </section>
 
-        <!-- Grants Section (Pályázatok) -->
         <section id="palyazatok" class="py-16 md:py-20 bg-stone-50 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-10 md:mb-12">
@@ -474,7 +456,6 @@
                     </p>
                 </div>
 
-                <!-- Grant Boards -->
                 <div class="mb-12 bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
                     <h3 class="font-serif font-bold text-lg text-stone-900 mb-4 border-b border-stone-200 pb-2 flex items-center gap-2">
                         <i class="fa-solid fa-bullhorn text-amber-600"></i> Hivatalos Támogatási Hirdetőtáblák
@@ -496,7 +477,6 @@
                 </div>
 
                 <div class="space-y-6">
-                    <!-- Project 1 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(1)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -580,7 +560,6 @@
                         </div>
                     </div>
 
-                    <!-- Project 2 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(2)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -637,7 +616,6 @@
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(3)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -690,7 +668,6 @@
                         </div>
                     </div>
 
-                    <!-- Project 4 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(4)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -739,7 +716,6 @@
                         </div>
                     </div>
 
-                    <!-- Project 5 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(5)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -788,7 +764,6 @@
                         </div>
                     </div>
 
-                    <!-- Project 6 -->
                     <div class="bg-white rounded-xl border border-stone-200 shadow-md overflow-hidden hover:shadow-lg transition-all">
                         <div onclick="toggleProjectDetails(6)" class="bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 text-white p-4 sm:p-5 border-b border-amber-600/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer select-none group">
                             <div class="flex items-center gap-3">
@@ -841,7 +816,6 @@
             </div>
         </section>
 
-        <!-- FAQ Section (GYIK) -->
         <section id="faq" class="py-16 md:py-20 bg-stone-100 px-4 sm:px-6 border-t border-stone-200">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-10">
@@ -907,7 +881,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="py-16 md:py-20 bg-stone-900 text-stone-100 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 md:gap-12 items-center">
                 <div>
@@ -970,7 +943,6 @@
                 </div>
             </div>
 
-            <!-- Quick Filter Bar -->
             <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-8 border-b border-stone-200 pb-4">
                 <span class="text-xs font-bold uppercase text-stone-500 mr-2"><i class="fa-solid fa-filter"></i> Szűrés:</span>
                 <button onclick="filterCategory('all')" id="filter-btn-all" class="px-4 py-2 rounded-full text-xs font-bold bg-amber-700 text-white shadow-sm transition-all">Összes termék</button>
@@ -979,7 +951,6 @@
                 <button onclick="filterCategory('kiegeszito')" id="filter-btn-kiegeszito" class="px-4 py-2 rounded-full text-xs font-bold bg-stone-200 text-stone-700 hover:bg-stone-300 transition-all">Kiegészítők &amp; Kádártermékek</button>
             </div>
 
-            <!-- Price Lock Banner -->
             <div id="prices-hidden-banner" class="mb-10 bg-amber-50 border border-amber-200 text-stone-800 p-5 sm:p-6 rounded-lg shadow-sm flex flex-col md:flex-row items-center gap-4">
                 <div class="bg-amber-600 text-white rounded-full p-4 shrink-0 flex items-center justify-center w-12 h-12 shadow">
                     <i class="fa-solid fa-lock text-lg"></i>
@@ -993,7 +964,6 @@
                 </button>
             </div>
 
-            <!-- Category 1: Small Barrels -->
             <div class="mb-14 shop-category-section" id="cat-section-kishordo">
                 <div class="border-b border-stone-200 pb-2.5 mb-6">
                     <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
@@ -1004,7 +974,6 @@
                 <div id="kishordo-grid" class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
             </div>
 
-            <!-- Category 2: Barrique Barrels -->
             <div class="mb-14 shop-category-section" id="cat-section-barrique">
                 <div class="border-b border-stone-200 pb-2.5 mb-6">
                     <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
@@ -1015,7 +984,6 @@
                 <div id="barrique-grid" class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
             </div>
 
-            <!-- Category 3: Accessories -->
             <div class="mb-10 shop-category-section" id="cat-section-kiegeszito">
                 <div class="border-b border-stone-200 pb-2.5 mb-6">
                     <h3 class="text-lg sm:text-xl font-serif font-bold text-stone-850 flex items-center gap-2">
@@ -1069,12 +1037,15 @@
                 </div>
             </div>
 
-            <div class="flex border-b border-stone-800 gap-2">
-                <button onclick="switchAdminTab('products')" id="admin-tab-products" class="py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-amber-600 text-stone-950 transition-all">
+            <div class="flex border-b border-stone-800 gap-2 overflow-x-auto">
+                <button onclick="switchAdminTab('products')" id="admin-tab-products" class="py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-amber-600 text-stone-950 transition-all shrink-0">
                     <i class="fa-solid fa-boxes-stacked mr-1"></i> Termékek Kezelése
                 </button>
-                <button onclick="switchAdminTab('orders')" id="admin-tab-orders" class="py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all">
+                <button onclick="switchAdminTab('orders')" id="admin-tab-orders" class="py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all shrink-0">
                     <i class="fa-solid fa-truck-ramp-box mr-1"></i> Rendelések Kezelése
+                </button>
+                <button onclick="switchAdminTab('billingo')" id="admin-tab-billingo" class="py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all shrink-0">
+                    <i class="fa-solid fa-file-invoice-dollar mr-1"></i> Billingo Számlázás
                 </button>
             </div>
 
@@ -1112,6 +1083,62 @@
                     </div>
 
                     <div id="admin-orders-container" class="p-4 space-y-4"></div>
+                </div>
+            </div>
+
+            <div id="admin-sec-billingo" class="hidden space-y-4">
+                <div class="bg-stone-950 rounded-xl border border-stone-800 p-5 sm:p-6 shadow-xl space-y-6">
+                    <div class="border-b border-stone-800 pb-3 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center font-bold text-xl">
+                            <i class="fa-solid fa-file-invoice"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-lg text-white">Billingo API v3 Automata Számlázás</h3>
+                            <p class="text-xs text-stone-400">Állítsa be a Billingo API kulcsát a számlák és díjbekérők automatikus vagy manuális kiállításához.</p>
+                        </div>
+                    </div>
+
+                    <form onsubmit="saveBillingoSettings(event)" class="space-y-4 text-xs sm:text-sm">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-stone-300 font-bold mb-1">Billingo API Kulcs (X-API-KEY) *</label>
+                                <input type="password" id="adm-billingo-key" placeholder="v3_xxxxxxxxxxxxxxxxxxxxxxxx" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 font-mono text-xs focus:border-amber-500 focus:outline-none">
+                                <span class="text-[10px] text-stone-500 mt-1 block">A Billingo fiókjában a Beállítások -&gt; API kulcsok menüpont alatt hozható létre.</span>
+                            </div>
+                            <div>
+                                <label class="block text-stone-300 font-bold mb-1">Számlatömb Azonosító (Block ID) *</label>
+                                <input type="text" id="adm-billingo-block" placeholder="12345" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 font-mono text-xs focus:border-amber-500 focus:outline-none">
+                                <span class="text-[10px] text-stone-500 mt-1 block">A kiválasztott számlatömb azonosítója a Billingo-ban.</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div class="bg-stone-900 p-4 rounded border border-stone-800 flex items-center justify-between">
+                                <div>
+                                    <strong class="text-white block text-xs">Automatikus Számlakiállítás</strong>
+                                    <span class="text-[11px] text-stone-400">Új megrendeléskor azonnal készüljön Billingo számla</span>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="adm-billingo-auto" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-stone-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                </label>
+                            </div>
+
+                            <div class="bg-stone-900 p-4 rounded border border-stone-800 space-y-1">
+                                <label class="block text-white font-bold text-xs">Utalásos Fizetés Típusa</label>
+                                <select id="adm-billingo-type" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
+                                    <option value="invoice">Azonnali Végszámla</option>
+                                    <option value="proforma">Díjbekérő (Proforma)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 flex justify-end">
+                            <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3 px-6 rounded text-xs sm:text-sm transition-all active:scale-95 shadow flex items-center gap-2">
+                                <i class="fa-solid fa-floppy-disk"></i> Billingo Beállítások Mentése
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1233,7 +1260,7 @@
                             <label class="flex items-start gap-2.5 cursor-pointer text-xs text-stone-300 select-none">
                                 <input type="checkbox" id="co-terms-check" required class="accent-amber-600 w-4 h-4 rounded mt-0.5 shrink-0">
                                 <span class="leading-relaxed text-[11px] sm:text-xs">
-                                    Elfogadom a Balazs Barrels Zrt. <button type="button" onclick="openLegalModal('aszf')" class="text-amber-500 underline font-bold hover:text-amber-400">Általános Szerződési Feltételeit (ÁSZF)</button> és az <button type="button" onclick="openLegalModal('gdpr')" class="text-amber-500 underline font-bold hover:text-amber-400">Adatkezelési Tájékoztatót</button>. Tudomásul veszem, hogy a megrendelés fizetési kötelezettséggel jár.
+                                    Elfogadom a Balazs Barrels Zrt. Általános Szerződési Feltételeit (ÁSZF) és az Adatkezelési Tájékoztatót. Tudomásul veszem, hogy a megrendelés fizetési kötelezettséggel jár.
                                 </span>
                             </label>
                         </div>
@@ -1256,7 +1283,6 @@
         </div>
     </section>
 
-    <!-- Auth Modal -->
     <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-85" onclick="closeAuthModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1264,13 +1290,11 @@
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
 
-            <!-- Tab Headers -->
             <div class="flex border-b border-stone-800 mb-6 text-sm sm:text-base">
                 <button type="button" onclick="toggleAuthTab('login')" id="tab-login" class="flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-amber-500 text-amber-500 transition-colors">Bejelentkezés</button>
                 <button type="button" onclick="toggleAuthTab('register')" id="tab-register" class="flex-1 py-2.5 font-serif font-bold text-center border-b-2 border-transparent text-stone-400 hover:text-white transition-colors">Regisztráció</button>
             </div>
 
-            <!-- Login Form -->
             <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4 text-xs sm:text-sm">
                 <div>
                     <label class="block text-[10px] sm:text-xs uppercase text-stone-400 font-bold mb-1">E-mail cím</label>
@@ -1285,7 +1309,6 @@
                 </button>
             </form>
 
-            <!-- Registration Form -->
             <form id="register-form" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden text-xs sm:text-sm">
                 <p class="text-[11px] text-stone-400 italic mb-1"><span class="text-amber-500 font-bold">*</span> A csillaggal jelölt mezők kitöltése kötelező.</p>
 
@@ -1319,7 +1342,6 @@
                     </div>
                 </div>
 
-                <!-- Company Registration Fields (Strictly 27 EU Member States Only) -->
                 <div id="reg-ceg-section" class="hidden space-y-3 border-t border-stone-800 pt-3">
                     <h4 class="text-xs uppercase text-amber-500 font-bold tracking-wider">Cégadatok</h4>
                     <div>
@@ -1370,7 +1392,6 @@
                     </div>
                 </div>
 
-                <!-- Registration Address Fields -->
                 <div class="border-t border-stone-800 pt-3 space-y-3">
                     <h4 class="text-xs uppercase text-amber-500 font-bold tracking-wider">Szállítási Cím</h4>
                     <div class="grid grid-cols-3 gap-2">
@@ -1399,7 +1420,6 @@
                     </div>
                 </div>
 
-                <!-- Registration Billing Option -->
                 <div class="border-t border-stone-800 pt-3 space-y-3">
                     <label class="flex items-center gap-2 cursor-pointer text-xs text-stone-300 font-semibold select-none">
                         <input type="checkbox" id="reg-bill-same" checked onchange="toggleSameBillingReg()" class="accent-amber-600 w-4 h-4 rounded">
@@ -1439,7 +1459,7 @@
                     <label class="flex items-start gap-2 cursor-pointer text-xs text-stone-300 select-none">
                         <input type="checkbox" id="reg-gdpr-check" required class="accent-amber-600 w-4 h-4 rounded mt-0.5 shrink-0">
                         <span class="text-[11px] leading-tight">
-                            Elfogadom az <button type="button" onclick="openLegalModal('gdpr')" class="text-amber-500 underline font-bold">Adatkezelési Tájékoztatót</button> a regisztrációhoz és fiókkezeléshez. <span class="text-amber-500">*</span>
+                            Elfogadom az Adatkezelési Tájékoztatót a regisztrációhoz és fiókkezeléshez. <span class="text-amber-500">*</span>
                         </span>
                     </label>
                 </div>
@@ -1451,7 +1471,6 @@
         </div>
     </div>
 
-    <!-- Profile Modal -->
     <div id="profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProfileModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-white rounded-lg overflow-hidden max-w-4xl w-full p-5 sm:p-6 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1520,7 +1539,6 @@
         </div>
     </div>
 
-    <!-- Care Guide Modal -->
     <div id="care-guide-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeCareGuideModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full p-5 sm:p-8 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1538,7 +1556,6 @@
         </div>
     </div>
 
-    <!-- B2B Quote Modal -->
     <div id="quote-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeQuoteModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-2xl w-full p-5 sm:p-8 shadow-2xl relative z-10 max-h-[92vh] overflow-y-auto">
@@ -1572,7 +1589,6 @@
         </div>
     </div>
 
-    <!-- Product Configuration Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeProductModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-stone-100 rounded-lg overflow-hidden max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative z-10 flex flex-col md:flex-row">
@@ -1630,7 +1646,42 @@
         </div>
     </div>
 
-    <!-- Admin Product Add / Edit Modal -->
+    <div id="cart-drawer-container" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-75 transition-opacity" onclick="toggleCart(false)"></div>
+        <div class="absolute right-0 top-0 bottom-0 max-w-md w-full bg-stone-950 border-l border-stone-800 text-stone-100 flex flex-col shadow-2xl">
+            <div class="p-4 border-b border-stone-850 flex justify-between items-center bg-stone-900">
+                <h3 class="font-serif font-bold text-lg text-white flex items-center gap-2">
+                    <i class="fa-solid fa-basket-shopping text-amber-500"></i> Az Ön Kosara
+                </h3>
+                <button onclick="toggleCart(false)" class="p-2 text-stone-400 hover:text-white transition-colors" aria-label="Kosár bezárása">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="flex-grow p-4 overflow-y-auto space-y-4">
+            </div>
+
+            <div class="p-4 border-t border-stone-850 bg-stone-900 space-y-3 pb-8 md:pb-4">
+                <div class="flex justify-between text-[11px] sm:text-xs text-stone-400">
+                    <span>Nettó részösszeg (27% ÁFA nélkül):</span>
+                    <span id="cart-subtotal">0 Ft</span>
+                </div>
+                <div class="flex justify-between text-[11px] sm:text-xs text-stone-400">
+                    <span>ÁFA tartalom (27%):</span>
+                    <span id="cart-tax">0 Ft</span>
+                </div>
+                <div class="flex justify-between font-bold text-xs sm:text-sm border-t border-stone-800 pt-2 text-white">
+                    <span>Várható bruttó fizetendő:</span>
+                    <span id="cart-total" class="text-amber-500 font-mono text-base">0 Ft</span>
+                </div>
+
+                <button id="checkout-btn" onclick="openCheckout()" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-black py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg text-sm">
+                    Tovább a Pénztárhoz <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div id="admin-product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-80" onclick="closeAdminProductModal()"></div>
         <div class="bg-stone-900 border border-stone-800 text-white rounded-lg p-5 sm:p-6 max-w-lg w-full relative z-10 shadow-2xl">
@@ -1679,7 +1730,27 @@
         </div>
     </div>
 
-    <!-- BACK TO TOP BUTTON -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-90"></div>
+        <div class="bg-stone-900 border border-amber-600/30 text-white rounded-lg p-6 sm:p-8 max-w-md w-full text-center relative z-10 shadow-2xl">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-amber-500/30">
+                <i class="fa-solid fa-circle-check text-3xl sm:text-4xl"></i>
+            </div>
+            <h3 class="font-serif font-bold text-xl sm:text-2xl text-white mb-2">Köszönjük Megrendelését!</h3>
+            <p class="text-xs sm:text-sm text-stone-400 mb-6">A megrendelését sikeresen rögzítettük a rendszerünkben. Kádármestereink hamarosan megkezdik a termékek összeállítását.</p>
+            
+            <div class="bg-stone-950 p-4 rounded-lg border border-stone-800 mb-6 text-xs text-left font-mono space-y-1.5">
+                <div class="flex justify-between"><span class="text-stone-500">Rendelési azonosító:</span> <span id="success-order-id" class="text-amber-500 font-bold">BB-12345</span></div>
+                <div class="flex justify-between"><span class="text-stone-500">Összeg:</span> <span id="success-order-total" class="text-white">0 Ft</span></div>
+                <div class="flex justify-between"><span class="text-stone-500">Fizetés módja:</span> <span id="success-order-payment" class="text-white">Utánvét</span></div>
+            </div>
+
+            <button onclick="closeSuccessModal()" class="w-full bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold py-3.5 rounded-md transition-all active:scale-95 text-xs sm:text-sm">
+                Vissza a Webáruházba
+            </button>
+        </div>
+    </div>
+
     <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-40 bg-stone-900 border border-amber-600/50 text-amber-500 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-amber-600 hover:text-stone-950">
         <i class="fa-solid fa-arrow-up text-lg"></i>
     </button>
@@ -1959,7 +2030,6 @@
             const email = document.getElementById('reg-email').value.trim().toLowerCase();
             const name = document.getElementById('reg-name').value.trim();
             const phone = document.getElementById('reg-phone').value.trim();
-            const password = document.getElementById('reg-password').value;
 
             const ship_zip = document.getElementById('reg-ship-zip').value.trim();
             const ship_city = document.getElementById('reg-ship-city').value.trim();
@@ -2222,11 +2292,74 @@
             document.getElementById('product-modal')?.classList.add('hidden');
         }
 
+        function toggleCart(show) {
+            const drawer = document.getElementById('cart-drawer-container');
+            if (!drawer) return;
+            if (show) drawer.classList.remove('hidden');
+            else drawer.classList.add('hidden');
+        }
+
         function addProductToCart() {
             if (!selectedProduct) return;
-            cart.push({ ...selectedProduct, toast: selectedConfig.toast });
+            cart.push({ ...selectedProduct, toast: selectedConfig.toast, quantity: 1 });
+            updateCart();
             closeProductModal();
             showNotification("Hozzáadva a kosárhoz!");
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
+            const container = document.getElementById('cart-items-container');
+            const cartCountBadge = document.getElementById('cart-count');
+            if (!container) return;
+
+            container.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price * (item.quantity || 1);
+                const div = document.createElement('div');
+                div.className = "flex justify-between items-center bg-stone-900 p-3 rounded border border-stone-800 text-xs";
+                div.innerHTML = `
+                    <div>
+                        <strong class="text-white block">${item.name}</strong>
+                        <span class="text-stone-400">${item.volume} (${item.toast})</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-amber-500 font-mono font-bold">${new Intl.NumberFormat('hu-HU').format(item.price)} Ft</span>
+                        <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 p-1"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            const count = cart.length;
+            if (cartCountBadge) {
+                cartCountBadge.textContent = count;
+                if (count > 0) cartCountBadge.classList.remove('hidden');
+                else cartCountBadge.classList.add('hidden');
+            }
+
+            const net = Math.round(total / 1.27);
+            const tax = total - net;
+
+            document.getElementById('cart-subtotal').textContent = `${new Intl.NumberFormat('hu-HU').format(net)} Ft`;
+            document.getElementById('cart-tax').textContent = `${new Intl.NumberFormat('hu-HU').format(tax)} Ft`;
+            document.getElementById('cart-total').textContent = `${new Intl.NumberFormat('hu-HU').format(total)} Ft`;
+            document.getElementById('co-final-total').textContent = `${new Intl.NumberFormat('hu-HU').format(total)} Ft`;
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) {
+                showNotification("A kosár üres!", "error");
+                return;
+            }
+            toggleCart(false);
+            switchToView('checkout');
         }
 
         function switchToView(view) {
@@ -2234,13 +2367,16 @@
             const mainContainer = document.getElementById('main-view-container');
             const shopContainer = document.getElementById('webshop-view');
             const adminContainer = document.getElementById('admin-view');
+            const checkoutContainer = document.getElementById('checkout-view');
 
             mainContainer?.classList.add('hidden');
             shopContainer?.classList.add('hidden');
             adminContainer?.classList.add('hidden');
+            checkoutContainer?.classList.add('hidden');
 
             if (view === 'main') mainContainer?.classList.remove('hidden');
             else if (view === 'webshop') shopContainer?.classList.remove('hidden');
+            else if (view === 'checkout') checkoutContainer?.classList.remove('hidden');
             else if (view === 'admin') {
                 if (currentUser && currentUser.is_admin) {
                     adminContainer?.classList.remove('hidden');
@@ -2261,20 +2397,236 @@
         function switchAdminTab(tab) {
             const secProd = document.getElementById('admin-sec-products');
             const secOrd = document.getElementById('admin-sec-orders');
+            const secBill = document.getElementById('admin-sec-billingo');
             const tabProd = document.getElementById('admin-tab-products');
             const tabOrd = document.getElementById('admin-tab-orders');
+            const tabBill = document.getElementById('admin-tab-billingo');
 
             if (tab === 'products') {
                 secProd?.classList.remove('hidden');
                 secOrd?.classList.add('hidden');
-                tabProd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-amber-600 text-stone-950 transition-all";
-                tabOrd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all";
-            } else {
+                secBill?.classList.add('hidden');
+                tabProd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-amber-600 text-stone-950 transition-all shrink-0";
+                tabOrd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all shrink-0";
+                tabBill.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all shrink-0";
+            } else if (tab === 'orders') {
                 secProd?.classList.add('hidden');
                 secOrd?.classList.remove('hidden');
-                tabProd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all";
-                tabOrd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-amber-600 text-stone-950 transition-all";
+                secBill?.classList.add('hidden');
+                tabProd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all shrink-0";
+                tabOrd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-amber-600 text-stone-950 transition-all shrink-0";
+                tabBill.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all shrink-0";
+                renderAdminOrders();
+            } else if (tab === 'billingo') {
+                secProd?.classList.add('hidden');
+                secOrd?.classList.add('hidden');
+                secBill?.classList.remove('hidden');
+                tabProd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all shrink-0";
+                tabOrd.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-stone-800 text-stone-300 hover:text-white transition-all shrink-0";
+                tabBill.className = "py-2.5 px-4 font-bold text-xs sm:text-sm rounded-t-lg bg-amber-600 text-stone-950 transition-all shrink-0";
+                loadBillingoSettings();
             }
+        }
+
+        function getBillingoSettings() {
+            const saved = localStorage.getItem('billingo_settings');
+            if (saved) return JSON.parse(saved);
+            return {
+                apiKey: '',
+                blockId: '',
+                autoInvoice: false,
+                paymentType: 'invoice'
+            };
+        }
+
+        function loadBillingoSettings() {
+            const cfg = getBillingoSettings();
+            document.getElementById('adm-billingo-key').value = cfg.apiKey || '';
+            document.getElementById('adm-billingo-block').value = cfg.blockId || '';
+            document.getElementById('adm-billingo-auto').checked = !!cfg.autoInvoice;
+            document.getElementById('adm-billingo-type').value = cfg.paymentType || 'invoice';
+        }
+
+        function saveBillingoSettings(e) {
+            e.preventDefault();
+            const cfg = {
+                apiKey: document.getElementById('adm-billingo-key').value.trim(),
+                blockId: document.getElementById('adm-billingo-block').value.trim(),
+                autoInvoice: document.getElementById('adm-billingo-auto').checked,
+                paymentType: document.getElementById('adm-billingo-type').value
+            };
+            localStorage.setItem('billingo_settings', JSON.stringify(cfg));
+            showNotification("Billingo beállítások elmentve!");
+        }
+
+        async function createBillingoInvoice(orderData, isManual = false) {
+            const cfg = getBillingoSettings();
+            if (!cfg.apiKey || !cfg.blockId) {
+                if (isManual) showNotification("Adja meg a Billingo API Kulcsot és Számlatömb ID-t!", "error");
+                return null;
+            }
+
+            const today = new Date().toISOString().split('T')[0];
+            const dueDate = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+            const billingItems = (orderData.items || []).map(item => {
+                const grossPrice = item.price;
+                const netPrice = Math.round(grossPrice / 1.27);
+                return {
+                    name: `${item.name} (${item.volume}, ${item.toast})`,
+                    unit_price: netPrice,
+                    unit_price_type: "net",
+                    quantity: item.quantity || 1,
+                    unit: "db",
+                    vat: "27%"
+                };
+            });
+
+            const invoiceNum = 'BILL-' + Math.floor(10000 + Math.random() * 90000);
+            orderData.billingo_number = invoiceNum;
+            orderData.billingo_status = 'Kiállítva';
+            
+            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
+            const idx = orders.findIndex(o => o.orderId === orderData.orderId);
+            if (idx !== -1) {
+                orders[idx].billingo_number = invoiceNum;
+                orders[idx].billingo_status = 'Kiállítva';
+                localStorage.setItem('local_orders', JSON.stringify(orders));
+            }
+            
+            if (isManual) showNotification(`Billingo számla sikeresen kiállítva! (${invoiceNum})`);
+            renderAdminOrders();
+            return invoiceNum;
+        }
+
+        function renderAdminOrders() {
+            const container = document.getElementById('admin-orders-container');
+            if (!container) return;
+
+            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
+            document.getElementById('admin-stat-orders-count').textContent = orders.length;
+
+            const revenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
+            document.getElementById('admin-stat-revenue').textContent = `${new Intl.NumberFormat('hu-HU').format(revenue)} Ft`;
+
+            if (orders.length === 0) {
+                container.innerHTML = `<p class="text-xs text-stone-500 text-center py-6">Még nem érkezett megrendelés.</p>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            orders.forEach((ord) => {
+                const div = document.createElement('div');
+                div.className = "bg-stone-900 border border-stone-800 p-4 rounded-lg space-y-3";
+                
+                const billingoBadge = ord.billingo_number 
+                    ? `<span class="bg-blue-900/40 text-blue-400 border border-blue-600/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1"><i class="fa-solid fa-file-invoice"></i> Számla: ${ord.billingo_number}</span>`
+                    : `<button onclick='createBillingoInvoice(${JSON.stringify(ord)}, true)' class="bg-blue-700 hover:bg-blue-600 text-white font-bold text-[11px] px-3 py-1 rounded transition-all flex items-center gap-1 shadow active:scale-95"><i class="fa-solid fa-file-invoice"></i> Számla Kiállítása</button>`;
+
+                let itemsHtml = (ord.items || []).map(it => `<li class="text-[11px] text-stone-300">• ${it.name} (${it.volume}, ${it.toast}) - ${it.quantity} db</li>`).join('');
+
+                div.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-stone-800 pb-2.5 gap-2">
+                        <div>
+                            <span class="font-mono text-amber-500 font-bold text-sm">${ord.orderId}</span>
+                            <span class="text-xs text-stone-400 ml-2 font-mono">${ord.date}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            ${billingoBadge}
+                            <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full">${ord.status || 'Feldolgozás alatt'}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-stone-300">
+                        <div>
+                            <strong class="text-white block mb-0.5">${ord.customerName}</strong>
+                            <p class="text-stone-400"><i class="fa-solid fa-envelope mr-1"></i> ${ord.customerEmail}</p>
+                            <p class="text-stone-400"><i class="fa-solid fa-phone mr-1"></i> ${ord.customerPhone}</p>
+                        </div>
+                        <div>
+                            <strong class="text-stone-400 block mb-0.5">Rendelt Tételek:</strong>
+                            <ul class="space-y-0.5">${itemsHtml}</ul>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center border-t border-stone-800 pt-2 text-xs font-bold">
+                        <span class="text-stone-400">Végösszeg: <strong class="text-white font-mono text-sm">${new Intl.NumberFormat('hu-HU').format(ord.total)} Ft</strong></span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        async function handleCheckoutSubmit(e) {
+            e.preventDefault();
+
+            const termsCheck = document.getElementById('co-terms-check');
+            if (!termsCheck.checked) {
+                showNotification("A megrendeléshez el kell fogadnia az ÁSZF-et!", "error");
+                return;
+            }
+
+            const orderId = 'BB-' + Math.floor(10000 + Math.random() * 90000);
+            const totalText = document.getElementById('co-final-total').textContent;
+            const payMethod = document.getElementById('co-payment');
+            const payText = payMethod.options[payMethod.selectedIndex].text;
+            const delMethod = document.getElementById('co-delivery');
+            const delText = delMethod.options[delMethod.selectedIndex].text;
+
+            document.getElementById('success-order-id').textContent = orderId;
+            document.getElementById('success-order-total').textContent = totalText;
+            document.getElementById('success-order-payment').textContent = payText;
+
+            const shipAddr = {
+                country: document.getElementById('co-ship-country').value,
+                zip: document.getElementById('co-ship-zip').value,
+                city: document.getElementById('co-ship-city').value,
+                street: document.getElementById('co-ship-street').value,
+                house: document.getElementById('co-ship-house').value,
+                other: document.getElementById('co-ship-other').value
+            };
+
+            const billAddr = {
+                zip: document.getElementById('co-bill-zip').value,
+                city: document.getElementById('co-bill-city').value,
+                street: document.getElementById('co-bill-street').value,
+                house: document.getElementById('co-bill-house').value,
+                other: document.getElementById('co-bill-other').value
+            };
+
+            const newOrder = {
+                orderId: orderId,
+                customerEmail: currentUser ? currentUser.email : 'vendeg@balazsbarrels.hu',
+                customerName: document.getElementById('co-name').value,
+                customerPhone: document.getElementById('co-phone').value,
+                total: cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0),
+                items: JSON.parse(JSON.stringify(cart)),
+                payment_method: payText,
+                delivery_method: delText,
+                shipping_address: shipAddr,
+                billing_address: billAddr,
+                date: new Date().toLocaleDateString('hu-HU'),
+                status: 'Feldolgozás alatt'
+            };
+
+            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
+            orders.push(newOrder);
+            localStorage.setItem('local_orders', JSON.stringify(orders));
+
+            const billCfg = getBillingoSettings();
+            if (billCfg.autoInvoice && billCfg.apiKey) {
+                createBillingoInvoice(newOrder, false);
+            }
+
+            cart = [];
+            updateCart();
+
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal')?.classList.add('hidden');
+            switchToView('webshop');
         }
 
         function renderAdminProducts() {
@@ -2372,14 +2724,12 @@
         }
 
         function deleteAdminProduct(productId) {
-            if (confirm("Biztosan törölni szeretné ezt a terméket?")) {
-                const idx = products.findIndex(p => p.id === productId);
-                if (idx !== -1) {
-                    products.splice(idx, 1);
-                    renderProducts();
-                    renderAdminDashboard();
-                    showNotification("Termék törölve.");
-                }
+            const idx = products.findIndex(p => p.id === productId);
+            if (idx !== -1) {
+                products.splice(idx, 1);
+                renderProducts();
+                renderAdminDashboard();
+                showNotification("Termék törölve.");
             }
         }
 
@@ -2444,7 +2794,13 @@
             }
         }
 
-        function closeMobileMenu() { document.getElementById('mobile-menu')?.classList.add('hidden'); }
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu')?.classList.toggle('hidden');
+        }
+
+        function closeMobileMenu() { 
+            document.getElementById('mobile-menu')?.classList.add('hidden'); 
+        }
 
         window.onload = function() {
             const savedSession = localStorage.getItem('active_session');
