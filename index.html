@@ -1484,6 +1484,10 @@
                             <input type="text" id="reg-vat-number" placeholder="12345678-1-12" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
                         </div>
                     </div>
+                    <div id="reg-eu-vat-container" class="hidden">
+                        <label class="block text-[10px] sm:text-xs uppercase text-amber-400 font-bold mb-1">EU / Közösségi Adószám <span class="text-amber-500">*</span></label>
+                        <input type="text" id="reg-eu-vat-number" placeholder="pl. DE123456789" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
+                    </div>
                 </div>
 
                 <div class="border-t border-stone-800 pt-3 space-y-3">
@@ -2210,11 +2214,25 @@
                 btnMagan.className = "py-2.5 rounded border border-stone-700 bg-stone-800 text-stone-400 text-xs text-center hover:border-amber-500 transition-all active:scale-95";
                 btnCeg.className = "py-2.5 rounded border border-amber-500 bg-amber-900/20 text-amber-300 font-bold text-xs text-center transition-all active:scale-95";
                 cegSection?.classList.remove('hidden');
+                handleCountryChange();
             }
         }
 
         function handleCountryChange() {
-            const countryVal = document.getElementById('reg-country').value;
+            const countryVal = document.getElementById('reg-country')?.value;
+            const euVatContainer = document.getElementById('reg-eu-vat-container');
+            const euVatInput = document.getElementById('reg-eu-vat-number');
+
+            if (countryVal && countryVal !== 'Magyarország') {
+                euVatContainer?.classList.remove('hidden');
+                if (euVatInput) euVatInput.required = true;
+            } else {
+                euVatContainer?.classList.add('hidden');
+                if (euVatInput) {
+                    euVatInput.required = false;
+                    euVatInput.value = '';
+                }
+            }
         }
 
         async function handleLoginSubmit(e) {
@@ -2264,6 +2282,11 @@
             const name = document.getElementById('reg-name').value.trim();
             const phone = document.getElementById('reg-phone').value.trim();
 
+            const country = document.getElementById('reg-country')?.value || 'Magyarország';
+            const company_name = selectedRegTypeState === 'ceg' ? document.getElementById('reg-company-name').value.trim() : '';
+            const vat_number = selectedRegTypeState === 'ceg' ? document.getElementById('reg-vat-number').value.trim() : '';
+            const eu_vat_number = selectedRegTypeState === 'ceg' && country !== 'Magyarország' ? document.getElementById('reg-eu-vat-number').value.trim() : '';
+
             const ship_zip = document.getElementById('reg-ship-zip').value.trim();
             const ship_city = document.getElementById('reg-ship-city').value.trim();
             const ship_street = document.getElementById('reg-ship-street').value.trim();
@@ -2275,6 +2298,11 @@
                 email,
                 name,
                 phone,
+                user_type: selectedRegTypeState,
+                country,
+                company_name,
+                vat_number,
+                eu_vat_number,
                 ship_zip,
                 ship_city,
                 ship_street,
