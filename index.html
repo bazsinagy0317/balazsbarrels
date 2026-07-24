@@ -1186,7 +1186,7 @@
                         </div>
                         <div>
                             <h3 class="font-serif font-bold text-lg text-white">Billingo API v3 Automata Számlázás</h3>
-                            <p class="text-xs text-stone-400">Állítsa be a Billingo API kulcsát a számlák és díjbekérők automatikus vagy manuális kiállításához.</p>
+                            <p class="text-xs text-stone-400">A megadott Billingo API kulccsal és Számlatömb ID-val az automatikus számlagenerálás alapértelmezetten aktív.</p>
                         </div>
                     </div>
 
@@ -1194,13 +1194,13 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-stone-300 font-bold mb-1">Billingo API Kulcs (X-API-KEY) *</label>
-                                <input type="password" id="adm-billingo-key" placeholder="v3_xxxxxxxxxxxxxxxxxxxxxxxx" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 font-mono text-xs focus:border-amber-500 focus:outline-none">
-                                <span class="text-[10px] text-stone-500 mt-1 block">A Billingo fiókjában a Beállítások -&gt; API kulcsok menüpont alatt hozható létre.</span>
+                                <input type="password" id="adm-billingo-key" value="a5d232f2-86c5-11f1-b561-026634090519" placeholder="v3_xxxxxxxxxxxxxxxxxxxxxxxx" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 font-mono text-xs focus:border-amber-500 focus:outline-none">
+                                <span class="text-[10px] text-stone-500 mt-1 block">Alapértelmezett aktív Billingo API kulcs.</span>
                             </div>
                             <div>
                                 <label class="block text-stone-300 font-bold mb-1">Számlatömb Azonosító (Block ID) *</label>
-                                <input type="text" id="adm-billingo-block" placeholder="12345" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 font-mono text-xs focus:border-amber-500 focus:outline-none">
-                                <span class="text-[10px] text-stone-500 mt-1 block">A kiválasztott számlatömb azonosítója a Billingo-ban.</span>
+                                <input type="text" id="adm-billingo-block" value="205687" placeholder="12345" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 font-mono text-xs focus:border-amber-500 focus:outline-none">
+                                <span class="text-[10px] text-stone-500 mt-1 block">A beállított Billingo számlatömb azonosítója.</span>
                             </div>
                         </div>
 
@@ -1211,7 +1211,7 @@
                                     <span class="text-[11px] text-stone-400">Új megrendeléskor azonnal készüljön Billingo számla</span>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="adm-billingo-auto" class="sr-only peer">
+                                    <input type="checkbox" id="adm-billingo-auto" checked class="sr-only peer">
                                     <div class="w-11 h-6 bg-stone-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
                                 </label>
                             </div>
@@ -1219,7 +1219,7 @@
                             <div class="bg-stone-900 p-4 rounded border border-stone-800 space-y-1">
                                 <label class="block text-white font-bold text-xs">Utalásos Fizetés Típusa</label>
                                 <select id="adm-billingo-type" class="w-full bg-stone-800 text-white p-2 rounded border border-stone-700 text-xs">
-                                    <option value="invoice">Azonnali Végszámla</option>
+                                    <option value="invoice" selected>Azonnali Végszámla</option>
                                     <option value="proforma">Díjbekérő (Proforma)</option>
                                 </select>
                             </div>
@@ -1806,7 +1806,7 @@
 
                 <section>
                     <h4 class="font-bold text-amber-500 uppercase tracking-wider mb-1 text-sm">5. Jogorvoslat</h4>
-                    <p>Jogainak megsértése esetén Ön a **Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAHIH)** (1055 Budapest, Falk Miksa utca 9-11., www.naih.hu) vagy az illetékes bírósághoz fordulhat.</p>
+                    <p>Jogainak megsértése esetén Ön a **Nemzeti Adatvédelmi és Információszabadság Hatóághoz (NAHIH)** (1055 Budapest, Falk Miksa utca 9-11., www.naih.hu) vagy az illetékes bírósághoz fordulhat.</p>
                 </section>
             </div>
         </div>
@@ -2114,7 +2114,6 @@
 
         let currentLightboxIndex = 0;
 
-        // Accessibility & Esc Key listener to close all open modals/drawers
         window.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeAllModalsAndDrawers();
@@ -2255,7 +2254,7 @@
         async function handleRegisterSubmit(e) {
             e.preventDefault();
 
-            // Spam Honeypot validation
+            // Anti-spam Honeypot validation
             const hpVal = document.getElementById('reg-hp')?.value;
             if (hpVal) {
                 console.warn('Spam submission detected via Honeypot.');
@@ -2791,28 +2790,34 @@
 
         function getBillingoSettings() {
             const saved = localStorage.getItem('billingo_settings');
-            if (saved) return JSON.parse(saved);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (!parsed.apiKey) parsed.apiKey = 'a5d232f2-86c5-11f1-b561-026634090519';
+                if (!parsed.blockId) parsed.blockId = '205687';
+                if (parsed.autoInvoice === undefined) parsed.autoInvoice = true;
+                return parsed;
+            }
             return {
-                apiKey: '',
-                blockId: '',
-                autoInvoice: false,
+                apiKey: 'a5d232f2-86c5-11f1-b561-026634090519',
+                blockId: '205687',
+                autoInvoice: true,
                 paymentType: 'invoice'
             };
         }
 
         function loadBillingoSettings() {
             const cfg = getBillingoSettings();
-            document.getElementById('adm-billingo-key').value = cfg.apiKey || '';
-            document.getElementById('adm-billingo-block').value = cfg.blockId || '';
-            document.getElementById('adm-billingo-auto').checked = !!cfg.autoInvoice;
+            document.getElementById('adm-billingo-key').value = cfg.apiKey || 'a5d232f2-86c5-11f1-b561-026634090519';
+            document.getElementById('adm-billingo-block').value = cfg.blockId || '205687';
+            document.getElementById('adm-billingo-auto').checked = cfg.autoInvoice !== undefined ? cfg.autoInvoice : true;
             document.getElementById('adm-billingo-type').value = cfg.paymentType || 'invoice';
         }
 
         function saveBillingoSettings(e) {
             e.preventDefault();
             const cfg = {
-                apiKey: document.getElementById('adm-billingo-key').value.trim(),
-                blockId: document.getElementById('adm-billingo-block').value.trim(),
+                apiKey: document.getElementById('adm-billingo-key').value.trim() || 'a5d232f2-86c5-11f1-b561-026634090519',
+                blockId: document.getElementById('adm-billingo-block').value.trim() || '205687',
                 autoInvoice: document.getElementById('adm-billingo-auto').checked,
                 paymentType: document.getElementById('adm-billingo-type').value
             };
