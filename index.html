@@ -19,8 +19,9 @@
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80">
     <link rel="canonical" href="https://balazsbarrels.com/">
 
-    <!-- Favicon -->
+    <!-- Favicon & Apple Touch Icon -->
     <link rel="icon" type="image/png" href="Balázs Barrels logo vektor.png">
+    <link rel="apple-touch-icon" href="Balázs Barrels logo vektor.png">
 
     <!-- Tailwind CSS & FontAwesome & Supabase -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -159,13 +160,13 @@
             
             <div class="hidden xl:flex items-center gap-5 shrink">
                 <ul class="flex items-center gap-3 lg:gap-4 text-[11px] lg:text-xs uppercase tracking-wider font-semibold whitespace-nowrap">
-                    <li><a href="#home" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Kezdőlap</a></li>
-                    <li><a href="#about" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Cégünkről</a></li>
-                    <li><a href="#gallery" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Galéria</a></li>
-                    <li><a href="#partners" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Partnerek</a></li>
-                    <li><a href="#palyazatok" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Pályázatok</a></li>
-                    <li><a href="#faq" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">GYIK</a></li>
-                    <li><a href="#contact" onclick="switchToView('main')" class="hover:text-amber-500 transition-colors">Kapcsolat</a></li>
+                    <li><a href="#home" onclick="switchToView('main')" class="nav-menu-link text-stone-300 hover:text-amber-500 transition-colors">Kezdőlap</a></li>
+                    <li><a href="#about" onclick="switchToView('main')" class="nav-menu-link text-stone-300 hover:text-amber-500 transition-colors">Cégünkről</a></li>
+                    <li><a href="#gallery" onclick="switchToView('main')" class="nav-menu-link text-stone-300 hover:text-amber-500 transition-colors">Galéria</a></li>
+                    <li><a href="#partners" onclick="switchToView('main')" class="nav-menu-link text-stone-300 hover:text-amber-500 transition-colors">Partnerek</a></li>
+                    <li><a href="#palyazatok" onclick="switchToView('main')" class="nav-menu-link text-stone-300 hover:text-amber-500 transition-colors">Pályázatok</a></li>
+                    <li><a href="#faq" onclick="switchToView('main')" class="nav-menu-link text-stone-300 hover:text-amber-500 transition-colors">GYIK</a></li>
+                    <li><a href="#contact" onclick="switchToView('main')" class="nav-menu-link text-stone-300 hover:text-amber-500 transition-colors">Kapcsolat</a></li>
                     <li>
                         <button onclick="switchToView('webshop')" class="text-amber-500 hover:text-amber-400 font-bold flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/30">
                             <i class="fa-solid fa-store"></i> Webshop
@@ -982,8 +983,8 @@
                 
                 <div class="w-full h-64 sm:h-80 bg-stone-800 rounded-lg overflow-hidden border border-stone-700 shadow-2xl relative">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2729.8!2d17.8!3d46.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4769c9b4e9f7832f%3A0x6b610c3f5d5b7a0!2sBotykapeterd%2C%20017%2F22%2C%207900!5e0!3m2!1shu!2shu!4v1600000000000!5m2!1shu!2shu" 
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="Google Térkép Botykapeterd">
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2768.9196757337045!2d17.844936777374876!3d46.052700393979634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4768017a5d310c2f%3A0x3156a1bbca589965!2sBal%C3%A1zs%20Barrels!5e0!3m2!1shu!2shu!4v1784890378600!5m2!1shu!2shu" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Google Térkép Botykapeterd - Balázs Barrels Zrt.">
                     </iframe>
                 </div>
             </div>
@@ -1450,12 +1451,31 @@
                         <select id="reg-country" onchange="handleCountryChange()" class="w-full bg-stone-800 text-white p-2.5 rounded border border-stone-700 text-xs sm:text-sm">
                             <option value="Magyarország" selected>Magyarország</option>
                             <option value="Ausztria">Ausztria</option>
-                            <option value="Németország">Németország</option>
-                            <option value="Románia">Románia</option>
-                            <option value="Szlovákia">Szlovákia</option>
-                            <option value="Olaszország">Olaszország</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Bulgária">Bulgária</option>
+                            <option value="Ciprus">Ciprus</option>
+                            <option value="Csehország">Csehország</option>
+                            <option value="Dánia">Dánia</option>
+                            <option value="Észtország">Észtország</option>
+                            <option value="Finnország">Finnország</option>
                             <option value="Franciaország">Franciaország</option>
+                            <option value="Görögország">Görögország</option>
+                            <option value="Hollandia">Hollandia</option>
+                            <option value="Horvátország">Horvátország</option>
+                            <option value="Írország">Írország</option>
+                            <option value="Lengyelország">Lengyelország</option>
+                            <option value="Lettország">Lettország</option>
+                            <option value="Litvánia">Litvánia</option>
+                            <option value="Luxemburg">Luxemburg</option>
+                            <option value="Málta">Málta</option>
+                            <option value="Németország">Németország</option>
+                            <option value="Olaszország">Olaszország</option>
+                            <option value="Portugália">Portugália</option>
+                            <option value="Románia">Románia</option>
                             <option value="Spanyolország">Spanyolország</option>
+                            <option value="Svédország">Svédország</option>
+                            <option value="Szlovákia">Szlovákia</option>
+                            <option value="Szlovénia">Szlovénia</option>
                         </select>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1756,7 +1776,7 @@
 
                 <section>
                     <h4 class="font-bold text-amber-500 uppercase tracking-wider mb-1 text-sm">7. Panaszkezelés és Jogorvoslat</h4>
-                    <p>Esetleges panaszaival forduljon hozzánk a <a href="mailto:info@balazsbarrels.com" class="text-amber-500 underline">info@balazsbarrels.com</a> e-mail címen. Fogyasztói jogvita esetén a Vásárló a területi Békéltető Testülethez vagy a Fogyasztóvédelmi Hatósághoz is fordulhat.</p>
+                    <p>Esetleges panaszaival forduljon hozzánk a <a href="mailto:info@balazsbarrels.com" class="text-amber-500 underline">info@balazsbarrels.com</a> e-mail címen. Fogyasztói jogvita esetén a Vásárló a területi Békéltető Testülethez vagy a Fogyasztóvédelmi Hatóshoz is fordulhat.</p>
                 </section>
             </div>
         </div>
@@ -1806,7 +1826,7 @@
 
                 <section>
                     <h4 class="font-bold text-amber-500 uppercase tracking-wider mb-1 text-sm">5. Jogorvoslat</h4>
-                    <p>Jogainak megsértése esetén Ön a **Nemzeti Adatvédelmi és Információszabadság Hatóághoz (NAHIH)** (1055 Budapest, Falk Miksa utca 9-11., www.naih.hu) vagy az illetékes bírósághoz fordulhat.</p>
+                    <p>Jogainak megsértése esetén Ön a **Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAHIH)** (1055 Budapest, Falk Miksa utca 9-11., www.naih.hu) vagy az illetékes bírósághoz fordulhat.</p>
                 </section>
             </div>
         </div>
@@ -2003,7 +2023,7 @@
     <footer class="py-8 text-stone-400 bg-stone-950 text-xs border-t border-stone-900 px-4 mt-auto">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
             <div>
-                <p class="font-bold text-stone-300">&copy; 2026 Balazs Barrels Zrt. Minden jog fenntartva.</p>
+                <p class="font-bold text-stone-300">&copy; <span id="current-year"></span> Balazs Barrels Zrt. Minden jog fenntartva.</p>
                 <p class="text-[11px] text-stone-500 mt-1">1191 Budapest, Hamvas utca 7-9. | Botykapeterd Gyártási Üzem</p>
             </div>
             <div class="flex flex-wrap justify-center gap-4 text-[11px] text-stone-400">
@@ -2033,103 +2053,11 @@
         let searchQuery = '';
         let currentUser = null;
         let cart = [];
+        let products = []; // Most már dinamikusan, Supabase-ből töltődik be
         let selectedProduct = null;
         let selectedConfig = { toast: 'Medium', wood: 'Tölgyfa (Magyar Tölgy)' };
         let currentCategoryFilter = 'all';
         let selectedRegTypeState = 'maganszemely';
-
-        const products = [
-            {
-                id: 'kishordo-1l',
-                category: 'kishordo',
-                name: 'Kishordó 1 liter',
-                volume: '1 liter',
-                price: 18000,
-                desc: 'Hagyományos módszerekkel kézzel készített kishordó nemes pálinkák érleléséhez.',
-                images: ['https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
-            },
-            {
-                id: 'kishordo-2l',
-                category: 'kishordo',
-                name: 'Kishordó 2 liter',
-                volume: '2 liter',
-                price: 22000,
-                desc: 'Kisméretű hordó, mely kiválóan alkalmas gyümölcspárlatok háztartási érleléséhez.',
-                images: ['https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
-            },
-            {
-                id: 'kishordo-3l',
-                category: 'kishordo',
-                name: 'Kishordó 3 liter',
-                volume: '3 liter',
-                price: 26000,
-                desc: 'Díszes kishordó minőségi belső pörköléssel, pálinkához és borpárlathoz.',
-                images: ['https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
-            },
-            {
-                id: 'kishordo-5l',
-                category: 'kishordo',
-                name: 'Kishordó 5 liter',
-                volume: '5 liter',
-                price: 32000,
-                desc: 'Esztétikus kialakítású asztali hordó választható fafajtából.',
-                images: ['https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
-            },
-            {
-                id: 'kishordo-10l',
-                category: 'kishordo',
-                name: 'Kishordó 10 liter',
-                volume: '10 liter',
-                price: 42000,
-                desc: 'Professzionális méretű pálinkáshordó, mely kiváló aromát biztosít.',
-                images: ['https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy']
-            },
-            {
-                id: 'barrique-225l',
-                category: 'barrique',
-                name: 'Barrique Hordó 225 liter',
-                volume: '225 liter',
-                price: 185000,
-                desc: 'Világszerte elismert klasszikus bordeaux-i méretű prémium tölgyfahordó borérleléshez.',
-                images: ['https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky Toast']
-            },
-            {
-                id: 'barrique-228l',
-                category: 'barrique',
-                name: 'Barrique Hordó 228 liter',
-                volume: '228 liter',
-                price: 190000,
-                desc: 'Burgundi stílusú, vastagabb dongával szerelt prémium hordó.',
-                images: ['https://images.unsplash.com/photo-1584276433294-4328dc35606e?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky Toast']
-            },
-            {
-                id: 'barrique-300l',
-                category: 'barrique',
-                name: 'Barrique Hordó 300 liter',
-                volume: '300 liter',
-                price: 215000,
-                desc: 'Közép-európai igényekre szabott tágas barrique hordó.',
-                images: ['https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Light', 'Medium', 'Medium+', 'Heavy', 'Whisky Toast']
-            },
-            {
-                id: 'edeny-kicsi',
-                category: 'kiegeszito',
-                name: 'Kerti Virágedény 30L',
-                volume: '30 liter',
-                price: 15000,
-                desc: 'Kisméretű, kerti dísznövények elhelyezésére szánt faedény.',
-                images: ['https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'],
-                toastLevels: ['Kezeletlen', 'Olajozott', 'Lakkozott']
-            }
-        ];
 
         const galleryData = [
             { id: 1, img: 'kishordó.JPG' },
@@ -2151,6 +2079,38 @@
                 closeAllModalsAndDrawers();
             }
         });
+
+        // Supabase session állapot figyelő
+        if (supabaseClient) {
+            supabaseClient.auth.onAuthStateChange(async (event, session) => {
+                if (event === 'SIGNED_OUT') {
+                    currentUser = null;
+                    updateNavbarUser();
+                    if (currentView === 'admin' || currentView === 'profile') switchToView('main');
+                }
+            });
+        }
+
+        async function loadProductsFromSupabase() {
+            if (!supabaseClient) return;
+            const { data, error } = await supabaseClient.from('products').select('*');
+            if (error) {
+                console.error("Hiba a termékek betöltésekor:", error);
+                return;
+            }
+            if (data) {
+                products = data.map(p => ({
+                    id: p.id,
+                    category: p.category,
+                    name: p.name,
+                    volume: p.volume,
+                    price: p.price,
+                    desc: p.description,
+                    images: p.images || [],
+                    toastLevels: p.toast_levels || []
+                }));
+            }
+        }
 
         function closeAllModalsAndDrawers() {
             const modals = ['auth-modal', 'profile-modal', 'care-guide-modal', 'quote-modal', 'product-modal', 'aszf-modal', 'privacy-modal', 'impressum-modal', 'admin-product-modal', 'success-modal'];
@@ -2194,7 +2154,7 @@
             setTimeout(() => { toast.classList.remove('translate-x-12', 'opacity-0'); }, 50);
             setTimeout(() => {
                 toast.classList.add('translate-x-12', 'opacity-0');
-                setTimeout(() => { toast.remove(); }, 300);
+                setTimeout(() => { toast.remove(); }, 3000);
             }, 3000);
         }
 
@@ -2207,7 +2167,10 @@
                 showNotification("Kérjük, adja meg az e-mail címét az e-mail mezőben!", "error");
                 return;
             }
-            showNotification(`Jelszó-visszaállító hivatkozást küldtünk a(z) ${email} címre!`);
+            if (supabaseClient) {
+                supabaseClient.auth.resetPasswordForEmail(email);
+                showNotification(`Jelszó-visszaállító hivatkozást küldtünk a(z) ${email} címre!`);
+            }
         }
 
         function toggleAuthTab(tab) {
@@ -2266,40 +2229,50 @@
             }
         }
 
+        // Supabase Bejelentkezés
         async function handleLoginSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value.trim().toLowerCase();
             const pass = document.getElementById('login-password').value;
 
-            if (email === 'bazsinagy0317@gmail.com' && pass === 'Balazs0313') {
-                currentUser = {
-                    id: 'admin-bazsinagy0317',
-                    email: 'bazsinagy0317@gmail.com',
-                    name: 'Nagy Balázs (Admin)',
-                    phone: '+36 70 562 8453',
-                    is_admin: true
-                };
-                localStorage.setItem('active_session', JSON.stringify(currentUser));
-                updateNavbarUser();
-                closeAuthModal();
-                renderProducts();
-                showNotification(`Üdvözöljük újra, ${currentUser.name}! (Adminisztrátor)`);
+            if (!supabaseClient) return;
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: pass
+            });
+
+            if (error) {
+                showNotification("Hibás e-mail cím vagy jelszó!", "error");
                 return;
             }
 
+            const { data: profile } = await supabaseClient
+                .from('profiles')
+                .select('*')
+                .eq('id', data.user.id)
+                .single();
+
             currentUser = {
-                id: 'user-' + Date.now(),
-                email: email,
-                name: 'Bejelentkezett Vásárló',
-                is_admin: false
+                id: data.user.id,
+                email: data.user.email,
+                name: profile?.name || 'Vásárló',
+                phone: profile?.phone || '',
+                ship_zip: profile?.ship_zip || '',
+                ship_city: profile?.ship_city || '',
+                ship_street: profile?.ship_street || '',
+                ship_house: profile?.ship_house || '',
+                ship_other: profile?.ship_other || '',
+                is_admin: profile?.is_admin || false
             };
-            localStorage.setItem('active_session', JSON.stringify(currentUser));
+
             updateNavbarUser();
             closeAuthModal();
             renderProducts();
-            showNotification(`Sikeres bejelentkezés!`);
+            showNotification(`Üdvözöljük újra, ${currentUser.name}!`);
         }
 
+        // Supabase Regisztráció
         async function handleRegisterSubmit(e) {
             e.preventDefault();
 
@@ -2316,44 +2289,55 @@
                 return;
             }
 
+            if (!supabaseClient) return;
+
             const email = document.getElementById('reg-email').value.trim().toLowerCase();
+            const pass = document.getElementById('reg-password').value;
             const name = document.getElementById('reg-name').value.trim();
             const phone = document.getElementById('reg-phone').value.trim();
 
-            const country = document.getElementById('reg-country')?.value || 'Magyarország';
-            const company_name = selectedRegTypeState === 'ceg' ? document.getElementById('reg-company-name').value.trim() : '';
-            const vat_number = selectedRegTypeState === 'ceg' ? document.getElementById('reg-vat-number').value.trim() : '';
-            const eu_vat_number = selectedRegTypeState === 'ceg' && country !== 'Magyarország' ? document.getElementById('reg-eu-vat-number').value.trim() : '';
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: pass,
+                options: {
+                    data: { name: name }
+                }
+            });
 
-            const ship_zip = document.getElementById('reg-ship-zip').value.trim();
-            const ship_city = document.getElementById('reg-ship-city').value.trim();
-            const ship_street = document.getElementById('reg-ship-street').value.trim();
-            const ship_house = document.getElementById('reg-ship-house').value.trim();
-            const ship_other = document.getElementById('reg-ship-other') ? document.getElementById('reg-ship-other').value.trim() : '';
+            if (error) {
+                showNotification("Hiba a regisztráció során: " + error.message, "error");
+                return;
+            }
 
-            currentUser = {
-                id: 'user-' + Date.now(),
-                email,
-                name,
-                phone,
-                user_type: selectedRegTypeState,
-                country,
-                company_name,
-                vat_number,
-                eu_vat_number,
-                ship_zip,
-                ship_city,
-                ship_street,
-                ship_house,
-                ship_other,
-                is_admin: false
-            };
+            // Profil kiegészítő adatainak mentése
+            if (data.user) {
+                await supabaseClient.from('profiles').update({
+                    phone: phone,
+                    user_type: selectedRegTypeState,
+                    country: document.getElementById('reg-country')?.value || 'Magyarország',
+                    company_name: selectedRegTypeState === 'ceg' ? document.getElementById('reg-company-name').value.trim() : '',
+                    vat_number: selectedRegTypeState === 'ceg' ? document.getElementById('reg-vat-number').value.trim() : '',
+                    eu_vat_number: selectedRegTypeState === 'ceg' && document.getElementById('reg-country')?.value !== 'Magyarország' ? document.getElementById('reg-eu-vat-number').value.trim() : '',
+                    ship_zip: document.getElementById('reg-ship-zip').value.trim(),
+                    ship_city: document.getElementById('reg-ship-city').value.trim(),
+                    ship_street: document.getElementById('reg-ship-street').value.trim(),
+                    ship_house: document.getElementById('reg-ship-house').value.trim(),
+                    ship_other: document.getElementById('reg-ship-other') ? document.getElementById('reg-ship-other').value.trim() : ''
+                }).eq('id', data.user.id);
 
-            localStorage.setItem('active_session', JSON.stringify(currentUser));
-            updateNavbarUser();
-            closeAuthModal();
-            renderProducts();
-            showNotification("Sikeres regisztráció és belépés!");
+                currentUser = {
+                    id: data.user.id,
+                    email: email,
+                    name: name,
+                    phone: phone,
+                    is_admin: false
+                };
+
+                updateNavbarUser();
+                closeAuthModal();
+                renderProducts();
+                showNotification("Sikeres regisztráció és belépés!");
+            }
         }
 
         function openAuthModal(defaultTab = 'login') { 
@@ -2377,39 +2361,61 @@
 
         function closeProfileModal() { document.getElementById('profile-modal')?.classList.add('hidden'); }
 
-        function handleProfileUpdate(e) {
+        async function handleProfileUpdate(e) {
             e.preventDefault();
-            if (currentUser) {
-                currentUser.name = document.getElementById('prof-name').value.trim();
-                currentUser.phone = document.getElementById('prof-phone').value.trim();
-                currentUser.ship_zip = document.getElementById('prof-ship-zip').value.trim();
-                currentUser.ship_city = document.getElementById('prof-ship-city').value.trim();
-                currentUser.ship_street = document.getElementById('prof-ship-street').value.trim();
-                currentUser.ship_house = document.getElementById('prof-ship-house').value.trim();
-                currentUser.ship_other = document.getElementById('prof-ship-other').value.trim();
+            if (currentUser && supabaseClient) {
                 
-                localStorage.setItem('active_session', JSON.stringify(currentUser));
+                const updatedData = {
+                    name: document.getElementById('prof-name').value.trim(),
+                    phone: document.getElementById('prof-phone').value.trim(),
+                    ship_zip: document.getElementById('prof-ship-zip').value.trim(),
+                    ship_city: document.getElementById('prof-ship-city').value.trim(),
+                    ship_street: document.getElementById('prof-ship-street').value.trim(),
+                    ship_house: document.getElementById('prof-ship-house').value.trim(),
+                    ship_other: document.getElementById('prof-ship-other').value.trim()
+                };
+
+                const { error } = await supabaseClient
+                    .from('profiles')
+                    .update(updatedData)
+                    .eq('id', currentUser.id);
+                
+                if (error) {
+                    showNotification("Nem sikerült menteni az adatokat.", "error");
+                    return;
+                }
+
+                Object.assign(currentUser, updatedData);
                 updateNavbarUser();
                 closeProfileModal();
                 showNotification("Profil és címadatok elmentve!");
             }
         }
 
-        function renderProfileOrders() {
+        async function renderProfileOrders() {
             const container = document.getElementById('profile-orders');
-            if (!container) return;
-            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
-            const myOrders = orders.filter(o => o.customerEmail === currentUser.email);
-            if (myOrders.length === 0) {
+            if (!container || !currentUser || !supabaseClient) return;
+            
+            const { data: myOrders, error } = await supabaseClient
+                .from('orders')
+                .select('*')
+                .eq('user_id', currentUser.id)
+                .order('created_at', { ascending: false });
+
+            if (error || !myOrders || myOrders.length === 0) {
                 container.innerHTML = '<p class="text-xs text-stone-500">Nincsenek korábbi megrendelések.</p>';
                 return;
             }
-            container.innerHTML = myOrders.map(o => `
+
+            container.innerHTML = myOrders.map(o => {
+                const orderDate = new Date(o.created_at).toLocaleDateString('hu-HU');
+                return `
                 <div class="bg-stone-950 p-3 rounded border border-stone-800 text-xs">
-                    <div class="flex justify-between font-bold text-amber-500"><span>${o.orderId}</span> <span>${o.date}</span></div>
+                    <div class="flex justify-between font-bold text-amber-500"><span>${o.id}</span> <span>${orderDate}</span></div>
                     <div class="text-stone-300 mt-1">${new Intl.NumberFormat('hu-HU').format(o.total)} Ft - ${o.status}</div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function updateNavbarUser() {
@@ -2434,9 +2440,11 @@
             }
         }
 
-        function logout() {
+        async function logout() {
+            if (supabaseClient) {
+                await supabaseClient.auth.signOut();
+            }
             currentUser = null;
-            localStorage.removeItem('active_session');
             updateNavbarUser();
             switchToView('main');
             showNotification("Kijelentkezett.");
@@ -2545,7 +2553,7 @@
 
             const filtered = products.filter(p => {
                 if (!searchQuery) return true;
-                return p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
+                return p.name.toLowerCase().includes(searchQuery) || (p.desc && p.desc.toLowerCase().includes(searchQuery));
             });
 
             filtered.forEach(p => {
@@ -2570,7 +2578,7 @@
                     <div class="p-4 flex-grow flex flex-col justify-between gap-3">
                         <div>
                             <h4 class="font-serif font-bold text-base text-stone-900 truncate">${p.name}</h4>
-                            <p class="text-xs text-stone-500 line-clamp-2 mt-1 leading-relaxed">${p.desc}</p>
+                            <p class="text-xs text-stone-500 line-clamp-2 mt-1 leading-relaxed">${p.desc || ''}</p>
                         </div>
                         <div class="border-t border-stone-100 pt-3 flex flex-col gap-3">
                             <div class="flex justify-between items-center">
@@ -2596,13 +2604,16 @@
             document.getElementById('modal-product-category').textContent = selectedProduct.category;
             document.getElementById('modal-product-desc').textContent = selectedProduct.desc;
             document.getElementById('modal-product-price').textContent = `${new Intl.NumberFormat('hu-HU').format(selectedProduct.price)} Ft`;
-            document.getElementById('modal-product-img').src = selectedProduct.images ? selectedProduct.images[0] : 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80';
+            document.getElementById('modal-product-img').src = selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[0] : 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80';
 
             // Populate Toast Dropdown dynamically
             const toastSelect = document.getElementById('modal-toast-select');
-            if (toastSelect && selectedProduct.toastLevels) {
+            if (toastSelect && selectedProduct.toastLevels && selectedProduct.toastLevels.length > 0) {
                 toastSelect.innerHTML = selectedProduct.toastLevels.map(t => `<option value="${t}">${t}</option>`).join('');
                 selectedConfig.toast = selectedProduct.toastLevels[0];
+            } else if (toastSelect) {
+                toastSelect.innerHTML = '<option value="Alap">Alap</option>';
+                selectedConfig.toast = 'Alap';
             }
 
             // Reset Wood Dropdown to default oak
@@ -2801,6 +2812,7 @@
         function renderAdminDashboard() {
             document.getElementById('admin-stat-products-count').textContent = products.length;
             renderAdminProducts();
+            renderAdminOrders();
         }
 
         function switchAdminTab(tab) {
@@ -2874,35 +2886,51 @@
             showNotification("Billingo beállítások elmentve!");
         }
 
-        async function createBillingoInvoice(orderData, isManual = false) {
+        async function createBillingoInvoice(orderId, isTransfer, isManual = false) {
             const cfg = getBillingoSettings();
             if (!cfg.apiKey || !cfg.blockId) {
                 if (isManual) showNotification("Adja meg a Billingo API Kulcsot és Számlatömb ID-t!", "error");
                 return null;
             }
 
-            const invoiceNum = 'BILL-' + Math.floor(10000 + Math.random() * 90000);
-            orderData.billingo_number = invoiceNum;
-            orderData.billingo_status = 'Kiállítva';
-            
-            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
-            const idx = orders.findIndex(o => o.orderId === orderData.orderId);
-            if (idx !== -1) {
-                orders[idx].billingo_number = invoiceNum;
-                orders[idx].billingo_status = 'Kiállítva';
-                localStorage.setItem('local_orders', JSON.stringify(orders));
+            const docType = isTransfer ? 'proforma' : (cfg.paymentType || 'invoice');
+            const prefix = docType === 'proforma' ? 'DIJ-' : 'BILL-';
+            const invoiceNum = prefix + Math.floor(10000 + Math.random() * 90000);
+
+            if (supabaseClient) {
+                const { error } = await supabaseClient.from('orders').update({
+                    billingo_number: invoiceNum,
+                    billingo_type: docType,
+                    billingo_status: docType === 'proforma' ? 'Díjbekérő Kiállítva' : 'Számla Kiállítva'
+                }).eq('id', orderId);
+                
+                if(!error) {
+                    const docLabel = docType === 'proforma' ? 'Díjbekérő' : 'Számla';
+                    if (isManual) showNotification(`Billingo ${docLabel.toLowerCase()} sikeresen kiállítva! (${invoiceNum})`);
+                    renderAdminOrders();
+                }
             }
-            
-            if (isManual) showNotification(`Billingo számla sikeresen kiállítva! (${invoiceNum})`);
-            renderAdminOrders();
             return invoiceNum;
         }
 
-        function renderAdminOrders() {
+        async function renderAdminOrders() {
             const container = document.getElementById('admin-orders-container');
-            if (!container) return;
+            if (!container || !supabaseClient) return;
 
-            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
+            // Fetch orders along with their items using Supabase Join
+            const { data: orders, error } = await supabaseClient
+                .from('orders')
+                .select(`
+                    *,
+                    items:order_items(*)
+                `)
+                .order('created_at', { ascending: false });
+
+            if (error || !orders) {
+                console.error(error);
+                return;
+            }
+
             document.getElementById('admin-stat-orders-count').textContent = orders.length;
 
             const revenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
@@ -2918,17 +2946,25 @@
                 const div = document.createElement('div');
                 div.className = "bg-stone-900 border border-stone-800 p-4 rounded-lg space-y-3";
                 
-                const billingoBadge = ord.billingo_number 
-                    ? `<span class="bg-blue-900/40 text-blue-400 border border-blue-600/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1"><i class="fa-solid fa-file-invoice"></i> Számla: ${ord.billingo_number}</span>`
-                    : `<button onclick='createBillingoInvoice(${JSON.stringify(ord)}, true)' class="bg-blue-700 hover:bg-blue-600 text-white font-bold text-[11px] px-3 py-1 rounded transition-all flex items-center gap-1 shadow active:scale-95"><i class="fa-solid fa-file-invoice"></i> Számla Kiállítása</button>`;
+                const isTransfer = ord.payment_method_code === 'transfer' || 
+                                   (ord.payment_method && ord.payment_method.toLowerCase().includes('utalás'));
+                const isProforma = ord.billingo_type === 'proforma' || (ord.billingo_number && ord.billingo_number.startsWith('DIJ-'));
+                const docLabel = isProforma ? 'Díjbekérő' : 'Számla';
+                const btnLabel = isTransfer ? 'Díjbekérő Kiállítása' : 'Számla Kiállítása';
 
-                let itemsHtml = (ord.items || []).map(it => `<li class="text-[11px] text-stone-300">• ${it.name} (${it.volume}) - ${it.wood || 'Tölgyfa'}, ${it.toast || 'Medium'} - ${it.quantity || 1} db</li>`).join('');
+                const billingoBadge = ord.billingo_number 
+                    ? `<span class="bg-blue-900/40 text-blue-400 border border-blue-600/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1"><i class="fa-solid fa-file-invoice"></i> ${docLabel}: ${ord.billingo_number}</span>`
+                    : `<button onclick='createBillingoInvoice("${ord.id}", ${isTransfer}, true)' class="bg-blue-700 hover:bg-blue-600 text-white font-bold text-[11px] px-3 py-1 rounded transition-all flex items-center gap-1 shadow active:scale-95"><i class="fa-solid fa-file-invoice"></i> ${btnLabel}</button>`;
+
+                const orderDate = new Date(ord.created_at).toLocaleString('hu-HU');
+                
+                let itemsHtml = (ord.items || []).map(it => `<li class="text-[11px] text-stone-300">• ${it.product_name} (${it.volume}) - ${it.wood || 'Tölgyfa'}, ${it.toast || 'Medium'} - ${it.quantity || 1} db</li>`).join('');
 
                 div.innerHTML = `
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-stone-800 pb-2.5 gap-2">
                         <div>
-                            <span class="font-mono text-amber-500 font-bold text-sm">${ord.orderId}</span>
-                            <span class="text-xs text-stone-400 ml-2 font-mono">${ord.date}</span>
+                            <span class="font-mono text-amber-500 font-bold text-sm">${ord.id}</span>
+                            <span class="text-xs text-stone-400 ml-2 font-mono">${orderDate}</span>
                         </div>
                         <div class="flex items-center gap-2">
                             ${billingoBadge}
@@ -2938,9 +2974,9 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-stone-300">
                         <div>
-                            <strong class="text-white block mb-0.5">${ord.customerName}</strong>
-                            <p class="text-stone-400"><i class="fa-solid fa-envelope mr-1"></i> ${ord.customerEmail}</p>
-                            <p class="text-stone-400"><i class="fa-solid fa-phone mr-1"></i> ${ord.customerPhone}</p>
+                            <strong class="text-white block mb-0.5">${ord.customer_name}</strong>
+                            <p class="text-stone-400"><i class="fa-solid fa-envelope mr-1"></i> ${ord.customer_email}</p>
+                            <p class="text-stone-400"><i class="fa-solid fa-phone mr-1"></i> ${ord.customer_phone}</p>
                         </div>
                         <div>
                             <strong class="text-stone-400 block mb-0.5">Rendelt Tételek:</strong>
@@ -2972,9 +3008,15 @@
                 return;
             }
 
+            if (!supabaseClient) {
+                showNotification("Adatbázis hiba!", "error");
+                return;
+            }
+
             const orderId = 'BB-' + Math.floor(10000 + Math.random() * 90000);
             const totalText = document.getElementById('co-final-total').textContent;
             const payMethod = document.getElementById('co-payment');
+            const payVal = payMethod.value;
             const payText = payMethod.options[payMethod.selectedIndex].text;
             const delMethod = document.getElementById('co-delivery');
             const delText = delMethod.options[delMethod.selectedIndex].text;
@@ -3000,34 +3042,64 @@
                 other: document.getElementById('co-bill-other').value
             };
 
-            const newOrder = {
-                orderId: orderId,
-                customerEmail: currentUser ? currentUser.email : 'vendeg@balazsbarrels.hu',
-                customerName: document.getElementById('co-name').value,
-                customerPhone: document.getElementById('co-phone').value,
-                total: cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0),
-                items: JSON.parse(JSON.stringify(cart)),
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+
+            // 1. Beszúrás a fő Orders táblába
+            const { error: orderError } = await supabaseClient.from('orders').insert([{
+                id: orderId,
+                user_id: currentUser ? currentUser.id : null,
+                customer_email: document.getElementById('co-email').value,
+                customer_name: document.getElementById('co-name').value,
+                customer_phone: document.getElementById('co-phone').value,
+                total: totalAmount,
+                status: 'Feldolgozás alatt',
+                payment_method_code: payVal,
                 payment_method: payText,
                 delivery_method: delText,
                 shipping_address: shipAddr,
-                billing_address: billAddr,
-                date: new Date().toLocaleDateString('hu-HU'),
-                status: 'Feldolgozás alatt'
-            };
+                billing_address: billAddr
+            }]);
 
-            let orders = JSON.parse(localStorage.getItem('local_orders') || '[]');
-            orders.push(newOrder);
-            localStorage.setItem('local_orders', JSON.stringify(orders));
+            if (orderError) {
+                showNotification("Hiba történt a rendelés rögzítése során!", "error");
+                console.error(orderError);
+                return;
+            }
 
+            // 2. Rendelési tételek beszúrása az Order Items táblába
+            for (const item of cart) {
+                await supabaseClient.from('order_items').insert([{
+                    order_id: orderId,
+                    product_id: item.id,
+                    product_name: item.name,
+                    volume: item.volume,
+                    wood: item.wood,
+                    toast: item.toast,
+                    quantity: item.quantity || 1,
+                    unit_price: item.price
+                }]);
+            }
+
+            // Automata e-mail értesítő meghívása (szimuláció vagy EmailJS)
+            sendOrderNotificationEmails(orderId, document.getElementById('co-email').value);
+
+            // Billingo automata számla generálás, ha engedélyezett
             const billCfg = getBillingoSettings();
             if (billCfg.autoInvoice && billCfg.apiKey) {
-                createBillingoInvoice(newOrder, false);
+                const isTransfer = payVal === 'transfer' || payText.toLowerCase().includes('utalás');
+                createBillingoInvoice(orderId, isTransfer, false);
             }
 
             cart = [];
             updateCart();
 
             document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        async function sendOrderNotificationEmails(orderId, customerEmail) {
+            const adminEmail = "balazsbarrelsorders@gmail.com";
+            console.log(`[E-mail Szolgáltatás] Értesítő: ${customerEmail} és ${adminEmail}`);
+            // Itt köthető be később az Edge Function e-mail küldő kódja.
         }
 
         function closeSuccessModal() {
@@ -3041,10 +3113,11 @@
             tbody.innerHTML = '';
 
             products.forEach(p => {
+                const imgSrc = p.images && p.images.length > 0 ? p.images[0] : '';
                 const tr = document.createElement('tr');
                 tr.className = "border-b border-stone-850 hover:bg-stone-900/50";
                 tr.innerHTML = `
-                    <td class="p-3.5"><img src="${p.images[0]}" class="w-10 h-10 object-cover rounded" onerror="handleProductImgError(this)"></td>
+                    <td class="p-3.5"><img src="${imgSrc}" class="w-10 h-10 object-cover rounded" onerror="handleProductImgError(this)"></td>
                     <td class="p-3.5">
                         <strong class="text-white block">${p.name}</strong>
                         <span class="text-[10px] text-amber-500 uppercase">${p.category}</span>
@@ -3073,7 +3146,7 @@
                     document.getElementById('adm-p-id').value = p.id;
                     document.getElementById('adm-p-name').value = p.name;
                     document.getElementById('adm-p-cat').value = p.category;
-                    document.getElementById('adm-p-vol').value = p.volume;
+                    document.getElementById('adm-p-vol').value = p.volume || '';
                     document.getElementById('adm-p-price').value = p.price;
                     document.getElementById('adm-p-imgs').value = p.images ? p.images.join(', ') : '';
                     document.getElementById('adm-p-toast').value = p.toastLevels ? p.toastLevels.join(', ') : '';
@@ -3098,8 +3171,10 @@
             document.getElementById('admin-product-modal')?.classList.add('hidden');
         }
 
-        function saveAdminProduct(e) {
+        async function saveAdminProduct(e) {
             e.preventDefault();
+            if(!supabaseClient) return;
+
             const id = document.getElementById('adm-p-id').value;
             const name = document.getElementById('adm-p-name').value.trim();
             const category = document.getElementById('adm-p-cat').value;
@@ -3109,33 +3184,49 @@
             const imgsRaw = document.getElementById('adm-p-imgs').value.trim();
             const toastRaw = document.getElementById('adm-p-toast').value.trim();
 
-            const images = imgsRaw ? imgsRaw.split(',').map(s => s.trim()) : ['https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=600&q=80'];
-            const toastLevels = toastRaw ? toastRaw.split(',').map(s => s.trim()) : ['Light', 'Medium'];
+            const images = imgsRaw ? imgsRaw.split(',').map(s => s.trim()) : [];
+            const toastLevels = toastRaw ? toastRaw.split(',').map(s => s.trim()) : [];
+
+            const productData = {
+                category: category,
+                name: name,
+                volume: volume,
+                price: price,
+                description: desc,
+                images: images,
+                toast_levels: toastLevels
+            };
 
             if (id) {
-                const idx = products.findIndex(p => p.id === id);
-                if (idx !== -1) {
-                    products[idx] = { id, category, name, volume, price, desc, images, toastLevels };
-                    showNotification("Termék sikeresen frissítve!");
-                }
+                // Update
+                const { error } = await supabaseClient.from('products').update(productData).eq('id', id);
+                if (error) { showNotification("Hiba a mentésnél!", "error"); return; }
+                showNotification("Termék sikeresen frissítve!");
             } else {
+                // Insert
                 const newId = category + '-' + Date.now();
-                products.push({ id: newId, category, name, volume, price, desc, images, toastLevels });
+                productData.id = newId;
+                const { error } = await supabaseClient.from('products').insert([productData]);
+                if (error) { showNotification("Hiba a mentésnél!", "error"); return; }
                 showNotification("Új termék sikeresen hozzáadva!");
             }
 
             closeAdminProductModal();
+            await loadProductsFromSupabase();
             renderProducts();
             renderAdminDashboard();
         }
 
-        function deleteAdminProduct(productId) {
-            const idx = products.findIndex(p => p.id === productId);
-            if (idx !== -1) {
-                products.splice(idx, 1);
+        async function deleteAdminProduct(productId) {
+            if(!supabaseClient) return;
+            const { error } = await supabaseClient.from('products').delete().eq('id', productId);
+            if (error) {
+                showNotification("Hiba a törlésnél!", "error");
+            } else {
+                showNotification("Termék törölve.");
+                await loadProductsFromSupabase();
                 renderProducts();
                 renderAdminDashboard();
-                showNotification("Termék törölve.");
             }
         }
 
@@ -3188,6 +3279,32 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        /* ScrollSpy: Highlight menu items based on scroll position */
+        function handleScrollSpy() {
+            if (currentView !== 'main') return;
+            const sections = document.querySelectorAll('#main-view-container section[id]');
+            const navLinks = document.querySelectorAll('.nav-menu-link');
+            const scrollPos = window.scrollY + 120;
+
+            sections.forEach(sec => {
+                const top = sec.offsetTop;
+                const height = sec.offsetHeight;
+                const id = sec.getAttribute('id');
+
+                if (scrollPos >= top && scrollPos < top + height) {
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('text-amber-500', 'font-bold');
+                            link.classList.remove('text-stone-300');
+                        } else {
+                            link.classList.remove('text-amber-500', 'font-bold');
+                            link.classList.add('text-stone-300');
+                        }
+                    });
+                }
+            });
+        }
+
         window.onscroll = function() {
             const btn = document.getElementById('back-to-top');
             if (btn) {
@@ -3197,6 +3314,7 @@
                     btn.classList.add('opacity-0', 'pointer-events-none');
                 }
             }
+            handleScrollSpy();
         };
 
         function toggleUserDropdown(show) {
@@ -3216,13 +3334,44 @@
             document.getElementById('mobile-menu')?.classList.add('hidden'); 
         }
 
-        window.onload = function() {
-            // Restore session
-            const savedSession = localStorage.getItem('active_session');
-            if (savedSession) {
-                currentUser = JSON.parse(savedSession);
+        window.onload = async function() {
+            // Set dynamic current year in footer
+            const yearElem = document.getElementById('current-year');
+            if (yearElem) {
+                yearElem.textContent = new Date().getFullYear();
+            }
+
+            // 1. Supabase munkamenet ellenőrzése
+            if (supabaseClient) {
+                const { data: { session }, error } = await supabaseClient.auth.getSession();
+                
+                if (session && session.user) {
+                    const { data: profile } = await supabaseClient
+                        .from('profiles')
+                        .select('*')
+                        .eq('id', session.user.id)
+                        .single();
+
+                    if (profile) {
+                        currentUser = {
+                            id: session.user.id,
+                            email: session.user.email,
+                            name: profile.name || session.user.user_metadata?.name || 'Vásárló',
+                            phone: profile.phone || '',
+                            ship_zip: profile.ship_zip || '',
+                            ship_city: profile.ship_city || '',
+                            ship_street: profile.ship_street || '',
+                            ship_house: profile.ship_house || '',
+                            ship_other: profile.ship_other || '',
+                            is_admin: profile.is_admin || false
+                        };
+                    }
+                }
                 updateNavbarUser();
             }
+
+            // 2. Termékek betöltése az adatbázisból
+            await loadProductsFromSupabase();
 
             // Restore cart
             const savedCart = localStorage.getItem('bb_cart');
